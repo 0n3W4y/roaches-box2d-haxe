@@ -1,0 +1,743 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"sha",
+				"shapes"
+			],
+			[
+				"se",
+				"setAsBox( hx : Float , hy : Float )	Void"
+			],
+			[
+				"B2sha",
+				"B2PolygonShape	box2D.collision.shapes"
+			],
+			[
+				"b2S",
+				"B2Shape	box2D.collision.shapes"
+			],
+			[
+				"B2Body",
+				"B2BodyDef	box2D.dynamics"
+			],
+			[
+				"Dis",
+				"DisplayObjectContainer	flash.display"
+			],
+			[
+				"new",
+				"newPlayer"
+			],
+			[
+				"linVel",
+				"linVelocityY	Float"
+			],
+			[
+				"world_s",
+				"world_scale	Float"
+			],
+			[
+				"world_",
+				"world_scale	Float"
+			],
+			[
+				"LAU",
+				"LAUNCH_POINT"
+			],
+			[
+				"Add",
+				"addEventListener(...)	Void"
+			],
+			[
+				"add",
+				"addEventListener"
+			],
+			[
+				"Player",
+				"PlayerEvent"
+			],
+			[
+				"_a",
+				"_actorsToRemove"
+			],
+			[
+				"in",
+				"instance(...)	instance.S"
+			],
+			[
+				"update",
+				"updateMyLook(  )	Void"
+			],
+			[
+				"B2Contact",
+				"B2Contact	box2D.dynamics.contacts"
+			],
+			[
+				"s",
+				"shape1	box2D.collision.shapes.B2Shape"
+			],
+			[
+				"setC",
+				"setContactListener(...)	Void"
+			],
+			[
+				"stage",
+				"stageHeight	Int"
+			],
+			[
+				"B2Contac",
+				"B2ContactListener	box2D.dynamics"
+			],
+			[
+				"right",
+				"rightWall"
+			],
+			[
+				"lef",
+				"leftWall"
+			],
+			[
+				"wor",
+				"world_scale	var"
+			],
+			[
+				"line",
+				"lineTo( x : Float , y : Float )	Void"
+			],
+			[
+				"B2Fixt",
+				"B2FixtureDef	box2D.dynamics"
+			],
+			[
+				"array",
+				"arrayOfCoordinates"
+			],
+			[
+				"B2Fix",
+				"B2FixtureDef	box2D.dynamics"
+			],
+			[
+				"b2Body",
+				"B2BodyDef	box2D.dynamics"
+			],
+			[
+				"Array",
+				"Array<T>	class"
+			],
+			[
+				"pegBounds",
+				"pegBoundsX	Int"
+			],
+			[
+				"u",
+				"updateNow"
+			],
+			[
+				"gp",
+				"graphics	openfl.display.Graphics"
+			],
+			[
+				"world",
+				"world_scale	Float"
+			],
+			[
+				"w",
+				"world_sprite	flash.display.Sprite"
+			],
+			[
+				"worl",
+				"world_scale	Float"
+			],
+			[
+				"Pla",
+				"PlayerActor	class"
+			],
+			[
+				"event",
+				"EventDispatcher	flash.events"
+			],
+			[
+				"setL",
+				"setLinearVelocity(...)	Void"
+			],
+			[
+				"a",
+				"addChild(...)	openfl.display.DisplayObject"
+			],
+			[
+				"Display",
+				"DisplayObjectContainer	flash.display"
+			],
+			[
+				"wo",
+				"world"
+			],
+			[
+				"Sp",
+				"Sprite	flash.display"
+			],
+			[
+				"Disp",
+				"DisplayObject	flash.display"
+			],
+			[
+				"P",
+				"PHYSICS_SCALE"
+			],
+			[
+				"B2",
+				"B2World"
+			],
+			[
+				"B2b",
+				"B2BodyDef	box2D.dynamics"
+			],
+			[
+				"Event",
+				"EventDispatcher	flash.events"
+			],
+			[
+				"Eve",
+				"EventDispatcher	class"
+			],
+			[
+				"body",
+				"bodyDefinition	box2D.dynamics.B2BodyDef"
+			],
+			[
+				"get",
+				"getPosition(  )	box2D.common.math.B2Vec2"
+			],
+			[
+				"wall",
+				"wallLeft	openfl.display.Sprite"
+			],
+			[
+				"sta",
+				"stageWidth"
+			],
+			[
+				"draw",
+				"drawRect(...)	Void"
+			],
+			[
+				"b2",
+				"b2_staticBody	Int"
+			],
+			[
+				"ba",
+				"ballShape"
+			],
+			[
+				"ADDE",
+				"ADDED_TO_STAGE	String"
+			],
+			[
+				"Debug",
+				"B2DebugDraw	box2D.dynamics"
+			],
+			[
+				"debug",
+				"debug_draw	box2D.dynamics.B2DebugDraw"
+			],
+			[
+				"my",
+				"my_circle	var"
+			],
+			[
+				"Get",
+				"getBodyList(  )	box2D.dynamics.B2Body"
+			],
+			[
+				"stae",
+				"stageHeight	Int"
+			],
+			[
+				"Circle",
+				"circleFixtureDef"
+			],
+			[
+				"cir",
+				"circleShape	box2D.collision.shapes.B2CircleShape"
+			],
+			[
+				"set",
+				"setFlags( flags : Int )	Void"
+			],
+			[
+				"f",
+				"m_friction	Float"
+			],
+			[
+				"de",
+				"m_density	Float"
+			],
+			[
+				"B2B",
+				"B2Body	box2D.dynamics"
+			],
+			[
+				"Timer",
+				"TimerEvent	flash.events"
+			],
+			[
+				"_whee",
+				"_wheelFixture"
+			],
+			[
+				"wh",
+				"wheel	var"
+			],
+			[
+				"ADD",
+				"ADDED_TO_STAGE	String"
+			],
+			[
+				"ev",
+				"Event"
+			],
+			[
+				"_",
+				"_physicsDebug"
+			],
+			[
+				"ge",
+				"getMidpoint"
+			],
+			[
+				"FlxC",
+				"FlxColor"
+			],
+			[
+				"FlxBu",
+				"FlxButton	flixel.ui"
+			],
+			[
+				"time",
+				"timeToConsole"
+			],
+			[
+				"loot",
+				"lootObject"
+			],
+			[
+				"onS",
+				"onStackObject"
+			],
+			[
+				"loo",
+				"lootObject"
+			],
+			[
+				"remove",
+				"removeComponent"
+			],
+			[
+				"item",
+				"itemInBag"
+			],
+			[
+				"class",
+				"className"
+			],
+			[
+				"place",
+				"place"
+			],
+			[
+				"stop",
+				"stopLoop"
+			],
+			[
+				"upda",
+				"updateUIfightingLog"
+			],
+			[
+				"res",
+				"respawnDelta"
+			],
+			[
+				"clas",
+				"className"
+			],
+			[
+				"cons",
+				"timeToConsole"
+			],
+			[
+				"tim",
+				"timeToConsole"
+			],
+			[
+				"ali",
+				"alive"
+			],
+			[
+				"up",
+				"updateUIfightingLog"
+			],
+			[
+				"shoots",
+				"Shoots"
+			],
+			[
+				"n",
+				"nickname"
+			],
+			[
+				"bag",
+				"bagVault"
+			],
+			[
+				"bots",
+				"botsInGame"
+			],
+			[
+				"newI",
+				"newItem"
+			],
+			[
+				"newite",
+				"newItemParams"
+			],
+			[
+				"newi",
+				"newItemData"
+			],
+			[
+				"__",
+				"__className"
+			],
+			[
+				"proto",
+				"prototype"
+			],
+			[
+				"Weapon",
+				"WeaponAdditional"
+			],
+			[
+				"equip",
+				"equipVault"
+			],
+			[
+				"gun",
+				"gun"
+			],
+			[
+				"player",
+				"playerOne"
+			],
+			[
+				"replace",
+				"replaceItem"
+			],
+			[
+				"setTo",
+				"setToBag"
+			],
+			[
+				"init",
+				"initInventory"
+			],
+			[
+				"belt",
+				"beltMaxSlots"
+			],
+			[
+				"Belt",
+				"beltMaxSlots"
+			],
+			[
+				"In",
+				"InventoryBag"
+			],
+			[
+				"inB",
+				"inBelt"
+			],
+			[
+				"playerT",
+				"playerThree"
+			],
+			[
+				"border-",
+				"border-style"
+			],
+			[
+				"border",
+				"border-style"
+			],
+			[
+				"shootin",
+				"shootingDelta"
+			],
+			[
+				"distan",
+				"distanceY"
+			],
+			[
+				"ran",
+				"randomHit"
+			],
+			[
+				"current",
+				"currentPosition"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/Project.xml",
+		"/C/Users/Admin/Desktop/teaching/TooManyShoots/Project.xml",
+		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/source/Game.hx",
+		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/source/Main.hx",
+		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/.gitignore",
+		"/c/Users/Admin/Desktop/teaching/TooManyShoots/source/Global.hx",
+		"/c/Users/Admin/Desktop/teaching/TooManyShoots/source/Actor.hx",
+		"/c/Users/Admin/Desktop/teaching/TooManyShoots/source/BonusChuteActor.hx",
+		"/c/Users/Admin/Desktop/teaching/TooManyShoots/source/ArbiStaticActor.hx",
+		"/c/Users/Admin/Desktop/teaching/TooManyShoots/source/PegActor.hx",
+		"/c/Users/Admin/Desktop/teaching/TooManyShoots/source/PlayerActor.hx",
+		"/c/Users/Admin/Desktop/teaching/TooManyShoots/Project.xml",
+		"/c/Users/Admin/Desktop/teaching/TooManyShoots/source/ContactListener.hx",
+		"/c/Users/Admin/Desktop/teaching/TooManyShoots/source/Main.hx",
+		"/C/Users/Admin/Desktop/teaching/TooManyShoots/.gitignore",
+		"/c/Users/Admin/Desktop/teaching/TooManyShoots/source/BallEvent.hx",
+		"/c/Users/Admin/Desktop/teaching/TooManyShoots/source/PegEvent.hx",
+		"/c/Users/Admin/Desktop/teaching/TooManyShoots/source/PlayerEvent.hx",
+		"/c/Users/Admin/Desktop/teaching/TooManyShoots/source/GameInfo.hx",
+		"/c/Users/Admin/Desktop/teaching/TooManyShoots/source/GameMenu.hx",
+		"/c/Users/Admin/Desktop/teaching/TooManyShoots/source/GameScreen.hx",
+		"/c/Users/Admin/Desktop/teaching/TooManyShoots/source/Player.hx",
+		"/c/Users/Admin/Desktop/teaching/TooManyShoots/source/Main_worked_teaching.hx",
+		"/c/Users/Admin/Desktop/teaching/TooManyShoots/source/Main_old.hx",
+		"/C/Users/Admin/Desktop/SimpleBox2DExample.as",
+		"/C/HaxeToolkit/haxe/lib/box2d/1,2,3/samples/TestBed/Source/Main.hx",
+		"/c/haxetoolkit/haxe/lib/box2d/1,2,3/samples/TestBed/Source/Test.hx",
+		"/C/Users/Admin/Desktop/teaching/TooManyShoots/source/Main.as",
+		"/C/Users/Admin/Desktop/teaching/HelloWorld/Project.xml",
+		"/C/Users/Admin/Desktop/teaching/HelloWorld/source/Main.hx",
+		"/C/HaxeToolkit/haxe/lib/box2d/1,2,3/samples/TestBed/project.xml",
+		"/C/Users/Admin/Desktop/teaching/asteroids/net/richardlord/asteroids/graphics/BulletView.hx",
+		"/C/Users/Admin/Desktop/teaching/asteroids/net/richardlord/asteroids/nodes/AnimationNode.hx",
+		"/C/Users/Admin/Desktop/teaching/asteroids/net/richardlord/asteroids/components/Animation.hx",
+		"/C/Users/Admin/Desktop/teaching/asteroids/net/richardlord/asteroids/components/Spaceship.hx",
+		"/C/Users/Admin/Desktop/teaching/asteroids/net/richardlord/asteroids/GameConfig.hx",
+		"/C/Users/Admin/Desktop/teaching/asteroids/net/richardlord/asteroids/systems/RenderSystem.hx",
+		"/C/Users/Admin/Desktop/teaching/asteroids/net/richardlord/asteroids/systems/MovementSystem.hx",
+		"/C/Users/Admin/Desktop/teaching/asteroids/net/richardlord/asteroids/systems/MotionControlSystem.hx",
+		"/C/Users/Admin/Desktop/teaching/asteroids/net/richardlord/asteroids/systems/GunControlSystem.hx",
+		"/c/Users/Admin/Desktop/teaching/HelloWorld/source/Player.hx",
+		"/c/Users/Admin/Desktop/teaching/HelloWorld/source/Enemy.hx",
+		"/c/Users/Admin/Desktop/teaching/HelloWorld/source/CombatHUD.hx",
+		"/c/Users/Admin/Desktop/teaching/HelloWorld/source/HUD.hx",
+		"/c/Users/Admin/Desktop/teaching/HelloWorld/source/Coin.hx",
+		"/c/Users/Admin/Desktop/teaching/HelloWorld/source/PlayState.hx",
+		"/C/Users/Admin/Desktop/teaching/asteroids/net/richardlord/asteroids/Main.hx",
+		"/c/Users/Admin/Desktop/teaching/HelloWorld/source/fixel/FlxSprite.hx",
+		"/c/Users/Admin/Desktop/teaching/HelloWorld/source/MenuState.hx",
+		"/c/Users/Admin/Desktop/teaching/HelloWorld/source/Main.hx",
+		"/c/Users/Admin/Desktop/teaching/HelloWorld/Project.xml",
+		"/c/Users/Admin/Desktop/teaching/HelloWorld/source/flixel/FlxSprite.hx",
+		"/C/Users/Admin/Desktop/teaching/HelloWorld/source/MenuState.hx",
+		"/C/HaxeToolkit/haxe/lib/flixel-demos/2,1,0/Tutorials/TurnBasedRPG/source/HUD.hx",
+		"/C/Users/Admin/Documents/GitHub/shoot-them-all/main.js",
+		"/C/Users/Admin/Documents/GitHub/shoot-them-all/index.html",
+		"/C/Users/Admin/Documents/GitHub/shoot-them-all/index.css",
+		"/C/Users/Admin/Desktop/teaching/teaching_2.html",
+		"/C/Users/Admin/AppData/Roaming/Sublime Text 3/Packages/Haxe/Support/Haxe.sublime-settings",
+		"/C/Users/Admin/Desktop/teaching/teaching_haxe/main.js",
+		"/C/Users/Admin/Desktop/arpg/index.js",
+		"/C/Users/Admin/Desktop/arpg/common/tool.js",
+		"/C/Users/Admin/Documents/GitHub/hory-card-v2.0/if.css",
+		"/C/Users/Admin/Documents/GitHub/hory-card-v2.0/index.html"
+	],
+	"find":
+	{
+		"height": 26.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			");\n",
+			"setV",
+			"Global.world_sprite",
+			"m_physScale",
+			"new",
+			"m_bodyList",
+			"the_w",
+			"size",
+			"set_size",
+			"setSize",
+			"12",
+			"getParent",
+			"removeComponent",
+			"getCompon",
+			"updateUIfightingLog",
+			"updateUIplayerStats",
+			"getData",
+			"this.getData",
+			"this.weapon",
+			"getComponentList",
+			" this.components",
+			" this.parent.components.",
+			"classDefenition",
+			"this.bagVault.1.",
+			"this.bagVault[1]"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"world_scale",
+			"w",
+			"W",
+			"classDefinition",
+			"gun.",
+			"gun"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "roaches.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 248.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

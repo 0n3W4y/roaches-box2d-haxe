@@ -1,0 +1,17 @@
+{
+	"folders":
+	[
+		{
+			"name": "roaches",
+			"path": "C:\\Users\\Admin\\Documents\\GitHub\\roaches-box2d-haxe"
+		},
+		{
+			"name": "box2d",
+			"path": "c:\\haxetoolkit\\haxe\\lib\\box2d\\1,2,3"
+		},
+		{
+			"name": "Haxe",
+			"path": "C:\\HaxeToolkit\\haxe\\std"
+		}
+	]
+}
