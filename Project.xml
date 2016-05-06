@@ -9,6 +9,8 @@
 	
 	<source path="source" />
 	<haxelib name="box2d" />
+	<haxelib name="openfl" />
+
 	<assets path="assets" />
 	<set name="BUILD_DIR" value="export" />
 </project>
