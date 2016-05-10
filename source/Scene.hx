@@ -4,17 +4,18 @@ import flash.display.Sprite;
 import flash.events.Event;
 import flash.display.Stage;
 import flash.Lib;
+import flash.events.EventDispatcher;
 
 import box2D.dynamics.B2World;
 import box2D.common.math.B2Vec2;
 import box2D.dynamics.B2DebugDraw;
 
-class Scene extends Sprite
+class Scene extends EventDispatcher
 {
 	public var myGame:Main;
 	public var world:B2World;
 	public var worldScale:Int = 30; // pixel to metr;
-	
+
 	private var worldGravity:B2Vec2;
 	private var worldStep:Float; 
 	private var velocityIterations:Int = 10;

@@ -5,7 +5,7 @@ import flash.events.EventDispatcher;
 import flash.display.DisplayObject;
 
 
-class SceneActor extends EventDispatcher{
+class SceneActor extends Scene{
 	
 
 	
