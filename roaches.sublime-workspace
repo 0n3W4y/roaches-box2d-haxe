@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"worldS",
+				"worldScale"
+			],
+			[
+				"remove",
+				"removeEventListener(...)	Void"
+			],
+			[
+				"Event",
+				"Event	flash.events"
+			],
+			[
 				"sha",
 				"shapes"
 			],
@@ -196,10 +208,6 @@
 				"B2BodyDef	box2D.dynamics"
 			],
 			[
-				"Event",
-				"EventDispatcher	flash.events"
-			],
-			[
 				"Eve",
 				"EventDispatcher	class"
 			],
@@ -330,10 +338,6 @@
 			[
 				"loo",
 				"lootObject"
-			],
-			[
-				"remove",
-				"removeComponent"
 			],
 			[
 				"item",
@@ -495,7 +499,7 @@
 			"file": "source/Main.hx",
 			"settings":
 			{
-				"buffer_size": 134,
+				"buffer_size": 104,
 				"line_ending": "Windows"
 			}
 		},
@@ -503,7 +507,23 @@
 			"file": "source/Scene.hx",
 			"settings":
 			{
-				"buffer_size": 948,
+				"buffer_size": 1747,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "source/SceneActor.hx",
+			"settings":
+			{
+				"buffer_size": 393,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "source/ContactListener.hx",
+			"settings":
+			{
+				"buffer_size": 627,
 				"line_ending": "Windows"
 			}
 		},
@@ -511,7 +531,7 @@
 			"file": "source/Game.hx",
 			"settings":
 			{
-				"buffer_size": 843,
+				"buffer_size": 855,
 				"line_ending": "Windows"
 			}
 		},
@@ -558,13 +578,19 @@
 	[
 		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe",
 		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/source",
-		"/c/haxetoolkit/haxe/lib/box2d/1,2,3/box2D",
+		"/c/haxetoolkit/haxe/lib/box2d/1,2,3",
+		"/c/haxetoolkit/haxe/lib/box2d/1,2,3/samples",
 		"/c/haxetoolkit/haxe/lib/box2d/1,2,3/samples/TestBed",
 		"/c/haxetoolkit/haxe/lib/box2d/1,2,3/samples/TestBed/Source"
 	],
 	"file_history":
 	[
 		"/C/Users/Admin/Desktop/teaching/TooManyShoots/source/Main.hx",
+		"/C/Users/Admin/Desktop/teaching/TooManyShoots/source/Actor.hx",
+		"/C/Users/Admin/Desktop/teaching/TooManyShoots/source/BonusChuteActor.hx",
+		"/C/Users/Admin/Desktop/teaching/TooManyShoots/source/PlayerActor.hx",
+		"/C/Users/Admin/Desktop/teaching/TooManyShoots/source/BallEvent.hx",
+		"/C/Users/Admin/Desktop/teaching/TooManyShoots/source/ContactListener.hx",
 		"/C/Users/Admin/Desktop/teaching/TooManyShoots/Project.xml",
 		"/C/HaxeToolkit/haxe/lib/box2d/1,2,3/samples/TestBed/Source/Main.hx",
 		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/Project.xml",
@@ -703,15 +729,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 134,
+						"buffer_size": 104,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								108,
-								108
+								99,
+								99
 							]
 						],
 						"settings":
@@ -719,7 +745,7 @@
 							"haxe-build-id": 0,
 							"syntax": "Packages/Haxe/Haxe.tmLanguage"
 						},
-						"translation.x": -0.0,
+						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
@@ -732,24 +758,25 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 948,
+						"buffer_size": 1747,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								473,
-								473
+								346,
+								346
 							]
 						],
 						"settings":
 						{
 							"haxe-build-id": 0,
-							"syntax": "Packages/Haxe/Haxe.tmLanguage"
+							"syntax": "Packages/Haxe/Haxe.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
-						"translation.x": -0.0,
-						"translation.y": 54.0,
+						"translation.x": 0.0,
+						"translation.y": 270.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -757,27 +784,28 @@
 				},
 				{
 					"buffer": 2,
-					"file": "source/Game.hx",
+					"file": "source/SceneActor.hx",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 843,
+						"buffer_size": 393,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								74,
-								74
+								228,
+								228
 							]
 						],
 						"settings":
 						{
 							"haxe-build-id": 0,
-							"syntax": "Packages/Haxe/Haxe.tmLanguage"
+							"syntax": "Packages/Haxe/Haxe.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
-						"translation.x": -0.0,
+						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
@@ -786,6 +814,66 @@
 				},
 				{
 					"buffer": 3,
+					"file": "source/ContactListener.hx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 627,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								551,
+								551
+							]
+						],
+						"settings":
+						{
+							"haxe-build-id": 0,
+							"syntax": "Packages/Haxe/Haxe.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "source/Game.hx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 855,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								305,
+								305
+							]
+						],
+						"settings":
+						{
+							"haxe-build-id": 0,
+							"syntax": "Packages/Haxe/Haxe.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
 					"file": "Project.xml",
 					"semi_transient": false,
 					"settings":
@@ -797,8 +885,8 @@
 						"selection":
 						[
 							[
-								422,
-								422
+								342,
+								342
 							]
 						],
 						"settings":
@@ -810,7 +898,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]

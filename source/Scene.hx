@@ -11,10 +11,10 @@ import box2D.dynamics.B2DebugDraw;
 
 class Scene extends Sprite
 {
-	public var myGame:Game;
+	public var myGame:Main;
 	public var world:B2World;
-
-	private var worldScale:Int = 30; // pixel to metr;
+	public var worldScale:Int = 30; // pixel to metr;
+	
 	private var worldGravity:B2Vec2;
 	private var worldStep:Float; 
 	private var velocityIterations:Int = 10;
