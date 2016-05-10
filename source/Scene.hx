@@ -1,6 +1,8 @@
 package;
 
-import flash.events.Sprite;
+import flash.display.Sprite;
+import flash.events.Event;
+import flash.display.Stage;
 import flash.Lib;
 
 import box2D.dynamics.B2World;
@@ -8,7 +10,7 @@ import box2D.common.math.B2Vec2;
 
 class Scene extends Sprite
 {
-	public var parent:Game;
+	public var myGame:Game;
 	public var world:B2World;
 
 	private var worldScale:Int = 30; // pixel to metr;
@@ -17,11 +19,12 @@ class Scene extends Sprite
 	private var velocityIterations:Int = 10;
 	private var positionIterations:Int = 10;
 
-	public function new(game:Game):Void
+	public function new(game)
 	{
 		super();
-		parent = game;
 		initilize();
+		myGame = game;
+		Main.myGameScene = this;
 	}
 
 	private function initilize()
@@ -31,20 +34,21 @@ class Scene extends Sprite
 
 	private function createWorld()
 	{
-		gravity = new B2Vec2(0, 9.8); //x=0, y=G == 9.8;
+		worldGravity = new B2Vec2(0, 9.8); //x=0, y=G == 9.8;
 		var isSleep:Bool = true;
-		world = new B2World(gravity, isSleep);
+		world = new B2World(worldGravity, isSleep);
 	}
 
-	public function start(fps:Int):Void
+	public function start(fps:Int)
 	{	
 		worldStep = 1/fps;
 		addEventListener(Event.ENTER_FRAME, update);
+
 	}
 
-	private function update():Void
+	private function update(event:Event)
 	{
-		world.step(world_step, velocityIterations, positionIterations);
+		world.step(worldStep, velocityIterations, positionIterations);
 		world.clearForces();
 	}
 

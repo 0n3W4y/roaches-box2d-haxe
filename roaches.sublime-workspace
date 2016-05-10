@@ -491,6 +491,38 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "source/Main.hx",
+			"settings":
+			{
+				"buffer_size": 134,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "source/Scene.hx",
+			"settings":
+			{
+				"buffer_size": 948,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "source/Game.hx",
+			"settings":
+			{
+				"buffer_size": 843,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Project.xml",
+			"settings":
+			{
+				"buffer_size": 422,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -522,10 +554,20 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
+	"expanded_folders":
+	[
+		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe",
+		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/source",
+		"/c/haxetoolkit/haxe/lib/box2d/1,2,3/box2D",
+		"/c/haxetoolkit/haxe/lib/box2d/1,2,3/samples/TestBed",
+		"/c/haxetoolkit/haxe/lib/box2d/1,2,3/samples/TestBed/Source"
+	],
 	"file_history":
 	[
-		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/Project.xml",
+		"/C/Users/Admin/Desktop/teaching/TooManyShoots/source/Main.hx",
 		"/C/Users/Admin/Desktop/teaching/TooManyShoots/Project.xml",
+		"/C/HaxeToolkit/haxe/lib/box2d/1,2,3/samples/TestBed/Source/Main.hx",
+		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/Project.xml",
 		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/source/Game.hx",
 		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/source/Main.hx",
 		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/.gitignore",
@@ -549,7 +591,6 @@
 		"/c/Users/Admin/Desktop/teaching/TooManyShoots/source/Main_worked_teaching.hx",
 		"/c/Users/Admin/Desktop/teaching/TooManyShoots/source/Main_old.hx",
 		"/C/Users/Admin/Desktop/SimpleBox2DExample.as",
-		"/C/HaxeToolkit/haxe/lib/box2d/1,2,3/samples/TestBed/Source/Main.hx",
 		"/c/haxetoolkit/haxe/lib/box2d/1,2,3/samples/TestBed/Source/Test.hx",
 		"/C/Users/Admin/Desktop/teaching/TooManyShoots/source/Main.as",
 		"/C/Users/Admin/Desktop/teaching/HelloWorld/Project.xml",
@@ -653,8 +694,125 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "source/Main.hx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 134,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								108,
+								108
+							]
+						],
+						"settings":
+						{
+							"haxe-build-id": 0,
+							"syntax": "Packages/Haxe/Haxe.tmLanguage"
+						},
+						"translation.x": -0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "source/Scene.hx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 948,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								473,
+								473
+							]
+						],
+						"settings":
+						{
+							"haxe-build-id": 0,
+							"syntax": "Packages/Haxe/Haxe.tmLanguage"
+						},
+						"translation.x": -0.0,
+						"translation.y": 54.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "source/Game.hx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 843,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								74,
+								74
+							]
+						],
+						"settings":
+						{
+							"haxe-build-id": 0,
+							"syntax": "Packages/Haxe/Haxe.tmLanguage"
+						},
+						"translation.x": -0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "Project.xml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 422,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								422,
+								422
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/XML/XML.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
 			]
 		}
 	],

@@ -1,14 +1,13 @@
 package;
 
-import flash.events.Sprite;
-
 
 class Main
 {
-	public var game:Game;
+	public var myGame:Game;
+	public static var myGameScene:Scene;
 
-	public function Main():Void
+	public function main()
 	{
-		game = new Game();
+		myGame = new Game();
 	}
 }
