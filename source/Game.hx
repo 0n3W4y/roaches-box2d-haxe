@@ -24,9 +24,9 @@ class Game extends Sprite
 		myMain = main;
 	}
 
-	public function createScene(game:Game, fps:Int)
+	public function createScene(fps:Int)
 	{
-		var myNewScene = new Scene(game, fps);
+		var myNewScene = new Scene(this, fps);
 		_allMyScenes.push(mynewScene);
 	}
 
@@ -40,26 +40,17 @@ class Game extends Sprite
 
 	public function start()
 	{
-		if (!isStarted)
-		{
-			addEventListener(Event.ENTER_FRAME, update);
-			isStarted = true;
-		}
-		
+		addEventListener(Event.ENTER_FRAME, update);
 	}
 
 	public function stop()
 	{
-		if (!isStopped)
-		{
-			removeEventListener(Event.ENTER_FRAME, update);
-			isStopped = true;
-		}
+		removeEventListener(Event.ENTER_FRAME, update);
 	}
 
 	public function removeSceneFromUpdate(scene)
 	{
-		//TODO: safe remove scen from list of all scenes
+		//TODO: safe remove scene from list of all scenes
 		// убирает сцену из списка тикающих сцен
 	}
 }
