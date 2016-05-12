@@ -6,9 +6,13 @@ import box2D.dynamics.B2ContactListener;
 
 class ContactListener extends B2ContactListener{
 
-	public function new()
+	private var _myScene:Scene;
+
+	public function new(scene)
 	{
 		super();
+		_myScene = scene;
+		
 	}
 
 	override public function beginContact(contact:B2Contact)

@@ -2,32 +2,30 @@ package;
 
 import flash.display.Sprite;
 import flash.events.Event;
+import flash.display.Stage;
+import flash.Lib;
 
-class Game extends Sprite
+class Game
 {
-	public var myMain:Main;
+	public var parent:Sprite;
 
-	private var fps:Int = 30;
-	private var _allMyScenes:Array<Dynamic>;
-	private var isStarted:Bool = false;
-	private var isStopped:Bool = false;
+	private var _allMyScenes:Array<Dynamic> = new Array();
 
-	public function new(main:Main)
+	public function new(main:Sprite)
 	{
-		super();
-
-		initilize(main);
+		parent = main;
+		initilize();
 	}
 
-	private function initilize(main:Main)
+	private function initilize()
 	{
-		myMain = main;
+		createScene();
 	}
 
-	public function createScene(fps:Int)
+	public function createScene()
 	{
-		var myNewScene = new Scene(this, fps);
-		_allMyScenes.push(mynewScene);
+		var myNewScene = new Scene(this);
+		_allMyScenes.push(myNewScene);
 	}
 
 	public function update(e:Event)
@@ -38,19 +36,10 @@ class Game extends Sprite
 		}
 	}
 
-	public function start()
-	{
-		addEventListener(Event.ENTER_FRAME, update);
-	}
-
-	public function stop()
-	{
-		removeEventListener(Event.ENTER_FRAME, update);
-	}
-
 	public function removeSceneFromUpdate(scene)
 	{
 		//TODO: safe remove scene from list of all scenes
 		// убирает сцену из списка тикающих сцен
 	}
+
 }

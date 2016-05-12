@@ -3,23 +3,35 @@ package;
 
 import flash.events.EventDispatcher;
 import flash.display.DisplayObject;
+import flash.display.Sprite;
+
+import box2D.dynamics.B2Body;
 
 
-class SceneActor extends Scene{
+class SceneActor extends EventDispatcher{
 	
 	private var _body:B2Body;
 	private var _sprite:Sprite;
+	private var _myScene:Scene;
 	
-	public function new(body, sprite)
+	public function new(scene:Scene, body:B2Body, sprite:Sprite)
 	{
+		
 		_body = body;
 		_sprite = sprite;
+
+		_myScene = scene;
+
+		_body.setUserData(this);
 		super();
 	}
 
 	public function update()
 	{
-		updateSprite();
+		if( _body.getType() != STATIC_BODY){
+			updateSprite();
+		}
+		
 		childSpecificUpdate();
 	}
 
@@ -40,8 +52,11 @@ class SceneActor extends Scene{
 
 	private function updateSprite()
 	{
+		var worldScale = _myScene.worldScale;
 		_sprite.x = _body.getPosition().x / worldScale;
 		_sprite.y = _body.getPosition().y / worldScale;
+
+		trace("i update my sprite!");
 	}
 
 }

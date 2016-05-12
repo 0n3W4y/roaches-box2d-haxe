@@ -4,24 +4,38 @@ import flash.Lib;
 import flash.display.Stage;
 import flash.display.StageAlign;
 import flash.display.StageScaleMode;
+import flash.display.Sprite;
+import flash.events.Event;
 
-
-class Main
+class Main extends Sprite
 {
 
-	
 	private var isStarted:Bool = false;
 	private var isStopped:Bool = false;
 	private var isPaused:Bool = false;
-	private var _allMyGames:Array<Dynamic>;
+	private var _allMyGames:Array<Dynamic> = new Array();
 
-	public function main()
+	public static function main()
 	{
 		Lib.current.stage.align = flash.display.StageAlign.TOP_LEFT;
 		Lib.current.stage.scaleMode = flash.display.StageScaleMode.NO_SCALE;
-		myGame = new Game(this);
-		Lib.current.addChild(myGame);
+		Lib.current.addChild(new Main());
+	}
+
+	public function new()
+	{
+		super();
+
+		initialize();
+
+	}
+
+	private function initialize()
+	{
+		var myGame = new Game(this);
 		_allMyGames.push(myGame);
+
+		//start(myGame);
 	}
 
 	public function start(game)
@@ -29,9 +43,9 @@ class Main
 		if (!isStarted)
 		{
 			isStarted = true;
-			var index = _allMyGames.indexOf(game)
+			var index = _allMyGames.indexOf(game);
 			if (index >= 0)
-				_allMyGames[index].start();
+				addEventListener(Event.ENTER_FRAME, _allMyGames[index].update);
 		}
 
 	}
@@ -41,9 +55,14 @@ class Main
 		if(!isStopped)
 		{
 			isStopped = true;
-			var index = _allMyGames.indexOf(game)
+			var index = _allMyGames.indexOf(game);
 			if (index >= 0)
-				_allMyGames[index].stop();
+				removeEventListener(Event.ENTER_FRAME, _allMyGames[index].update);
 		}
+	}
+
+	public function addSpriteChild(child)
+	{
+		addChild(child);
 	}
 }
