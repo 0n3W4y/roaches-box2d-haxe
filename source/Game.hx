@@ -7,7 +7,7 @@ import flash.Lib;
 
 class Game
 {
-	public var parent:Sprite;
+	private var parent:Sprite;
 
 	private var _allMyScenes:Array<Dynamic> = new Array();
 
@@ -40,6 +40,21 @@ class Game
 	{
 		//TODO: safe remove scene from list of all scenes
 		// убирает сцену из списка тикающих сцен
+	}
+
+	public function start()
+	{
+
+	}
+
+	public function stop()
+	{
+
+	}
+
+	public function getParent():Sprite
+	{
+		return parent;
 	}
 
 }

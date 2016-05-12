@@ -31,8 +31,7 @@ class Scene
 	{
 		initilize();
 		parent = game;
-		globalSprite = game.parent;
-		trace (game.parent);
+		globalSprite = game.getParent();
 
 
 	}
@@ -44,9 +43,9 @@ class Scene
 		createContactListener();
 		createCamera();
 
-	//	addDebuger();
+		addDebuger();
 
-	//	createActors();
+		createActors();
 	}
 
 	private function createTimeMaster()
@@ -107,8 +106,8 @@ class Scene
 	private function createCamera()
 	{
 		_camera = new Camera(this);
-	//	globalSprite.addChild(_camera);
-	globalSprite.addSpriteChild(_camera);
+		globalSprite.addChild(_camera);
+	
 	}
 
 	private function createGroundActor()
