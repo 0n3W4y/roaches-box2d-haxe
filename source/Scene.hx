@@ -99,38 +99,23 @@ class Scene extends Sprite
 
 	private function createGroundActor()
 	{
+/*
 		var coord = new Array();
 		coord.push(new B2Vec2(-1280/2/worldScale, 40/2/worldScale));
-		coord.push(new B2Vec2(-1280/2/worldScale, -100/2/worldScale));
+		coord.push(new B2Vec2(-1280/2/worldScale, -40/2/worldScale));
 		coord.push(new B2Vec2(-1000/2/worldScale, -80/2/worldScale));
-		coord.push(new B2Vec2(-500/2/worldScale, -60/2/worldScale));
-		coord.push(new B2Vec2(-200/2/worldScale, -120/2/worldScale));
 		coord.push(new B2Vec2(-80/2/worldScale, -40/2/worldScale));
-		coord.push(new B2Vec2(0/worldScale, 0/worldScale)); //special point
-		coord.push(new B2Vec2(100/2/worldScale, -20/2/worldScale));
 		coord.push(new B2Vec2(400/2/worldScale, -80/2/worldScale));
 		coord.push(new B2Vec2(1280/2/worldScale, -40/2/worldScale));
 		coord.push(new B2Vec2(1280/2/worldScale, 40/2/worldScale));
-
+*/
+		var width = 1280/2;
+		var figures = 4;
 		var pos = new B2Vec2(1280/2/worldScale, 720/worldScale);
 
-		var newGroundActor = new SceneGroundActor(this, coord, pos);
-
-		var boxCoord = new Array();
-		boxCoord.push(new B2Vec2(-100/2/worldScale, 50/2/worldScale));
-		boxCoord.push(new B2Vec2(-100/2/worldScale, -50/2/worldScale));
-		boxCoord.push(new B2Vec2(100/2/worldScale, -50/2/worldScale));
-		boxCoord.push(new B2Vec2(100/2/worldScale, 50/2/worldScale));
-
-		var boxPos = new B2Vec2(300/worldScale, 500/worldScale);
-
-		var boxActor = new SceneGroundActor(this, boxCoord, boxPos);
-
-
-
+		var newGroundActor = new SceneGroundActor(this, width, pos, figures);
 
 		_allActors.push(newGroundActor);
-		_allActors.push(boxActor);
 	}
 
 	private function createPlayerActor()
