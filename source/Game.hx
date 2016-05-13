@@ -7,54 +7,60 @@ import flash.Lib;
 
 class Game
 {
-	private var parent:Sprite;
+	private var myMain:Sprite;
 
 	private var _allMyScenes:Array<Dynamic> = new Array();
+	private var _scenesToStart:Array<Dynamic> = new Array();
+	private var _scenesToStop:Array<Dynamic> = new Array();
 
-	public function new(main:Sprite)
+	public function new(main:Sprite):Void
 	{
-		parent = main;
+		myMain = main;
 		initilize();
 	}
 
-	private function initilize()
+	private function initilize():Void
 	{
 		createScene();
 	}
 
-	public function createScene()
+	public function createScene():Void
 	{
 		var myNewScene = new Scene(this);
+		myMain.addChild(myNewScene);
 		_allMyScenes.push(myNewScene);
 	}
 
-	public function update(e:Event)
+	public function start():Void
 	{
-		for (i in 0..._allMyScenes.length)
+		
+		for (i in 0... _allMyScenes.length)
 		{
-			_allMyScenes[i].update();
+			_allMyScenes[i].start();
 		}
 	}
 
-	public function removeSceneFromUpdate(scene)
+	public function stop():Void
 	{
-		//TODO: safe remove scene from list of all scenes
-		// убирает сцену из списка тикающих сцен
+		for (i in 0... _allMyScenes.length)
+		{
+			_allMyScenes[i].stop();
+		}
 	}
 
-	public function start()
+	public function getMain():Sprite
 	{
-
+		return myMain;
+	}
+/*
+	public function addSceneToStart(scene:Scene):Void
+	{
+		_scenesToStart.push(scene);
 	}
 
-	public function stop()
+	public function addSceneToStop(scene:Scene):Void
 	{
-
+		_scenesToStop.push(scene);
 	}
-
-	public function getParent():Sprite
-	{
-		return parent;
-	}
-
+*/
 }

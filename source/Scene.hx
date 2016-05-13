@@ -5,15 +5,15 @@ import flash.events.Event;
 import flash.display.Stage;
 import flash.Lib;
 import flash.events.EventDispatcher;
+import flash.geom.Point;
 
 import box2D.dynamics.B2World;
 import box2D.common.math.B2Vec2;
 import box2D.dynamics.B2DebugDraw;
 
-class Scene
+class Scene extends Sprite
 {
-	public var parent:Game;
-	public var globalSprite:Sprite;
+	public var myGame:Game;
 	public var world:B2World;
 	public var worldScale:Int = 30; // pixel to metr;
 
@@ -29,9 +29,9 @@ class Scene
 
 	public function new(game)
 	{
+		super();
 		initilize();
-		parent = game;
-		globalSprite = game.getParent();
+		myGame = game;
 
 
 	}
@@ -41,7 +41,6 @@ class Scene
 		createTimeMaster();
 		createWorld();
 		createContactListener();
-		createCamera();
 
 		addDebuger();
 
@@ -66,15 +65,10 @@ class Scene
 		world.setContactListener(sceneContactListener);
 	}
 
-	public function getCamera():Camera
-	{
-		return _camera;
-	}
-
 	private function update(event:Event)
 	{
 		var step = _timeMaster.getTimeStep();
-		world.step(1/30, velocityIterations, positionIterations);
+		world.step(step, velocityIterations, positionIterations);
 		world.clearForces();
 		world.drawDebugData();
 
@@ -88,7 +82,7 @@ class Scene
 	{
 		var debugDraw = new B2DebugDraw();
 		var debugSprite = new Sprite();
-		_camera.addChild(debugSprite);
+		addChild(debugSprite);
 		
 		debugDraw.setSprite(debugSprite);
 		debugDraw.setDrawScale(worldScale);
@@ -103,32 +97,40 @@ class Scene
 		createPlayerActor();
 	}
 
-	private function createCamera()
-	{
-		_camera = new Camera(this);
-		globalSprite.addChild(_camera);
-	
-	}
-
 	private function createGroundActor()
 	{
 		var coord = new Array();
-		coord.push(new B2Vec2(-1280/worldScale, 700/worldScale));
-		coord.push(new B2Vec2(-1100/worldScale, 680/worldScale));
-		coord.push(new B2Vec2(-800/worldScale, 710/worldScale));
-		coord.push(new B2Vec2(-500/worldScale, 690/worldScale));
-		coord.push(new B2Vec2(-250/worldScale, 720/worldScale));
-		coord.push(new B2Vec2(0/worldScale, 730/worldScale)); //special point
-		coord.push(new B2Vec2(200/worldScale, 690/worldScale));
-		coord.push(new B2Vec2(1280/worldScale, 720/worldScale));
-		coord.push(new B2Vec2(1280/worldScale, 760/worldScale));
-		coord.push(new B2Vec2(-1280/worldScale, 760/worldScale));
+		coord.push(new B2Vec2(-1280/2/worldScale, 40/2/worldScale));
+		coord.push(new B2Vec2(-1280/2/worldScale, -100/2/worldScale));
+		coord.push(new B2Vec2(-1000/2/worldScale, -80/2/worldScale));
+		coord.push(new B2Vec2(-500/2/worldScale, -60/2/worldScale));
+		coord.push(new B2Vec2(-200/2/worldScale, -120/2/worldScale));
+		coord.push(new B2Vec2(-80/2/worldScale, -40/2/worldScale));
+		coord.push(new B2Vec2(0/worldScale, 0/worldScale)); //special point
+		coord.push(new B2Vec2(100/2/worldScale, -20/2/worldScale));
+		coord.push(new B2Vec2(400/2/worldScale, -80/2/worldScale));
+		coord.push(new B2Vec2(1280/2/worldScale, -40/2/worldScale));
+		coord.push(new B2Vec2(1280/2/worldScale, 40/2/worldScale));
 
-		var pos = new B2Vec2(1280/worldScale, 720/worldScale);
+		var pos = new B2Vec2(1280/2/worldScale, 720/worldScale);
 
 		var newGroundActor = new SceneGroundActor(this, coord, pos);
 
+		var boxCoord = new Array();
+		boxCoord.push(new B2Vec2(-100/2/worldScale, 50/2/worldScale));
+		boxCoord.push(new B2Vec2(-100/2/worldScale, -50/2/worldScale));
+		boxCoord.push(new B2Vec2(100/2/worldScale, -50/2/worldScale));
+		boxCoord.push(new B2Vec2(100/2/worldScale, 50/2/worldScale));
+
+		var boxPos = new B2Vec2(300/worldScale, 500/worldScale);
+
+		var boxActor = new SceneGroundActor(this, boxCoord, boxPos);
+
+
+
+
 		_allActors.push(newGroundActor);
+		_allActors.push(boxActor);
 	}
 
 	private function createPlayerActor()
@@ -136,6 +138,16 @@ class Scene
 		var pos = new B2Vec2(300/worldScale, 100/worldScale);
 		var newPlayer = new ScenePlayerActor(this, pos);
 		_allActors.push(newPlayer);
+	}
+
+	public function start()
+	{
+		addEventListener(Event.ENTER_FRAME, update);
+	}
+
+	public function stop():Void
+	{
+		removeEventListener(Event.ENTER_FRAME, update);
 	}
 
 

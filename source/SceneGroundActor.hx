@@ -26,7 +26,7 @@ class SceneGroundActor  extends SceneActor
 		var polygon = new B2PolygonShape ();
 		var bodyDef = new B2BodyDef();
 		var fixtureDef = new B2FixtureDef ();
-		fixtureDef.density = 0;
+		fixtureDef.density = 1;
 		fixtureDef.friction = 0.3;
 		fixtureDef.restitution = 0.4;
 		var body;
@@ -54,7 +54,7 @@ class SceneGroundActor  extends SceneActor
 
 		sprite.graphics.lineTo(firstPoint.x*_parent.worldScale, firstPoint.y*_parent.worldScale);
 		sprite.graphics.endFill();
-		_parent.getCamera().addChild(sprite);
+		_parent.addChild(sprite);
 
 		return sprite;
 	}

@@ -34,7 +34,8 @@ class ScenePlayerActor extends SceneActor
 		var body;
 
 		bodyDef.position.set (pos.x, pos.y);
-		polygon.setAsBox(5,5);
+		bodyDef.type = B2Body.b2_dynamicBody;
+		polygon.setAsBox(5/_parent.worldScale,5/_parent.worldScale);
 		body = _parent.world.createBody (bodyDef);
 		fixtureDef.shape = polygon;
 		body.createFixture(fixtureDef);
@@ -46,11 +47,11 @@ class ScenePlayerActor extends SceneActor
 	{
 		var sprite = new Sprite();
 		sprite.graphics.beginFill(0x07aa15, 1);
-		sprite.graphics.drawCircle(0, 0, 5);
+		sprite.graphics.drawCircle(0, 0, 10);
 		sprite.graphics.endFill();
-		sprite.scaleX = 5 / sprite.width;
-		sprite.scaleY = 5 / sprite.height;
-		_parent.getCamera().addChild(sprite);
+		sprite.scaleX = 10 / sprite.width;
+		sprite.scaleY = 10 / sprite.height;
+		_parent.addChild(sprite);
 		return sprite;
 	}
 }

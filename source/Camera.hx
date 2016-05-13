@@ -16,8 +16,8 @@ class Camera extends Sprite{
 	{
 		super();
 		_myScene = scene;
-		//this.stageWidth = _stageWidth;
-		//this.stageHeight = _stageHeight;
+		this.stageWidth = _stageWidth;
+		this.stageHeight = _stageHeight;
 	}
 
 	public function zoomTo(whatPoint:Point)

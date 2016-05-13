@@ -23,6 +23,8 @@ class SceneActor extends EventDispatcher{
 		_myScene = scene;
 
 		_body.setUserData(this);
+
+		updateSprite();
 		super();
 	}
 
@@ -53,10 +55,9 @@ class SceneActor extends EventDispatcher{
 	private function updateSprite()
 	{
 		var worldScale = _myScene.worldScale;
-		_sprite.x = _body.getPosition().x / worldScale;
-		_sprite.y = _body.getPosition().y / worldScale;
-
-		trace("i update my sprite!");
+		_sprite.x = _body.getPosition().x * _myScene.worldScale;
+		_sprite.y = _body.getPosition().y * _myScene.worldScale;
+		_sprite.rotation = _body.getAngle() * 180/Math.PI;
 	}
 
 }

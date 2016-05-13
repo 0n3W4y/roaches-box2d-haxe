@@ -13,18 +13,13 @@ class Main extends Sprite
 	private var isStarted:Bool = false;
 	private var isStopped:Bool = false;
 	private var isPaused:Bool = false;
-	private var _allMyGames:Array<Dynamic>;
 	private var myGame:Game;
-
-	public static var globalSprite:Sprite;
 
 	public static function main()
 	{
 		Lib.current.stage.align = flash.display.StageAlign.TOP_LEFT;
 		Lib.current.stage.scaleMode = flash.display.StageScaleMode.NO_SCALE;
-		globalSprite = new Main();
-		Lib.current.addChild(globalSprite);
-
+		Lib.current.addChild(new Main());
 	}
 
 	public function new()
@@ -32,13 +27,11 @@ class Main extends Sprite
 		super();
 
 		initialize();
-
 	}
 
 	private function initialize()
 	{
-		myGame = new Game(globalSprite);
-		_allMyGames.push(myGame);
+		myGame = new Game(this);
 
 		start();
 	}
@@ -48,7 +41,7 @@ class Main extends Sprite
 		if (!isStarted)
 		{
 			isStarted = true;
-			myGame.start(); //addEventListener(Event.ENTER_FRAME, _allMyGames[index].update);
+			myGame.start(); 
 		}
 
 	}
@@ -58,7 +51,7 @@ class Main extends Sprite
 		if(!isStopped)
 		{
 			isStopped = true;
-			myGame.stop(); //removeEventListener(Event.ENTER_FRAME, _allMyGames[index].update);
+			myGame.stop();
 				
 		}
 	}
