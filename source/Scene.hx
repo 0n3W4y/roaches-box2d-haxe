@@ -22,7 +22,6 @@ class Scene extends Sprite
 	private var velocityIterations:Int = 10;
 	private var positionIterations:Int = 10;
 	private var sceneContactListener:ContactListener;
-	private var _camera:Camera;
 	private var _timeMaster:TimeMaster;
 
 	private var _allActors:Array<Dynamic> = new Array();
@@ -99,21 +98,11 @@ class Scene extends Sprite
 
 	private function createGroundActor()
 	{
-/*
-		var coord = new Array();
-		coord.push(new B2Vec2(-1280/2/worldScale, 40/2/worldScale));
-		coord.push(new B2Vec2(-1280/2/worldScale, -40/2/worldScale));
-		coord.push(new B2Vec2(-1000/2/worldScale, -80/2/worldScale));
-		coord.push(new B2Vec2(-80/2/worldScale, -40/2/worldScale));
-		coord.push(new B2Vec2(400/2/worldScale, -80/2/worldScale));
-		coord.push(new B2Vec2(1280/2/worldScale, -40/2/worldScale));
-		coord.push(new B2Vec2(1280/2/worldScale, 40/2/worldScale));
-*/
 		var width = 1280/2;
-		var figures = 4;
+		var figures = 2;
 		var pos = new B2Vec2(1280/2/worldScale, 720/worldScale);
 
-		var newGroundActor = new SceneGroundActor(this, width, pos, figures);
+		var newGroundActor = new SceneGroundActor(this, width, pos, figures, true);
 
 		_allActors.push(newGroundActor);
 	}

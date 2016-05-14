@@ -2,7 +2,11 @@
 	"folders":
 	[
 		{
-			"name": "roaches",
+			"name": "roaches-home",
+			"path": "C:\\Users\\Oneway\\Documents\\GitHub\\roaches-box2d-haxe"
+		},
+		{
+			"name": "roaches-work",
 			"path": "C:\\Users\\Admin\\Documents\\GitHub\\roaches-box2d-haxe"
 		},
 		{
