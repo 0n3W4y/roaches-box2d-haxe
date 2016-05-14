@@ -3,6 +3,7 @@ package;
 import flash.display.Sprite;
 import flash.Lib;
 import flash.events.KeyboardEvent;
+import flash.display.Stage;
 
 import box2D.dynamics.B2Body;
 import box2D.common.math.B2Vec2;
@@ -28,7 +29,7 @@ class ScenePlayerActor extends SceneActor
 		var sprite:Sprite = createSprite();
 
 		Lib.current.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownListener);
-		//Lib.current.stage.addEventListener(KeyboardEvent.KEY_UP, keyUpListener);
+		//_parent.addEventListener(KeyboardEvent.KEY_UP, keyUpListener);
 
 		super(scene, body, sprite);
 
@@ -46,7 +47,7 @@ class ScenePlayerActor extends SceneActor
 
 		bodyDef.position.set (pos.x, pos.y);
 		bodyDef.type = B2Body.b2_dynamicBody;
-		bodyDef.userData.name = "Player";
+		//bodyDef.userData.name = "Player";
 		polygon.setAsBox(10/_parent.worldScale,10/_parent.worldScale);
 		body = _parent.world.createBody (bodyDef);
 		fixtureDef.shape = polygon;
@@ -68,26 +69,44 @@ class ScenePlayerActor extends SceneActor
 	}
 
 	private function keyDownListener(e:KeyboardEvent)
-	{
+	{	
+		var speedX:Int = 0;
+		var speedY:Int = 0;
+
 		if (e.keyCode == 37)
 		{
-			body.setLinearVelocity(new B2Vec2(-5, 0));
+			speedX = -5;
 		}
 
 		if (e.keyCode == 39)
 		{
-			body.setLinearVelocity(new B2Vec2(5, 0));
+			speedX = 5;
 		}
 
-		if(e.keyCode == 36)
+		if(e.keyCode == 38)
 		{
-			body.setLinearVelocity(new B2Vec2(0, 5));
+			speedY = 10;
 		}
+
+		body.setLinearVelocity(new B2Vec2(speedX, speedY));
 	}
 
 	private function keyUpListener(e:KeyboardEvent)
 	{
+		if (e.keyCode == 37)
+		{
+			body.setLinearVelocity(new B2Vec2(0, 0));
+		}
 
+		if (e.keyCode == 39)
+		{
+			body.setLinearVelocity(new B2Vec2(0, 0));
+		}
+
+		if(e.keyCode == 38)
+		{
+			body.setLinearVelocity(new B2Vec2(0, 0));
+		}
 	}
 
 }
