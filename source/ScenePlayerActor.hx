@@ -1,6 +1,8 @@
 package;
 
 import flash.display.Sprite;
+import flash.Lib;
+import flash.events.KeyboardEvent;
 
 import box2D.dynamics.B2Body;
 import box2D.common.math.B2Vec2;
@@ -9,15 +11,24 @@ import box2D.dynamics.B2FixtureDef;
 import box2D.collision.shapes.B2PolygonShape;
 
 
+
+
+
 class ScenePlayerActor extends SceneActor
 {
 	private var _parent:Scene;
+	private var speed:Int = 0;
+
+	private var body:B2Body;
 
 	public function new(scene:Scene, pos:B2Vec2)
 	{
 		_parent = scene;
-		var body:B2Body = createBody(pos);
+		body = createBody(pos);
 		var sprite:Sprite = createSprite();
+
+		Lib.current.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownListener);
+		//Lib.current.stage.addEventListener(KeyboardEvent.KEY_UP, keyUpListener);
 
 		super(scene, body, sprite);
 
@@ -35,7 +46,8 @@ class ScenePlayerActor extends SceneActor
 
 		bodyDef.position.set (pos.x, pos.y);
 		bodyDef.type = B2Body.b2_dynamicBody;
-		polygon.setAsBox(5/_parent.worldScale,5/_parent.worldScale);
+		bodyDef.userData.name = "Player";
+		polygon.setAsBox(10/_parent.worldScale,10/_parent.worldScale);
 		body = _parent.world.createBody (bodyDef);
 		fixtureDef.shape = polygon;
 		body.createFixture(fixtureDef);
@@ -49,9 +61,33 @@ class ScenePlayerActor extends SceneActor
 		sprite.graphics.beginFill(0x07aa15, 1);
 		sprite.graphics.drawCircle(0, 0, 10);
 		sprite.graphics.endFill();
-		sprite.scaleX = 10 / sprite.width;
-		sprite.scaleY = 10 / sprite.height;
+		sprite.scaleX = 20 / sprite.width;
+		sprite.scaleY = 20 / sprite.height;
 		_parent.addChild(sprite);
 		return sprite;
 	}
+
+	private function keyDownListener(e:KeyboardEvent)
+	{
+		if (e.keyCode == 37)
+		{
+			body.setLinearVelocity(new B2Vec2(-5, 0));
+		}
+
+		if (e.keyCode == 39)
+		{
+			body.setLinearVelocity(new B2Vec2(5, 0));
+		}
+
+		if(e.keyCode == 36)
+		{
+			body.setLinearVelocity(new B2Vec2(0, 5));
+		}
+	}
+
+	private function keyUpListener(e:KeyboardEvent)
+	{
+
+	}
+
 }

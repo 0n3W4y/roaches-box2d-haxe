@@ -32,17 +32,18 @@ class SceneGroundActor  extends SceneActor
 	private function createSprite(pos:B2Vec2)
 	{
 		var sprite = new Sprite();
-		sprite.graphics.beginFill(0x00dd44, 0.5);
+		sprite.graphics.beginFill(0x0033ff, 0.5);
 		sprite.graphics.lineStyle(2, 0xff0000);
 
-
-			var wh = coordsArray[0];
-			sprite.graphics.moveTo(wh[0].x*_parent.worldScale, 1*_parent.worldScale);
+		for (i in 0...coordsArray.length)
+		{
+			var wh = coordsArray[i];
+			sprite.graphics.moveTo(wh[0].x*_parent.worldScale, wh[0].y*_parent.worldScale);
 			sprite.graphics.lineTo(wh[1].x*_parent.worldScale, wh[1].y*_parent.worldScale);
 			sprite.graphics.lineTo(wh[2].x*_parent.worldScale, wh[2].y*_parent.worldScale);
-			sprite.graphics.lineTo(wh[3].x*_parent.worldScale, 4*_parent.worldScale);
-			sprite.graphics.lineTo(wh[0].x*_parent.worldScale, 1*_parent.worldScale);
-			trace(wh[0].y + " = wh0y; " + wh[1].y + " = wh1y;");
+			sprite.graphics.lineTo(wh[3].x*_parent.worldScale, wh[3].y*_parent.worldScale);
+			sprite.graphics.lineTo(wh[0].x*_parent.worldScale, wh[0].y*_parent.worldScale);
+		}
 		
 		sprite.graphics.endFill();
 		_parent.addChild(sprite);
@@ -78,14 +79,14 @@ class SceneGroundActor  extends SceneActor
 			{
 				p1x = -maxWidth + a;
 				p2x = -maxWidth + widthPerFigure - a;
-				py = minHeight;
+				py = 30;
 
 			}
 			else
 			{
 				p1x = maxWidth - widthPerFigure + a;
 				p2x = maxWidth - a;
-				py = minHeight;
+				py = 30;
 				
 			}
 

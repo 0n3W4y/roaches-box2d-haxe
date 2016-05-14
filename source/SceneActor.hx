@@ -4,6 +4,9 @@ package;
 import flash.events.EventDispatcher;
 import flash.display.DisplayObject;
 import flash.display.Sprite;
+import flash.events.Event;
+import flash.ui.Keyboard;
+import flash.events.KeyboardEvent;
 
 import box2D.dynamics.B2Body;
 
@@ -60,4 +63,8 @@ class SceneActor extends EventDispatcher{
 		_sprite.rotation = _body.getAngle() * 180/Math.PI;
 	}
 
+	private function updateInputKeyboard()
+	{
+
+	}
 }
