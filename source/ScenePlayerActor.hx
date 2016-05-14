@@ -21,6 +21,8 @@ class ScenePlayerActor extends SceneActor
 	private var speed:Int = 0;
 
 	private var body:B2Body;
+	private var speedX:Int = 0;
+	private	var speedY:Int = 9;
 
 	public function new(scene:Scene, pos:B2Vec2)
 	{
@@ -29,7 +31,7 @@ class ScenePlayerActor extends SceneActor
 		var sprite:Sprite = createSprite();
 
 		Lib.current.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownListener);
-		//_parent.addEventListener(KeyboardEvent.KEY_UP, keyUpListener);
+		Lib.current.stage.addEventListener(KeyboardEvent.KEY_UP, keyUpListener);
 
 		super(scene, body, sprite);
 
@@ -70,43 +72,46 @@ class ScenePlayerActor extends SceneActor
 
 	private function keyDownListener(e:KeyboardEvent)
 	{	
-		var speedX:Int = 0;
-		var speedY:Int = 0;
+		
 
 		if (e.keyCode == 37)
 		{
 			speedX = -5;
 		}
-
-		if (e.keyCode == 39)
+		else if(e.keyCode == 39)
 		{
 			speedX = 5;
 		}
 
+
 		if(e.keyCode == 38)
 		{
-			speedY = 10;
+			speedY = -10;
 		}
 
-		body.setLinearVelocity(new B2Vec2(speedX, speedY));
+		
 	}
 
 	private function keyUpListener(e:KeyboardEvent)
 	{
 		if (e.keyCode == 37)
 		{
-			body.setLinearVelocity(new B2Vec2(0, 0));
+			speedX = 0;
 		}
-
-		if (e.keyCode == 39)
+		else if (e.keyCode == 39)
 		{
-			body.setLinearVelocity(new B2Vec2(0, 0));
+			speedX = 0;
 		}
 
 		if(e.keyCode == 38)
 		{
-			body.setLinearVelocity(new B2Vec2(0, 0));
+			speedY = 5;
 		}
+
 	}
 
+	override public function childSpecificUpdate()
+	{
+		body.setLinearVelocity(new B2Vec2(speedX, speedY));
+	}
 }
