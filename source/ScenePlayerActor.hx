@@ -21,12 +21,12 @@ class ScenePlayerActor extends SceneActor
 	private var speed:Int = 0;
 
 	private var body:B2Body;
-	private var speedX:Int = 0;
-	private	var speedY:Float = 9.8;
 	private var headCoord = new Array();
 	private var bodyCoord = new Array();
 	private var footCoord = new Array();
-	private var jumpSteps:Int = 0;
+	private var goLeft:Bool = false;
+	private var goRight:Bool = false;
+	private var goJump:Bool = false;
 
 	public var canJump:Bool = false;
 
@@ -55,14 +55,15 @@ class ScenePlayerActor extends SceneActor
 		var fixtureHead = new B2FixtureDef ();
 		var fixtureFoots = new B2FixtureDef ();
 		var fixtureFootsSensor = new B2FixtureDef ();
-		fixtureBody.density = 0;
+		fixtureBody.density = 1;
 		fixtureBody.friction = 1;
-		fixtureBody.restitution = 1;
+		fixtureBody.restitution = 0.1;
 		var body;
 
 		bodyDef.position.set (pos.x, pos.y);
 		bodyDef.type = B2Body.b2_dynamicBody;
 		//bodyDef.userData.name = "Player";
+		//bodyDef.setUserData("name":"Player");
 		
 		headCoord = [new B2Vec2(-5/_parent.worldScale, -25/_parent.worldScale), new B2Vec2(5/_parent.worldScale, -25/_parent.worldScale),
 					new B2Vec2(5/_parent.worldScale, -15/_parent.worldScale), new B2Vec2(-5/_parent.worldScale, -15/_parent.worldScale)];
@@ -88,6 +89,7 @@ class ScenePlayerActor extends SceneActor
 		fixtureFoots.shape = polygonFoots;
 		fixtureFootsSensor.shape = polygonFootsSensor;
 		fixtureFootsSensor.isSensor = true;
+		fixtureFootsSensor.userData = "footSensor";
 		body.createFixture(fixtureBody);
 		body.createFixture(fixtureHead);
 		body.createFixture(fixtureFoots);
@@ -130,61 +132,53 @@ class ScenePlayerActor extends SceneActor
 
 	private function keyDownListener(e:KeyboardEvent)
 	{	
-		
-
 		if (e.keyCode == 37)
 		{
-			speedX = -5;
+			goLeft = true;
 		}
 		else if(e.keyCode == 39)
 		{
-			speedX = 5;
+			goRight = true;
 		}
-		else if(e.keyCode == 37 && e.keyCode == 39)
+		else if(e.keyCode == 38 && canJump)
 		{
-			speedX = 0;
-		}
-
-
-		if(e.keyCode == 38 && canJump)
-		{
-			speedY = -30;
-			jumpSteps = 5;
-			canJump = false;
-		}
-
-		
+			goJump = true;
+		}		
 	}
 
 	private function keyUpListener(e:KeyboardEvent)
 	{
-		
 		if (e.keyCode == 37)
-		{
-			speedX = 0;
-		}
-		else if (e.keyCode == 39)
-		{
-			speedX = 0;
-		}
+			goLeft = false;
 
-		if(e.keyCode == 38)
-		{
-			speedY = 0; //G/2
-		}
+		if (e.keyCode  == 39)
+			goRight = false;
+
+		if (e.keyCode == 38)
+			goJump = false;
 	
 	}
 
 	override public function childSpecificUpdate()
 	{
-		if (jumpSteps > 0)
+
+		var velY = body.getLinearVelocity().y;
+
+		if (goLeft)
 		{
-			jumpSteps--;
+			body.setLinearVelocity(new B2Vec2(-5, velY));
 		}
-		else
+		else if (goRight)
 		{
-			speedY = 9.8;
+			body.setLinearVelocity(new B2Vec2(5, velY));
 		}
-		body.setLinearVelocity(new B2Vec2(speedX, speedY));
+
+		if (goJump && canJump)
+		{
+			body.applyImpulse(new B2Vec2(0, -4), body.getWorldCenter());
+			canJump = false;
+		}
+
 	}
+
 }

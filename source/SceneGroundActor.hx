@@ -26,14 +26,16 @@ class SceneGroundActor  extends SceneActor
 		var body = createBody(width, pos, figures, holes);
 		var sprite = createSprite(pos);
 
+
+
 		super(scene, body, sprite);
 	}
 
 	private function createSprite(pos:B2Vec2)
 	{
 		var sprite = new Sprite();
-		sprite.graphics.beginFill(0x0033ff, 0.5);
-		sprite.graphics.lineStyle(2, 0xff0000);
+		sprite.graphics.beginFill(0x331a00, 0.5);
+		sprite.graphics.lineStyle(2, 0x663300);
 
 		for (i in 0...coordsArray.length)
 		{
@@ -113,9 +115,9 @@ class SceneGroundActor  extends SceneActor
 			polygonArray.push(newPolygon);
 
 			var newFixture = new B2FixtureDef();
-			newFixture.density = 0;
-			newFixture.friction = 0.1;
-			newFixture.restitution = 0.6;
+			newFixture.density = 1;
+			newFixture.friction = 100;
+			newFixture.restitution = 0.2;
 			fixturesArray.push(newFixture);
 			
 		}
@@ -146,9 +148,9 @@ class SceneGroundActor  extends SceneActor
 			var newPolygon = new B2PolygonShape();
 			var newFixture = new B2FixtureDef();
 
-			newFixture.density = 1;
-			newFixture.friction = 0.1;
-			newFixture.restitution = 0.6;
+			newFixture.density = 2;
+			newFixture.friction = 0;
+			newFixture.restitution = 0.1;
 			polygonArray.push(newPolygon);
 			fixturesArray.push(newFixture);
 		}
