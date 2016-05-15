@@ -22,7 +22,14 @@ class ScenePlayerActor extends SceneActor
 
 	private var body:B2Body;
 	private var speedX:Int = 0;
-	private	var speedY:Int = 9;
+	private	var speedY:Float = 9.8;
+	private var headCoord = new Array();
+	private var bodyCoord = new Array();
+	private var footCoord = new Array();
+	private var jumpSteps:Int = 0;
+
+	public var canJump:Bool = false;
+
 
 	public function new(scene:Scene, pos:B2Vec2)
 	{
@@ -39,21 +46,53 @@ class ScenePlayerActor extends SceneActor
 
 	private function createBody(pos):B2Body
 	{
-		var polygon = new B2PolygonShape ();
+		var polygonHead = new B2PolygonShape();
+		var polygonBody = new B2PolygonShape();
+		var polygonFoots = new B2PolygonShape();
+		var polygonFootsSensor = new B2PolygonShape();
 		var bodyDef = new B2BodyDef();
-		var fixtureDef = new B2FixtureDef ();
-		fixtureDef.density = 1;
-		fixtureDef.friction = 0.3;
-		fixtureDef.restitution = 0.4;
+		var fixtureBody = new B2FixtureDef ();
+		var fixtureHead = new B2FixtureDef ();
+		var fixtureFoots = new B2FixtureDef ();
+		var fixtureFootsSensor = new B2FixtureDef ();
+		fixtureBody.density = 0;
+		fixtureBody.friction = 1;
+		fixtureBody.restitution = 1;
 		var body;
 
 		bodyDef.position.set (pos.x, pos.y);
 		bodyDef.type = B2Body.b2_dynamicBody;
 		//bodyDef.userData.name = "Player";
-		polygon.setAsBox(10/_parent.worldScale,10/_parent.worldScale);
+		
+		headCoord = [new B2Vec2(-5/_parent.worldScale, -25/_parent.worldScale), new B2Vec2(5/_parent.worldScale, -25/_parent.worldScale),
+					new B2Vec2(5/_parent.worldScale, -15/_parent.worldScale), new B2Vec2(-5/_parent.worldScale, -15/_parent.worldScale)];
+		
+		bodyCoord = [new B2Vec2(-10/_parent.worldScale, -15/_parent.worldScale), new B2Vec2(10/_parent.worldScale, -15/_parent.worldScale),
+					new B2Vec2(10/_parent.worldScale, 15/_parent.worldScale), new B2Vec2(-10/_parent.worldScale, 15/_parent.worldScale)];
+		
+		footCoord = [new B2Vec2(-8/_parent.worldScale, 15/_parent.worldScale), new B2Vec2(8/_parent.worldScale, 15/_parent.worldScale),
+					new B2Vec2(8/_parent.worldScale, 30/_parent.worldScale), new B2Vec2(-8/_parent.worldScale, 30/_parent.worldScale)];
+		var footSensorCoord = new Array();
+		footSensorCoord = [new B2Vec2(-8/_parent.worldScale, 30/_parent.worldScale), new B2Vec2(8/_parent.worldScale, 30/_parent.worldScale),
+					new B2Vec2(8/_parent.worldScale, 35/_parent.worldScale), new B2Vec2(-8/_parent.worldScale, 35/_parent.worldScale)];
+
+
+		polygonHead.setAsArray(headCoord, headCoord.length);
+		polygonBody.setAsArray(bodyCoord, bodyCoord.length);
+		polygonFoots.setAsArray(footCoord, footCoord.length);
+		polygonFootsSensor.setAsArray(footSensorCoord, footSensorCoord.length);
+
 		body = _parent.world.createBody (bodyDef);
-		fixtureDef.shape = polygon;
-		body.createFixture(fixtureDef);
+		fixtureBody.shape = polygonBody;
+		fixtureHead.shape = polygonHead;
+		fixtureFoots.shape = polygonFoots;
+		fixtureFootsSensor.shape = polygonFootsSensor;
+		fixtureFootsSensor.isSensor = true;
+		body.createFixture(fixtureBody);
+		body.createFixture(fixtureHead);
+		body.createFixture(fixtureFoots);
+		body.createFixture(fixtureFootsSensor);
+		body.setFixedRotation(true);
 
 		return body;
 	}
@@ -61,11 +100,30 @@ class ScenePlayerActor extends SceneActor
 	private function createSprite():Sprite
 	{
 		var sprite = new Sprite();
-		sprite.graphics.beginFill(0x07aa15, 1);
-		sprite.graphics.drawCircle(0, 0, 10);
+		sprite.graphics.beginFill(0x0000ff, 1);
+		sprite.graphics.lineStyle(2, 0x00ff00, 1);
+		
+	
+		sprite.graphics.moveTo(headCoord[0].x*_parent.worldScale, headCoord[0].y*_parent.worldScale);
+		sprite.graphics.lineTo(headCoord[1].x*_parent.worldScale, headCoord[1].y*_parent.worldScale);
+		sprite.graphics.lineTo(headCoord[2].x*_parent.worldScale, headCoord[2].y*_parent.worldScale);
+		sprite.graphics.lineTo(headCoord[3].x*_parent.worldScale, headCoord[3].y*_parent.worldScale);
+		sprite.graphics.lineTo(headCoord[0].x*_parent.worldScale, headCoord[0].y*_parent.worldScale);
+
+		sprite.graphics.moveTo(bodyCoord[0].x*_parent.worldScale, bodyCoord[0].y*_parent.worldScale);
+		sprite.graphics.lineTo(bodyCoord[1].x*_parent.worldScale, bodyCoord[1].y*_parent.worldScale);
+		sprite.graphics.lineTo(bodyCoord[2].x*_parent.worldScale, bodyCoord[2].y*_parent.worldScale);
+		sprite.graphics.lineTo(bodyCoord[3].x*_parent.worldScale, bodyCoord[3].y*_parent.worldScale);
+		sprite.graphics.lineTo(bodyCoord[0].x*_parent.worldScale, bodyCoord[0].y*_parent.worldScale);
+
+		sprite.graphics.moveTo(footCoord[0].x*_parent.worldScale, footCoord[0].y*_parent.worldScale);
+		sprite.graphics.lineTo(footCoord[1].x*_parent.worldScale, footCoord[1].y*_parent.worldScale);
+		sprite.graphics.lineTo(footCoord[2].x*_parent.worldScale, footCoord[2].y*_parent.worldScale);
+		sprite.graphics.lineTo(footCoord[3].x*_parent.worldScale, footCoord[3].y*_parent.worldScale);
+		sprite.graphics.lineTo(footCoord[0].x*_parent.worldScale, footCoord[0].y*_parent.worldScale);
+
+
 		sprite.graphics.endFill();
-		sprite.scaleX = 20 / sprite.width;
-		sprite.scaleY = 20 / sprite.height;
 		_parent.addChild(sprite);
 		return sprite;
 	}
@@ -82,11 +140,17 @@ class ScenePlayerActor extends SceneActor
 		{
 			speedX = 5;
 		}
-
-
-		if(e.keyCode == 38)
+		else if(e.keyCode == 37 && e.keyCode == 39)
 		{
-			speedY = -10;
+			speedX = 0;
+		}
+
+
+		if(e.keyCode == 38 && canJump)
+		{
+			speedY = -30;
+			jumpSteps = 5;
+			canJump = false;
 		}
 
 		
@@ -94,6 +158,7 @@ class ScenePlayerActor extends SceneActor
 
 	private function keyUpListener(e:KeyboardEvent)
 	{
+		
 		if (e.keyCode == 37)
 		{
 			speedX = 0;
@@ -105,13 +170,21 @@ class ScenePlayerActor extends SceneActor
 
 		if(e.keyCode == 38)
 		{
-			speedY = 5;
+			speedY = 0; //G/2
 		}
-
+	
 	}
 
 	override public function childSpecificUpdate()
 	{
+		if (jumpSteps > 0)
+		{
+			jumpSteps--;
+		}
+		else
+		{
+			speedY = 9.8;
+		}
 		body.setLinearVelocity(new B2Vec2(speedX, speedY));
 	}
 }

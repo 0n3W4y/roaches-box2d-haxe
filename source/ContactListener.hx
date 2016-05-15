@@ -17,17 +17,31 @@ class ContactListener extends B2ContactListener{
 
 	override public function beginContact(contact:B2Contact)
 	{
-
 		var bodyUserDataA = contact.getFixtureA().getBody().getUserData();
 		var bodyUserDataB = contact.getFixtureB().getBody().getUserData();
+		var fixtureA = contact.getFixtureA();
+		var fixtureB = contact.getFixtureB();
+
+		if (Std.is(bodyUserDataA, ScenePlayerActor) && Std.is(bodyUserDataB, SceneGroundActor) && fixtureA.isSensor())
+		{
+			bodyUserDataA.canJump = true;
+		}
+		if (Std.is(bodyUserDataB, ScenePlayerActor) && Std.is(bodyUserDataA, SceneGroundActor) && fixtureB.isSensor())
+		{
+			bodyUserDataB.canJump = true;
+		}
 
 	}
 
 	override public function endContact(contact:B2Contact)
 	{
-
 		var bodyUserDataA = contact.getFixtureA().getBody().getUserData();
 		var bodyUserDataB = contact.getFixtureB().getBody().getUserData();
+		var fixtureA = contact.getFixtureA();
+		var fixtureB = contact.getFixtureB();
+
+
+
 	}
 	
 }
