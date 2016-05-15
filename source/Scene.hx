@@ -98,11 +98,12 @@ class Scene extends Sprite
 
 	private function createGroundActor()
 	{
-		var width = 1280/2;
-		var figures = 10;
-		var pos = new B2Vec2(1280/2/worldScale, 720/worldScale);
+		var width = 1920/2;
+		var height = 20;
+		var figures = 4;
+		var pos = new B2Vec2(1920/2/worldScale, 1000/worldScale);
 
-		var newGroundActor = new SceneGroundActor(this, width, pos, figures, true);
+		var newGroundActor = new SceneGroundActor(this, width, height, pos, figures, true);
 
 		_allActors.push(newGroundActor);
 	}

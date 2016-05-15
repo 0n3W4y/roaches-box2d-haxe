@@ -4,6 +4,90 @@
 		"selected_items":
 		[
 			[
+				"get",
+				"getUserData(  )	Dynamic"
+			],
+			[
+				"apply",
+				"applyTorque( torque : Float )	Void"
+			],
+			[
+				"appl",
+				"applyImpulse(...)	Void"
+			],
+			[
+				"setLinera",
+				"setLinearVelocity(...)	Void"
+			],
+			[
+				"app",
+				"applyTorque( torque : Float )	Void"
+			],
+			[
+				"getLine",
+				"getLinearVelocity(...)	box2D.common.math.B2Vec2"
+			],
+			[
+				"setLine",
+				"setLinearVelocity(...)	Void"
+			],
+			[
+				"speed",
+				"speedY	Int"
+			],
+			[
+				"getWorld",
+				"getWorldCenter(...)	box2D.common.math.B2Vec2"
+			],
+			[
+				"a",
+				"applyImpulse(...)	Void"
+			],
+			[
+				"jump",
+				"jumpSteps	Int"
+			],
+			[
+				"Scene",
+				"SceneGroundActor	class"
+			],
+			[
+				"word",
+				"worldScale	Int"
+			],
+			[
+				"body",
+				"bodyCoord"
+			],
+			[
+				"fixtureFoots",
+				"fixtureFootsSensor"
+			],
+			[
+				"fixture",
+				"fixtureFootsSensor	box2D.dynamics.B2FixtureDef"
+			],
+			[
+				"foot",
+				"footSensorCoord	Array<box2D.common.math.B2Vec2>"
+			],
+			[
+				"foo",
+				"footSensorCoord"
+			],
+			[
+				"setAs",
+				"setAsArray(...)	Void"
+			],
+			[
+				"polygo",
+				"polygonFootsSensor	box2D.collision.shapes.B2PolygonShape"
+			],
+			[
+				"polygon",
+				"polygonFoots	var"
+			],
+			[
 				"setLin",
 				"setLinearVelocity(...)	Void"
 			],
@@ -46,10 +130,6 @@
 			[
 				"w",
 				"worldScale	Int"
-			],
-			[
-				"setAs",
-				"setAsBox( hx : Float , hy : Float )	Void"
 			],
 			[
 				"Hole",
@@ -232,10 +312,6 @@
 				"setLinearVelocity(...)	Void"
 			],
 			[
-				"a",
-				"addChild(...)	openfl.display.DisplayObject"
-			],
-			[
 				"Display",
 				"DisplayObjectContainer	flash.display"
 			],
@@ -266,14 +342,6 @@
 			[
 				"Eve",
 				"EventDispatcher	class"
-			],
-			[
-				"body",
-				"bodyDefinition	box2D.dynamics.B2BodyDef"
-			],
-			[
-				"get",
-				"getPosition(  )	box2D.common.math.B2Vec2"
 			],
 			[
 				"wall",
@@ -446,74 +514,6 @@
 			[
 				"n",
 				"nickname"
-			],
-			[
-				"bag",
-				"bagVault"
-			],
-			[
-				"bots",
-				"botsInGame"
-			],
-			[
-				"newI",
-				"newItem"
-			],
-			[
-				"newite",
-				"newItemParams"
-			],
-			[
-				"newi",
-				"newItemData"
-			],
-			[
-				"__",
-				"__className"
-			],
-			[
-				"proto",
-				"prototype"
-			],
-			[
-				"Weapon",
-				"WeaponAdditional"
-			],
-			[
-				"equip",
-				"equipVault"
-			],
-			[
-				"gun",
-				"gun"
-			],
-			[
-				"player",
-				"playerOne"
-			],
-			[
-				"replace",
-				"replaceItem"
-			],
-			[
-				"setTo",
-				"setToBag"
-			],
-			[
-				"init",
-				"initInventory"
-			],
-			[
-				"belt",
-				"beltMaxSlots"
-			],
-			[
-				"Belt",
-				"beltMaxSlots"
-			],
-			[
-				"In",
-				"InventoryBag"
 			]
 		]
 	},
@@ -539,7 +539,7 @@
 			"file": "source/Scene.hx",
 			"settings":
 			{
-				"buffer_size": 2588,
+				"buffer_size": 2616,
 				"line_ending": "Windows"
 			}
 		},
@@ -555,15 +555,7 @@
 			"file": "/C/Users/Oneway/Documents/GitHub/roaches-box2d-haxe/source/ScenePlayerActor.hx",
 			"settings":
 			{
-				"buffer_size": 2209,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "source/ContactListener.hx",
-			"settings":
-			{
-				"buffer_size": 691,
+				"buffer_size": 6014,
 				"line_ending": "Windows"
 			}
 		},
@@ -571,15 +563,15 @@
 			"file": "/C/Users/Oneway/Documents/GitHub/roaches-box2d-haxe/source/SceneGroundActor.hx",
 			"settings":
 			{
-				"buffer_size": 6275,
+				"buffer_size": 6316,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "Project.xml",
+			"file": "source/ContactListener.hx",
 			"settings":
 			{
-				"buffer_size": 422,
+				"buffer_size": 1199,
 				"line_ending": "Windows"
 			}
 		}
@@ -621,6 +613,8 @@
 	],
 	"file_history":
 	[
+		"/C/Users/OneWay/Documents/GitHub/roaches-box2d-haxe/Project.xml",
+		"/C/Users/OneWay/Desktop/HelloWorld.as",
 		"/C/Users/OneWay/Documents/GitHub/TooManyShoots-haxe-box2d/source/Main.hx",
 		"/C/Users/OneWay/Documents/GitHub/TooManyShoots-haxe-box2d/source/BonusChuteActor.hx",
 		"/C/Users/OneWay/Documents/GitHub/TooManyShoots-haxe-box2d/source/ArbiStaticActor.hx",
@@ -760,7 +754,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -790,7 +784,7 @@
 						"translation.y": 456.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
@@ -817,10 +811,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 285.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
@@ -829,15 +823,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2588,
+						"buffer_size": 2616,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1591,
-								1591
+								2476,
+								2476
 							]
 						],
 						"settings":
@@ -847,10 +841,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1026.0,
+						"translation.y": 1938.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -877,10 +871,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 171.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -889,15 +883,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2209,
+						"buffer_size": 6014,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2089,
-								2089
+								3284,
+								3296
 							]
 						],
 						"settings":
@@ -907,27 +901,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1368.0,
+						"translation.y": 1254.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
 					"buffer": 5,
-					"file": "source/ContactListener.hx",
+					"file": "/C/Users/Oneway/Documents/GitHub/roaches-box2d-haxe/source/SceneGroundActor.hx",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 691,
+						"buffer_size": 6316,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								274,
-								274
+								407,
+								407
 							]
 						],
 						"settings":
@@ -945,19 +939,19 @@
 				},
 				{
 					"buffer": 6,
-					"file": "/C/Users/Oneway/Documents/GitHub/roaches-box2d-haxe/source/SceneGroundActor.hx",
+					"file": "source/ContactListener.hx",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6275,
+						"buffer_size": 1199,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								863,
-								863
+								865,
+								865
 							]
 						],
 						"settings":
@@ -967,39 +961,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 285.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "Project.xml",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 422,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								342,
-								342
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/XML/XML.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]

@@ -15,15 +15,14 @@ class SceneGroundActor  extends SceneActor
 	private var _parent:Scene;
 	private var maxHeight:Int = 100;
 	private var minHeight:Int = 5;
-	private var maxHoleWidth:Int = 20;
+	private var maxHoleWidth:Int = 30;
 
 	private var coordsArray:Array<Dynamic> = new Array();
 
-	public function new(scene:Scene, width:Float, pos:B2Vec2, figures:Int, holes:Bool = false)
+	public function new(scene:Scene, width:Float, height:Float, pos:B2Vec2, figures:Int, holes:Bool = false)
 	{	
 		_parent = scene;
-		//var body = generateGround(width, pos, figures);
-		var body = createBody(width, pos, figures, holes);
+		var body = createBody(width, height, pos, figures, holes);
 		var sprite = createSprite(pos);
 
 
@@ -35,7 +34,7 @@ class SceneGroundActor  extends SceneActor
 	{
 		
 		var sprite = new Sprite();
-		sprite.graphics.beginFill(0x331a00, 1);
+		sprite.graphics.beginFill(0x663300, 1);
 		sprite.graphics.lineStyle(4, 0x00af22);
 
 		for (i in 0...coordsArray.length)
@@ -54,7 +53,7 @@ class SceneGroundActor  extends SceneActor
 		return sprite;
 	}
 
-	private function createBody(width:Float, pos:B2Vec2, figures:Int, holes:Bool)
+	private function createBody(width:Float, height:Float, pos:B2Vec2, figures:Int, holes:Bool)
 	{
 		var polygonArray = new Array();
 		var fixturesArray = new Array();
@@ -83,14 +82,14 @@ class SceneGroundActor  extends SceneActor
 			{
 				p1x = -maxWidth + a;
 				p2x = -maxWidth + widthPerFigure - a;
-				py = 30;
+				py = height;
 
 			}
 			else
 			{
 				p1x = maxWidth - widthPerFigure + a;
 				p2x = maxWidth - a;
-				py = 30;
+				py = height;
 				
 			}
 
