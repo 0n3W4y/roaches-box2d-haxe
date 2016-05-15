@@ -56,14 +56,15 @@ class ScenePlayerActor extends SceneActor
 		var fixtureFoots = new B2FixtureDef ();
 		var fixtureFootsSensor = new B2FixtureDef ();
 		fixtureBody.density = 1;
-		fixtureBody.friction = 1;
+		fixtureBody.friction = 0;
 		fixtureBody.restitution = 0.1;
+		fixtureFoots.density = 1;
+		fixtureFoots.friction = 1;
+		fixtureFoots.restitution = 0.1;
 		var body;
 
 		bodyDef.position.set (pos.x, pos.y);
 		bodyDef.type = B2Body.b2_dynamicBody;
-		//bodyDef.userData.name = "Player";
-		//bodyDef.setUserData("name":"Player");
 		
 		headCoord = [new B2Vec2(-5/_parent.worldScale, -25/_parent.worldScale), new B2Vec2(5/_parent.worldScale, -25/_parent.worldScale),
 					new B2Vec2(5/_parent.worldScale, -15/_parent.worldScale), new B2Vec2(-5/_parent.worldScale, -15/_parent.worldScale)];
@@ -102,8 +103,8 @@ class ScenePlayerActor extends SceneActor
 	private function createSprite():Sprite
 	{
 		var sprite = new Sprite();
-		sprite.graphics.beginFill(0x0000ff, 1);
-		sprite.graphics.lineStyle(2, 0x00ff00, 1);
+		sprite.graphics.beginFill(0xffffff, 1);
+		sprite.graphics.lineStyle(2, 0x000000, 1);
 		
 	
 		sprite.graphics.moveTo(headCoord[0].x*_parent.worldScale, headCoord[0].y*_parent.worldScale);
@@ -166,10 +167,12 @@ class ScenePlayerActor extends SceneActor
 
 		if (goLeft)
 		{
+			body.applyTorque(10);
 			body.setLinearVelocity(new B2Vec2(-5, velY));
 		}
 		else if (goRight)
 		{
+			body.applyTorque(10);
 			body.setLinearVelocity(new B2Vec2(5, velY));
 		}
 

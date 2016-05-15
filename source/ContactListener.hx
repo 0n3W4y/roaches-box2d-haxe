@@ -22,11 +22,11 @@ class ContactListener extends B2ContactListener{
 		var fixtureA = contact.getFixtureA();
 		var fixtureB = contact.getFixtureB();
 
-		if (Std.is(bodyUserDataA, ScenePlayerActor) && Std.is(bodyUserDataB, SceneGroundActor) && fixtureA.isSensor())
+		if (Std.is(bodyUserDataA, ScenePlayerActor) && Std.is(bodyUserDataB, SceneGroundActor) && fixtureA.getUserData() == "footSensor")
 		{
 			bodyUserDataA.canJump = true;
 		}
-		if (Std.is(bodyUserDataB, ScenePlayerActor) && Std.is(bodyUserDataA, SceneGroundActor) && fixtureB.isSensor())
+		if (Std.is(bodyUserDataB, ScenePlayerActor) && Std.is(bodyUserDataA, SceneGroundActor) && fixtureB.getUserData() == "footSensor")
 		{
 			bodyUserDataB.canJump = true;
 		}

@@ -33,20 +33,21 @@ class SceneGroundActor  extends SceneActor
 
 	private function createSprite(pos:B2Vec2)
 	{
+		
 		var sprite = new Sprite();
-		sprite.graphics.beginFill(0x331a00, 0.5);
-		sprite.graphics.lineStyle(2, 0x663300);
+		sprite.graphics.beginFill(0x331a00, 1);
+		sprite.graphics.lineStyle(4, 0x00af22);
 
 		for (i in 0...coordsArray.length)
 		{
 			var wh = coordsArray[i];
-			sprite.graphics.moveTo(wh[0].x*_parent.worldScale, wh[0].y*_parent.worldScale);
-			sprite.graphics.lineTo(wh[1].x*_parent.worldScale, wh[1].y*_parent.worldScale);
-			sprite.graphics.lineTo(wh[2].x*_parent.worldScale, wh[2].y*_parent.worldScale);
-			sprite.graphics.lineTo(wh[3].x*_parent.worldScale, wh[3].y*_parent.worldScale);
-			sprite.graphics.lineTo(wh[0].x*_parent.worldScale, wh[0].y*_parent.worldScale);
+			sprite.graphics.moveTo(wh[0].x, wh[0].y);
+			sprite.graphics.lineTo(wh[1].x, wh[1].y);
+			sprite.graphics.lineTo(wh[2].x, wh[2].y);
+			sprite.graphics.lineTo(wh[3].x, wh[3].y);
+			sprite.graphics.lineTo(wh[0].x, wh[0].y);
 		}
-		
+
 		sprite.graphics.endFill();
 		_parent.addChild(sprite);
 
@@ -64,6 +65,7 @@ class SceneGroundActor  extends SceneActor
 		for (i in 0...figures)
 		{	
 			var coordArray = new Array();
+			var coordArrayForSprite = new Array();
 			var a = 0;
 
 			if (holes)
@@ -97,26 +99,29 @@ class SceneGroundActor  extends SceneActor
 			coordArray.push(new B2Vec2(p2x/_parent.worldScale, py/_parent.worldScale));
 			coordArray.push(new B2Vec2(p1x/_parent.worldScale, py/_parent.worldScale));
 
+			coordArrayForSprite.push(new B2Vec2(p1x, -py));
+			coordArrayForSprite.push(new B2Vec2(p2x, -py));
+			coordArrayForSprite.push(new B2Vec2(p2x, py));
+			coordArrayForSprite.push(new B2Vec2(p1x, py));
+
+			coordsArray.push(coordArrayForSprite);
 			
-
-			coordsArray.push(coordArray);
-
-			if (maxWidth > widthPerFigure)
-				maxWidth -= widthPerFigure;
-			else if (maxWidth == widthPerFigure && i < figures/2)
+			if (i >= figures/2)
+				maxWidth += widthPerFigure;
+			else if (i < figures/2 && maxWidth <= widthPerFigure)
 			{
 
 			}
 			else
-				maxWidth += widthPerFigure;
-
+				maxWidth -= widthPerFigure;
+	
 			var newPolygon = new B2PolygonShape();
 			newPolygon.setAsArray(coordArray, coordArray.length);
 			polygonArray.push(newPolygon);
 
 			var newFixture = new B2FixtureDef();
 			newFixture.density = 1;
-			newFixture.friction = 100;
+			newFixture.friction = 1;
 			newFixture.restitution = 0.2;
 			fixturesArray.push(newFixture);
 			
@@ -150,7 +155,7 @@ class SceneGroundActor  extends SceneActor
 
 			newFixture.density = 2;
 			newFixture.friction = 0;
-			newFixture.restitution = 0.1;
+			newFixture.restitution = 0.3;
 			polygonArray.push(newPolygon);
 			fixturesArray.push(newFixture);
 		}
