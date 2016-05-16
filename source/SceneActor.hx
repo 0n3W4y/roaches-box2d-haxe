@@ -40,13 +40,14 @@ class SceneActor extends EventDispatcher{
 		childSpecificUpdate();
 	}
 
-	public function destroy()
-	{
+	public function destroy(){
 		cleanUpBeforeRemoving();
+
+		_sprite.parent.removeChild(_sprite);
+		_myScene.world.destroyBody(_body);
 	}
 
-	private function cleanUpBeforeRemoving()
-	{
+	private function cleanUpBeforeRemoving(){
 
 	}
 

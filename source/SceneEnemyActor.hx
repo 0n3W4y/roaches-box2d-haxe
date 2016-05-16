@@ -15,7 +15,7 @@ import box2D.collision.shapes.B2PolygonShape;
 
 
 
-class ScenePlayerActor extends SceneActor
+class SceneEnemyActor extends SceneActor
 {
 	private var _parent:Scene;
 	private var speed:Int = 0;
@@ -41,10 +41,7 @@ class ScenePlayerActor extends SceneActor
 		body = createBody(pos);
 		var sprite:Sprite = createSprite();
 
-		Lib.current.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownListener);
-		Lib.current.stage.addEventListener(KeyboardEvent.KEY_UP, keyUpListener);
-
-		addEventListener(PlayerEvent.PLAYER_OFF_SCREEN, handlePlayerOffScreen);
+		addEventListener(EnemyEvent.ENEMY_OFF_SCREEN, handleEnemyOffScreen);
 
 		super(scene, body, sprite);
 
@@ -66,7 +63,10 @@ class ScenePlayerActor extends SceneActor
 		fixtureBody.restitution = 0.1;
 		fixtureFoots.density = 1;
 		fixtureFoots.friction = 1;
-		fixtureFoots.restitution = 0.1;
+		fixtureFoots.restitution = 0;
+		fixtureHead.density = 1;
+		fixtureHead.friction = 0;
+		fixtureHead.restitution = 0.1;
 		var body;
 
 		bodyDef.position.set (pos.x, pos.y);
@@ -112,7 +112,7 @@ class ScenePlayerActor extends SceneActor
 	private function createSprite():Sprite
 	{
 		var sprite = new Sprite();
-		sprite.graphics.beginFill(0xffffff, 1);
+		sprite.graphics.beginFill(0xaa0000, 1);
 		sprite.graphics.lineStyle(2, 0x000000, 1);
 		
 	
@@ -140,39 +140,10 @@ class ScenePlayerActor extends SceneActor
 		return sprite;
 	}
 
-	private function keyDownListener(e:KeyboardEvent)
-	{	
-		if (e.keyCode == 37)
-		{
-			goLeft = true;
-		}
-		else if(e.keyCode == 39)
-		{
-			goRight = true;
-		}
-		else if(e.keyCode == 38 && canJump)
-		{
-			goJump = true;
-		}		
-	}
-
-	private function keyUpListener(e:KeyboardEvent)
-	{
-		if (e.keyCode == 37)
-			goLeft = false;
-
-		if (e.keyCode  == 39)
-			goRight = false;
-
-		if (e.keyCode == 38)
-			goJump = false;
-	
-	}
-
 	override public function childSpecificUpdate()
 	{	
 		playerMoving();
-		playerOutOffScreen();
+		enemyOutOffScreen();
 	}
 
 	private function playerMoving()
@@ -197,19 +168,20 @@ class ScenePlayerActor extends SceneActor
 		}
 	}
 
-	private function playerOutOffScreen()
+	private function enemyOutOffScreen()
 	{
 		if (_sprite.y > _parent.maxSceneHeight || _sprite.x > _parent.maxSceneWidth){
-			dispatchEvent(new PlayerEvent(PlayerEvent.PLAYER_OFF_SCREEN));
+			dispatchEvent(new EnemyEvent(EnemyEvent.ENEMY_OFF_SCREEN));
 			//remove;
 		}
 	}
 
-	private function handlePlayerOffScreen(e:PlayerEvent)
+	private function handleEnemyOffScreen(event:EnemyEvent)
 	{
-		var actorToRemove:ScenePlayerActor = e.currentTarget;
-		_parent.markToRemovePlayer(actorToRemove);
-		actorToRemove.removeEventListener(PlayerEvent.PLAYER_OFF_SCREEN, handlePlayerOffScreen);
+		var actorToRemove = event.currentTarget;
+		_parent.markToRemoveEnemy(actorToRemove);
+		actorToRemove.removeEventListener(EnemyEvent.ENEMY_OFF_SCREEN, handleEnemyOffScreen);
+		
 	}
 
 }
