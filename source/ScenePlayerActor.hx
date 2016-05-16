@@ -66,7 +66,10 @@ class ScenePlayerActor extends SceneActor
 		fixtureBody.restitution = 0.1;
 		fixtureFoots.density = 1;
 		fixtureFoots.friction = 1;
-		fixtureFoots.restitution = 0.1;
+		fixtureFoots.restitution = 0;
+		fixtureHead.density = 1;
+		fixtureHead.friction = 0;
+		fixtureHead.restitution = 0.1;
 		var body;
 
 		bodyDef.position.set (pos.x, pos.y);

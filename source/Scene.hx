@@ -27,12 +27,11 @@ class Scene extends Sprite
 	private var player:ScenePlayerActor;
 	private var _playersToRemove:Array<Dynamic> = new Array();
 	private var playerIsAlive:Bool = false;
+	private var myGameTurnControl:GameTurnControl;
+	private var _userInterface:UserInterface;
 
 	public var maxSceneWidth:Int = 2048;
 	public var maxSceneHeight:Int = 1280;
-
-	private var stageWidth:Int;
-	private var stageHeight:Int;
 
 	private var _allActors:Array<Dynamic> = new Array();
 
@@ -50,11 +49,24 @@ class Scene extends Sprite
 		createTimeMaster();
 		createWorld();
 		createContactListener();
+		createUserInterface();
 
 		addDebuger();
 
 		createLevel();
 		createActors();
+		createGameTurnControl();
+	}
+
+	private function createGameTurnControl()
+	{
+		myGameTurnControl = new GameTurnControl(this, 30);
+	}
+
+	private function createUserInterface()
+	{
+		_userInterface = new UserInterface(this);
+		addChild(_userInterface);
 	}
 
 	private function createTimeMaster()
@@ -90,6 +102,8 @@ class Scene extends Sprite
 		}
 
 		removePlayersFromScene();
+		myGameTurnControl.update();
+		_userInterface.update();
 	}
 
 	private function addDebuger()
@@ -108,10 +122,10 @@ class Scene extends Sprite
 	private function createActors()
 	{
 		
-		var playerPos = new B2Vec2(100, 980);
+		var playerPos = new B2Vec2(100, 650);
 		createPlayerActor(playerPos, 5, 8);
 
-		var enemyPos = new B2Vec2(300, 990);
+		var enemyPos = new B2Vec2(300, 650);
 		createEnemyActor(enemyPos, 5, 8);
 	}
 
@@ -144,8 +158,6 @@ class Scene extends Sprite
 	public function start()
 	{
 		addEventListener(Event.ENTER_FRAME, update);
-		stageWidth = Lib.current.stageWidth;
-		stageHeight = Lib.current.stageHeight;
 	}
 
 	public function stop():Void
@@ -159,20 +171,22 @@ class Scene extends Sprite
  		{
  			root.scaleX = 2;
  			root.scaleY = 2;
- 			root.scrollRect = new Rectangle(player.getSprite().x - stage.stageWidth/4, player.getSprite().y - stage.stageHeight/4, stage.stageWidth, stage.stageHeight);
+ 			//root.scrollRect = new Rectangle(player.getSprite().x - stage.stageWidth/4, player.getSprite().y - stage.stageHeight/4, stage.stageWidth, stage.stageHeight);
+ 			this.x = -player.getSprite().x + stage.stageWidth/4;
+ 			this.y = -player.getSprite().y + stage.stageHeight/4;
  		}
  		else 
  		{
  			root.scaleX = 1;
  			root.scaleY = 1;
- 			root.x = stageWidth;
- 			root.y = 0;
+ 			root.x = 0;
+ 			root.y = 900;
  		}
 	}
 
 	private function createLevel()
 	{	
-		var groundPos = new B2Vec2(1920, 1080);
+		var groundPos = new B2Vec2(1920, 700);
 		createGround(1920, 20, groundPos, 10);
 
 	//	createWalls();
@@ -201,6 +215,11 @@ class Scene extends Sprite
 			}
 		}
 		_playersToRemove = new Array();
+	}
+
+	public function getUI()
+	{
+		return _userInterface;
 	}
 
 }
