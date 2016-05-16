@@ -6,6 +6,7 @@ import flash.display.Stage;
 import flash.Lib;
 import flash.events.EventDispatcher;
 import flash.geom.Point;
+import flash.geom.Rectangle;
 
 import box2D.dynamics.B2World;
 import box2D.common.math.B2Vec2;
@@ -23,6 +24,7 @@ class Scene extends Sprite
 	private var positionIterations:Int = 10;
 	private var sceneContactListener:ContactListener;
 	private var _timeMaster:TimeMaster;
+	private var player:ScenePlayerActor;
 
 	private var _allActors:Array<Dynamic> = new Array();
 
@@ -43,6 +45,7 @@ class Scene extends Sprite
 
 		addDebuger();
 
+		createLevel();
 		createActors();
 	}
 
@@ -71,6 +74,8 @@ class Scene extends Sprite
 		world.clearForces();
 		world.drawDebugData();
 
+		sceneFollowPlayer();
+
 		for(i in 0..._allActors.length)
 		{
 			_allActors[i].update();
@@ -92,27 +97,27 @@ class Scene extends Sprite
 
 	private function createActors()
 	{
-		createGroundActor();
-		createPlayerActor();
+		
+		var playerPos = new B2Vec2(100, 980);
+		createPlayerActor(playerPos, 5, 8);
 	}
 
-	private function createGroundActor()
+	private function createGround(width:Int, height:Int, pos:B2Vec2, figures:Int)
 	{
-		var width = 1920/2;
-		var height = 20;
-		var figures = 4;
-		var pos = new B2Vec2(1920/2/worldScale, 1000/worldScale);
+		var width = width/2;
+		var height = height/2;
+		var loc = new B2Vec2(pos.x/2/worldScale, pos.y/worldScale);
 
-		var newGroundActor = new SceneGroundActor(this, width, height, pos, figures, true);
+		var newGroundActor = new SceneGroundActor(this, width, height, loc, figures, true);
 
 		_allActors.push(newGroundActor);
 	}
 
-	private function createPlayerActor()
+	private function createPlayerActor(pos:B2Vec2, velocityX:Int, velocityY:Int)
 	{
-		var pos = new B2Vec2(300/worldScale, 100/worldScale);
-		var newPlayer = new ScenePlayerActor(this, pos);
-		_allActors.push(newPlayer);
+		var loc = new B2Vec2(pos.x/worldScale, pos.y/worldScale);
+		player = new ScenePlayerActor(this, loc, velocityX, velocityY);
+		_allActors.push(player);
 	}
 
 	public function start()
@@ -123,6 +128,25 @@ class Scene extends Sprite
 	public function stop():Void
 	{
 		removeEventListener(Event.ENTER_FRAME, update);
+	}
+
+	private function sceneFollowPlayer()
+	{
+ 		
+ 		root.scaleX = 2;
+ 		root.scaleY = 2;
+ 		root.scrollRect = new Rectangle(player.getSprite().x - stage.stageWidth/4, player.getSprite().y - stage.stageHeight/4, stage.stageWidth, stage.stageHeight);
+	}
+
+	private function createLevel()
+	{	
+		var groundPos = new B2Vec2(1920, 1080);
+		createGround(1920, 20, groundPos, 10);
+
+		var upperGroundPos = new B2Vec2(1920, 880);
+		createGround(1000, 10, upperGroundPos, 4);
+
+	//	createWalls();
 	}
 
 

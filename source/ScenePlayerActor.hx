@@ -27,13 +27,17 @@ class ScenePlayerActor extends SceneActor
 	private var goLeft:Bool = false;
 	private var goRight:Bool = false;
 	private var goJump:Bool = false;
+	private var speedX:Int;
+	private var speedY:Int;
 
 	public var canJump:Bool = false;
 
 
-	public function new(scene:Scene, pos:B2Vec2)
+	public function new(scene:Scene, pos:B2Vec2, velocityX:Int, velocityY:Int)
 	{
 		_parent = scene;
+		speedX = velocityX;
+		speedY = velocityY;
 		body = createBody(pos);
 		var sprite:Sprite = createSprite();
 
@@ -86,8 +90,11 @@ class ScenePlayerActor extends SceneActor
 
 		body = _parent.world.createBody (bodyDef);
 		fixtureBody.shape = polygonBody;
+		fixtureBody.userData = "Body";
 		fixtureHead.shape = polygonHead;
+		fixtureHead.userData = "Head";
 		fixtureFoots.shape = polygonFoots;
+		fixtureFoots.userData = "Foots";
 		fixtureFootsSensor.shape = polygonFootsSensor;
 		fixtureFootsSensor.isSensor = true;
 		fixtureFootsSensor.userData = "footSensor";
@@ -168,17 +175,17 @@ class ScenePlayerActor extends SceneActor
 		if (goLeft)
 		{
 			body.applyTorque(10);
-			body.setLinearVelocity(new B2Vec2(-5, velY));
+			body.setLinearVelocity(new B2Vec2(-speedX, velY));
 		}
 		else if (goRight)
 		{
 			body.applyTorque(10);
-			body.setLinearVelocity(new B2Vec2(5, velY));
+			body.setLinearVelocity(new B2Vec2(speedX, velY));
 		}
 
 		if (goJump && canJump)
 		{
-			body.applyImpulse(new B2Vec2(0, -4), body.getWorldCenter());
+			body.applyImpulse(new B2Vec2(0, -speedY), body.getWorldCenter());
 			canJump = false;
 		}
 

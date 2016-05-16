@@ -67,4 +67,9 @@ class SceneActor extends EventDispatcher{
 	{
 
 	}
+
+	public function getSprite()
+	{
+		return _sprite;
+	}
 }
