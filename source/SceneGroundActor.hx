@@ -24,10 +24,11 @@ class SceneGroundActor  extends SceneActor
 		_parent = scene;
 		var body = createBody(width, height, pos, figures, holes);
 		var sprite = createSprite(pos);
+		var entityType = "Ground";
 
 
 
-		super(scene, body, sprite);
+		super(scene, body, sprite, entityType);
 	}
 
 	private function createSprite(pos:B2Vec2)

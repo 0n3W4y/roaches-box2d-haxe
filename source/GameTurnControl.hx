@@ -15,7 +15,7 @@ class GameTurnControl
 	private var _timerTextField:TextField;
 	private var _lastTimerCount:Int = 0;
 	private var _currentTime:Int;
-	private var _timerIsStopped:Bool = true;
+	private var _timerIsStopped:Bool = false;
 	private var _timeToType:Bool = true;
 
 	public function new(scene:Scene, turnTime:Int)
@@ -47,22 +47,17 @@ class GameTurnControl
 	public function update()
 	{
 
-		//_timerTextField.x = _myScene.stage.stageWidth/2;
-		//_timerTextField.y = _myScene.stage.stageHeight/2 - 100;
-
-		if(_timerIsStopped)
-		{
-			_turnTimer.start();
-			_timerIsStopped = false;
-		}
 		isTimeToType();
+
 		if(_timeToType)
-		{
 			typeNextNum();
-		}
+
+		if (_turnTimer.currentCount == _turnTime)
+			nextPlayerTurn();
+
 	}
 
-	private function getTimerCount()
+	public function getTimerCount()
 	{
 		return _turnTimer.currentCount;
 	}
@@ -71,7 +66,7 @@ class GameTurnControl
 	{
 		var currentCount = getTimerCount();
 
-		if (currentCount > _lastTimerCount)
+		if (currentCount > _lastTimerCount && currentCount <= _turnTime)
 		{
 			_lastTimerCount = currentCount;
 			_timeToType = true;
@@ -104,5 +99,25 @@ class GameTurnControl
 			_timerTextField.text = timerText;
 			_currentTime--;
 		}
+	}
+
+	public function nextPlayerTurn()
+	{
+		_myScene.takeTurnToNextPlayer();
+	}
+
+	public function startTimer()
+	{
+		if (_timerIsStopped)
+			_turnTimer.reset();
+			_currentTime = turnTime;
+			_timerIsStopped = false;
+	}
+
+	public function forciblyStopTimer()
+	{
+		_turnTimer.stop();
+		_timerTextField.text = "0";
+		_timerIsStopped = true;
 	}
 }

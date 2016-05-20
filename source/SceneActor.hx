@@ -5,8 +5,7 @@ import flash.events.EventDispatcher;
 import flash.display.DisplayObject;
 import flash.display.Sprite;
 import flash.events.Event;
-import flash.ui.Keyboard;
-import flash.events.KeyboardEvent;
+import flash.text.TextField;
 
 import box2D.dynamics.B2Body;
 
@@ -16,8 +15,9 @@ class SceneActor extends EventDispatcher{
 	private var _body:B2Body;
 	private var _sprite:Sprite;
 	private var _myScene:Scene;
+	private var _entityType:String;
 	
-	public function new(scene:Scene, body:B2Body, sprite:Sprite)
+	public function new(scene:Scene, body:B2Body, sprite:Sprite, eType:String)
 	{
 		
 		_body = body;
@@ -26,6 +26,7 @@ class SceneActor extends EventDispatcher{
 		_myScene = scene;
 
 		_body.setUserData(this);
+		_entityType = eType;
 
 		updateSprite();
 		super();
@@ -58,19 +59,18 @@ class SceneActor extends EventDispatcher{
 
 	private function updateSprite()
 	{
-		var worldScale = _myScene.worldScale;
 		_sprite.x = _body.getPosition().x * _myScene.worldScale;
 		_sprite.y = _body.getPosition().y * _myScene.worldScale;
 		_sprite.rotation = _body.getAngle() * 180/Math.PI;
 	}
 
-	private function updateInputKeyboard()
-	{
-
-	}
-
 	public function getSprite()
 	{
 		return _sprite;
+	}
+
+	public function getEntityType()
+	{
+		return _entityType;
 	}
 }

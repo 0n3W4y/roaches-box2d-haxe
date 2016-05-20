@@ -24,11 +24,11 @@ class Scene extends Sprite
 	private var positionIterations:Int = 10;
 	private var sceneContactListener:ContactListener;
 	private var _timeMaster:TimeMaster;
-	private var player:ScenePlayerActor;
+	private var _allPlayersOnScene:Array<Dynamic> = new Array();
 	private var _playersToRemove:Array<Dynamic> = new Array();
-	private var playerIsAlive:Bool = false;
 	private var myGameTurnControl:GameTurnControl;
 	private var _userInterface:UserInterface;
+	private var _curPlayer:ScenePlayerActor;
 
 	public var maxSceneWidth:Int = 2048;
 	public var maxSceneHeight:Int = 1280;
@@ -38,10 +38,8 @@ class Scene extends Sprite
 	public function new(game)
 	{
 		super();
-		initilize();
 		myGame = game;
-
-
+		initilize();
 	}
 
 	private function initilize()
@@ -56,11 +54,12 @@ class Scene extends Sprite
 		createLevel();
 		createActors();
 		createGameTurnControl();
+		doPlayerTurnQue();
 	}
 
 	private function createGameTurnControl()
 	{
-		myGameTurnControl = new GameTurnControl(this, 30);
+		myGameTurnControl = new GameTurnControl(this, 10);
 	}
 
 	private function createUserInterface()
@@ -94,16 +93,18 @@ class Scene extends Sprite
 		world.clearForces();
 		world.drawDebugData();
 
-		sceneFollowPlayer();
-
 		for(i in 0..._allActors.length)
 		{
 			_allActors[i].update();
 		}
 
-		removePlayersFromScene();
+		cameraControl();
+
 		myGameTurnControl.update();
 		_userInterface.update();
+
+		removePlayersFromScene();
+		
 	}
 
 	private function addDebuger()
@@ -123,10 +124,10 @@ class Scene extends Sprite
 	{
 		
 		var playerPos = new B2Vec2(100, 650);
-		createPlayerActor(playerPos, 5, 8);
+		createPlayerActor(playerPos, 3, 3);
 
 		var enemyPos = new B2Vec2(300, 650);
-		createEnemyActor(enemyPos, 5, 8);
+		createBotActor(enemyPos, 3, 3);
 	}
 
 	private function createGround(width:Int, height:Int, pos:B2Vec2, figures:Int)
@@ -143,45 +144,26 @@ class Scene extends Sprite
 	private function createPlayerActor(pos:B2Vec2, velocityX:Int, velocityY:Int)
 	{
 		var loc = new B2Vec2(pos.x/worldScale, pos.y/worldScale);
-		player = new ScenePlayerActor(this, loc, velocityX, velocityY);
-		playerIsAlive = true;
+		var eType = "Player";
+		var name = "I'm a player";
+		var player = new ScenePlayerActor(this, loc, velocityX, velocityY, eType, name);
 		_allActors.push(player);
 	}
 
-	private function createEnemyActor(pos:B2Vec2, velocityX:Int, velocityY:Int)
+	private function createBotActor(pos:B2Vec2, velocityX:Int, velocityY:Int)
 	{
 		var loc = new B2Vec2(pos.x/worldScale, pos.y/worldScale);
-		var newEnemy = new SceneEnemyActor(this, loc, velocityX, velocityY);
+		var eType = "Bot";
+		var newEnemy = new ScenePlayerActor(this, loc, velocityX, velocityY, eType);
 		_allActors.push(newEnemy);
-	}
-
-	public function start()
-	{
-		addEventListener(Event.ENTER_FRAME, update);
-	}
-
-	public function stop():Void
-	{
-		removeEventListener(Event.ENTER_FRAME, update);
 	}
 
 	private function sceneFollowPlayer()
 	{
- 		if ( playerIsAlive )
- 		{
- 			root.scaleX = 2;
- 			root.scaleY = 2;
- 			//root.scrollRect = new Rectangle(player.getSprite().x - stage.stageWidth/4, player.getSprite().y - stage.stageHeight/4, stage.stageWidth, stage.stageHeight);
- 			this.x = -player.getSprite().x + stage.stageWidth/4;
- 			this.y = -player.getSprite().y + stage.stageHeight/4;
- 		}
- 		else 
- 		{
- 			root.scaleX = 1;
- 			root.scaleY = 1;
- 			root.x = 0;
- 			root.y = 900;
- 		}
+ 		root.scaleX = 2;
+ 		root.scaleY = 2;
+ 		this.x = -_curPlayer.getSprite().x + stage.stageWidth/4;
+ 		this.y = -_curPlayer.getSprite().y + stage.stageHeight/4;
 	}
 
 	private function createLevel()
@@ -192,17 +174,75 @@ class Scene extends Sprite
 	//	createWalls();
 	}
 
+	private function cameraControl()
+	{
+		if (_curPlayer != null)
+		{
+			sceneFollowPlayer();
+		}
+	}
+
+	private function doPlayerTurnQue()
+	{
+		for (i in 0..._allActors.length)
+		{
+			var player = _allActors[i];
+			if (player.getEntityType() == "Player" || player.getEntityType() == "Bot")
+				_allPlayersOnScene.push(player);
+		}
+
+		_allPlayersOnScene.sort(function(x,y){ return Math.round(Math.random()); });
+		_curPlayer = _allPlayersOnScene[0];
+		//round start
+
+	}
+
+	private function teamPlayerTurnQue()
+	{
+		//TODO: turn players in team mode, 1 member per team, then next member per team, for the last member - round end;
+	}
+
+	public function takeTurnToNextPlayer()
+	{
+		var lastPlayerTurn = _curPlayer;
+		_curPlayer = null;
+		
+		var index = _allPlayersOnScene.indexOf(lastPlayerTurn);
+		if ( index > -1 )
+		{
+			var nextPlayer = _allPlayersOnScene[index+1];
+			if (nextPlayer != null)
+				_curPlayer = nextPlayer;
+			else 
+				_curPlayer = _allPlayersOnScene[0];
+				//round ended
+		}
+		turnStart();
+		
+	}
+
+	public function turnStart()
+	{
+		if (_curPlayer.getEntityType() == "Player")
+		{
+			_curPlayer.addInputListener();
+		}
+		else
+		{
+			_curPlayer.removeInputListener();
+		}
+		startTimer();
+	}
+
+	private function startTimer()
+	{
+		myGameTurnControl.startTimer();
+	}
+
 	public function markToRemovePlayer(playerActor:ScenePlayerActor)
 	{
 		if( _playersToRemove.indexOf(playerActor) < 0 )
 			_playersToRemove.push(playerActor);
-			playerIsAlive = false;	
-	}
-
-	public function markToRemoveEnemy(enemyActor:SceneEnemyActor)
-	{
-		if ( _playersToRemove.indexOf(enemyActor) < 0)
-			_playersToRemove.push(enemyActor);
 	}
 
 	public function removePlayersFromScene()
@@ -220,6 +260,17 @@ class Scene extends Sprite
 	public function getUI()
 	{
 		return _userInterface;
+	}
+
+	public function start()
+	{
+		addEventListener(Event.ENTER_FRAME, update);
+		turnStart();
+	}
+
+	public function stop():Void
+	{
+		removeEventListener(Event.ENTER_FRAME, update);
 	}
 
 }
