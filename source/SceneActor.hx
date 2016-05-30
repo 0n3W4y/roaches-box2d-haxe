@@ -24,7 +24,6 @@ class SceneActor extends EventDispatcher{
 		_sprite = sprite;
 
 		_myScene = scene;
-
 		_body.setUserData(this);
 		_entityType = eType;
 
@@ -48,7 +47,8 @@ class SceneActor extends EventDispatcher{
 		_myScene.world.destroyBody(_body);
 	}
 
-	private function cleanUpBeforeRemoving(){
+	private function cleanUpBeforeRemoving()
+	{
 
 	}
 
@@ -67,6 +67,11 @@ class SceneActor extends EventDispatcher{
 	public function getSprite()
 	{
 		return _sprite;
+	}
+
+	public function getBody()
+	{
+		return _body;
 	}
 
 	public function getEntityType()

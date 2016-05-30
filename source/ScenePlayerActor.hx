@@ -75,10 +75,10 @@ class ScenePlayerActor extends SceneActor
 		var fixtureHead = new B2FixtureDef ();
 		var fixtureFootsSensor = new B2FixtureDef ();
 		fixtureBody.density = 1;
-		fixtureBody.friction = 0;
+		fixtureBody.friction = 1;
 		fixtureBody.restitution = 0;
 		fixtureHead.density = 1;
-		fixtureHead.friction = 0;
+		fixtureHead.friction = 1;
 		fixtureHead.restitution = 0;
 		var body;
 
@@ -271,4 +271,11 @@ class ScenePlayerActor extends SceneActor
 
 	}
 
+	public function forciblyKeyUp()
+	{
+		goLeft = false;
+		goRight = false;
+		goJump = false;
+
+	}
 }

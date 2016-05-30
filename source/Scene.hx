@@ -124,10 +124,10 @@ class Scene extends Sprite
 	{
 		
 		var playerPos = new B2Vec2(100, 650);
-		createPlayerActor(playerPos, 3, 3);
+		createPlayerActor(playerPos, 3, 1);
 
 		var enemyPos = new B2Vec2(300, 650);
-		createBotActor(enemyPos, 3, 3);
+		createBotActor(enemyPos, 3, 1);
 	}
 
 	private function createGround(width:Int, height:Int, pos:B2Vec2, figures:Int)
@@ -210,27 +210,35 @@ class Scene extends Sprite
 		var index = _allPlayersOnScene.indexOf(lastPlayerTurn);
 		if ( index > -1 )
 		{
-			var nextPlayer = _allPlayersOnScene[index+1];
-			if (nextPlayer != null)
-				_curPlayer = nextPlayer;
+			if ( index+1 < _allPlayersOnScene.length)
+				_curPlayer = _allPlayersOnScene[index+1];
 			else 
 				_curPlayer = _allPlayersOnScene[0];
 				//round ended
 		}
+
 		turnStart();
 		
+	}
+
+	public function endTurn()
+	{
+		//TODO: clear all turn moving, stop all collisions,
+
+		if (_curPlayer.getEntityType() == "Player")
+		{
+			_curPlayer.removeInputListener();
+			_curPlayer.forciblyKeyUp();
+		}
+		
+		takeTurnToNextPlayer();
 	}
 
 	public function turnStart()
 	{
 		if (_curPlayer.getEntityType() == "Player")
-		{
 			_curPlayer.addInputListener();
-		}
-		else
-		{
-			_curPlayer.removeInputListener();
-		}
+
 		startTimer();
 	}
 
