@@ -6,6 +6,8 @@ import flash.events.KeyboardEvent;
 import flash.display.Stage;
 import flash.text.TextField;
 import flash.text.TextFieldType;
+import flash.events.MouseEvent;
+import flash.events.Event;
 
 import box2D.dynamics.B2Body;
 import box2D.common.math.B2Vec2;
@@ -203,14 +205,18 @@ class ScenePlayerActor extends SceneActor
 
 			_weapon.getSprite().x = _weapon.getBody().getPosition().x * _myScene.worldScale;
 			_weapon.getSprite().y = _weapon.getBody().getPosition().y * _myScene.worldScale;
-/*
-			var dist_x=bazooka.x-mouseX;
-			var dist_y=bazooka.y-mouseY;
-			bazooka_angle=Math.atan2(- dist_y,- dist_x);
-			bazooka.rotation=bazooka_angle*57.2957795;
-*/
+
+			_weapon.getSprite().rotation = _weapon.getBody().getAngle() * 180/Math.PI;
 		}
 	}
+
+	private function updateWeaponRotation(e:MouseEvent)
+	{
+		var dist_x = _weapon.getBody().getPosition().x - _myScene.getUI().mouseX;
+		var dist_y = _weapon.getBody().getPosition().y - _myScene.getUI().mouseY;
+		_weapon.getBody().setAngle(Math.atan2(- dist_y,- dist_x));
+	}
+
 
 	private function playerMoving()
 	{
@@ -289,12 +295,14 @@ class ScenePlayerActor extends SceneActor
 	{
 		Lib.current.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownListener);
 		Lib.current.stage.addEventListener(KeyboardEvent.KEY_UP, keyUpListener);
+		Lib.current.stage.addEventListener(MouseEvent.MOUSE_MOVE, updateWeaponRotation);		
 	}
 
 	public function removeInputListener()
 	{
 		Lib.current.stage.removeEventListener(KeyboardEvent.KEY_DOWN, keyDownListener);
 		Lib.current.stage.removeEventListener(KeyboardEvent.KEY_UP, keyUpListener);
+		Lib.current.stage.addEventListener(MouseEvent.MOUSE_MOVE, updateWeaponRotation);
 	}
 
 	public function runAI()

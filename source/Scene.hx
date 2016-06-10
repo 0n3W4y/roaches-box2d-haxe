@@ -148,6 +148,9 @@ class Scene extends Sprite
 		var name = "I'm a player";
 		var player = new ScenePlayerActor(this, loc, velocityX, velocityY, eType, name);
 		_allActors.push(player);
+
+		var weapon = new Weapon(this);
+		player.setWeapon(weapon);
 	}
 
 	private function createBotActor(pos:B2Vec2, velocityX:Int, velocityY:Int)

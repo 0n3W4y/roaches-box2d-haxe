@@ -25,7 +25,7 @@ class Weapon
 	public function new(scene)
 	{
 		damage = 10;
-		_sizeX = 5;
+		_sizeX = 7;
 		_sizeY = 2;
 		_myScene = scene;
 
@@ -66,7 +66,7 @@ class Weapon
 		var body;
 
 		bodyDef.position.set (0, 0);
-		bodyDef.type = B2Body.b2_kinematicBody;
+	//	bodyDef.type = B2Body.b2_kinematicBody;
 
 		polygonShape.setAsBox(_sizeX/_myScene.worldScale, _sizeY/_myScene.worldScale);
 
@@ -84,10 +84,10 @@ class Weapon
 		sprite.graphics.beginFill(0x0000aa, 1);
 		sprite.graphics.lineStyle(2, 0x000000, 1);
 
-		sprite.graphics.moveTo( -_sizeX*2, _sizeY*2);
-		sprite.graphics.lineTo( _sizeX*2, _sizeY*2);
-		sprite.graphics.lineTo( _sizeX*2, -_sizeY*2);
-		sprite.graphics.lineTo( -_sizeX*2, -_sizeY*2);
+		sprite.graphics.moveTo( -_sizeX, _sizeY);
+		sprite.graphics.lineTo( _sizeX, _sizeY);
+		sprite.graphics.lineTo( _sizeX, -_sizeY);
+		sprite.graphics.lineTo( -_sizeX, -_sizeY);
 
 		sprite.graphics.endFill();
 		_myScene.addChild(sprite);
