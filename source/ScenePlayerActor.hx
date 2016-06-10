@@ -30,8 +30,12 @@ class ScenePlayerActor extends SceneActor
 	private var goLeft:Bool = false;
 	private var goRight:Bool = false;
 	private var goJump:Bool = false;
+	private var goShoot:Bool = false;
 	private var speedX:Int;
 	private var speedY:Int;
+
+	private var _haveWeapon:Bool = false;
+	private var _weapon:Weapon;
 
 	private var _eType:String;
 	private var _name:String;
@@ -159,7 +163,12 @@ class ScenePlayerActor extends SceneActor
 		else if(e.keyCode == 38 && canJump)
 		{
 			goJump = true;
-		}		
+		}
+/*		else if(e.keyCode == )
+		{
+			goShoot = true;
+		}	
+*/	
 	}
 
 	private function keyUpListener(e:KeyboardEvent)
@@ -172,13 +181,35 @@ class ScenePlayerActor extends SceneActor
 
 		if (e.keyCode == 38)
 			goJump = false;
-	
+
+/*		if ( e.keyCode == )
+			goShoot = false;
+*/
 	}
 
 	override public function childSpecificUpdate()
 	{	
 		playerMoving();
 		playerOutOffScreen();
+		updateWeaponPosition();
+	}
+
+	private function updateWeaponPosition()
+	{
+		if (_haveWeapon)
+		{
+			_weapon.getBody().getPosition().x = _body.getPosition().x;
+			_weapon.getBody().getPosition().y = _body.getPosition().y;
+
+			_weapon.getSprite().x = _weapon.getBody().getPosition().x * _myScene.worldScale;
+			_weapon.getSprite().y = _weapon.getBody().getPosition().y * _myScene.worldScale;
+/*
+			var dist_x=bazooka.x-mouseX;
+			var dist_y=bazooka.y-mouseY;
+			bazooka_angle=Math.atan2(- dist_y,- dist_x);
+			bazooka.rotation=bazooka_angle*57.2957795;
+*/
+		}
 	}
 
 	private function playerMoving()
@@ -277,5 +308,41 @@ class ScenePlayerActor extends SceneActor
 		goRight = false;
 		goJump = false;
 
+	}
+
+	private function shoot()
+	{
+		if (goShoot)
+		{
+
+		}
+	}
+
+	public function getWeapon()
+	{
+		return _weapon;
+	}
+
+	public function setWeapon(weapon)
+	{
+		if (_haveWeapon)
+		{
+			removeWeapon();
+			_weapon = weapon;
+		}
+		else
+		{
+			_weapon = weapon;
+			_haveWeapon = true;
+		}
+	}
+
+	public function removeWeapon()
+	{
+		if (_haveWeapon)
+		{
+			_haveWeapon = false;
+			_weapon = null;
+		}
 	}
 }
