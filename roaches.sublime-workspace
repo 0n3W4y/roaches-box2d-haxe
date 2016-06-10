@@ -4,120 +4,176 @@
 		"selected_items":
 		[
 			[
+				"weapo",
+				"weaponSprite"
+			],
+			[
+				"remov",
+				"removeChild(...)	openfl.display.DisplayObject"
+			],
+			[
+				"rem",
+				"removeWeapon(  )	Unknown<9>"
+			],
+			[
+				"Get",
+				"getSprite(  )	Unknown<2>"
+			],
+			[
+				"M",
+				"MOUSE_MOVE	String"
+			],
+			[
+				"mouse",
+				"MouseEvent	flash.events"
+			],
+			[
+				"set",
+				"setAsBox( hx : Float , hy : Float )	Void"
+			],
+			[
+				"B2B",
+				"B2BodyDef	box2D.dynamics"
+			],
+			[
 				"get",
-				"getUserData(  )	Dynamic"
+				"getFixtureList(...)	box2D.dynamics.B2Fixture"
 			],
 			[
-				"apply",
-				"applyTorque( torque : Float )	Void"
+				"turn",
+				"myGameTurnControl	GameTurnControl"
 			],
 			[
-				"appl",
-				"applyImpulse(...)	Void"
+				"_all",
+				"_allPlayerOnScene	Array<Dynamic>"
 			],
 			[
-				"setLinera",
-				"setLinearVelocity(...)	Void"
+				"Scne",
+				"ScenePlayerActor	class"
 			],
 			[
-				"app",
-				"applyTorque( torque : Float )	Void"
+				"stage",
+				"stageHeight	Int"
 			],
 			[
-				"getLine",
-				"getLinearVelocity(...)	box2D.common.math.B2Vec2"
+				"tage",
+				"stageWidth	Int"
 			],
 			[
-				"setLine",
-				"setLinearVelocity(...)	Void"
+				"stag",
+				"stageWidth	Int"
 			],
 			[
-				"speed",
-				"speedY	Int"
+				"rec",
+				"scrollRect	openfl.geom.Rectangle"
 			],
 			[
-				"getWorld",
-				"getWorldCenter(...)	box2D.common.math.B2Vec2"
+				"_",
+				"_turnTimer	flash.utils.Timer"
 			],
 			[
-				"a",
-				"applyImpulse(...)	Void"
+				"Timer",
+				"Timer	flash.utils"
 			],
 			[
-				"jump",
-				"jumpSteps	Int"
+				"textF",
+				"TextFieldType	flash.text"
 			],
 			[
 				"Scene",
-				"SceneGroundActor	class"
+				"ScenePlayerActor	class"
 			],
 			[
-				"word",
-				"worldScale	Int"
+				"max",
+				"maxSceneHeight	Int"
 			],
 			[
-				"body",
-				"bodyCoord"
+				"sc",
+				"scaleX	Float"
 			],
 			[
-				"fixtureFoots",
-				"fixtureFootsSensor"
+				"maxWid",
+				"maxWidthPerPolygon	Float"
 			],
 			[
-				"fixture",
-				"fixtureFootsSensor	box2D.dynamics.B2FixtureDef"
+				"maxWi",
+				"maxWidthPerPolygon	Float"
 			],
 			[
-				"foot",
-				"footSensorCoord	Array<box2D.common.math.B2Vec2>"
+				"coord",
+				"coordsArray	Array<Dynamic>"
 			],
 			[
-				"foo",
-				"footSensorCoord"
-			],
-			[
-				"setAs",
-				"setAsArray(...)	Void"
-			],
-			[
-				"polygo",
-				"polygonFootsSensor	box2D.collision.shapes.B2PolygonShape"
+				"cre",
+				"createFixture"
 			],
 			[
 				"polygon",
-				"polygonFoots	var"
+				"polygonArray"
 			],
 			[
-				"setLin",
-				"setLinearVelocity(...)	Void"
+				"wor",
+				"worldScale"
 			],
 			[
-				"key",
-				"keyUpListener(...)	Void"
+				"right",
+				"rightVertexY	var"
 			],
 			[
-				"Key",
-				"KeyboardEvent	flash.events"
+				"nextR",
+				"nextRightVertexX"
 			],
 			[
-				"add",
-				"addEventListener(...)	Void"
+				"left",
+				"leftVertexX"
 			],
 			[
-				"keyboa",
-				"KeyboardEvent	flash.events"
+				"nextRigh",
+				"nextRightVertexY	var"
 			],
 			[
-				"en",
-				"entityType	String"
+				"next",
+				"nextRightVertexX	var"
 			],
 			[
-				"coo",
-				"coordArray	var"
+				"generate",
+				"generatePolygons	function"
 			],
 			[
-				"line",
-				"lineStyle(...)	Void"
+				"B2Fixture",
+				"B2FixtureDef	box2D.dynamics"
+			],
+			[
+				"update",
+				"updateSprite(  )	Void"
+			],
+			[
+				"worldS",
+				"worldScale	Int"
+			],
+			[
+				"_scne",
+				"_scenesToStop	var"
+			],
+			[
+				"_sce",
+				"_scenesToStop"
+			],
+			[
+				"_scenes",
+				"_scenesToStop	var"
+			],
+			[
+				"Display",
+				"DisplayObject	flash.display"
+			],
+			[
+				"L",
+				"Lib	flash"
+			],
+			[
+				"B2Body",
+				"B2BodyDef	box2D.dynamics"
 			],
 			[
 				"world",
@@ -128,40 +184,12 @@
 				"worldScale	Int"
 			],
 			[
-				"w",
-				"worldScale	Int"
-			],
-			[
-				"Hole",
-				"maxHoleWidth	Int"
-			],
-			[
-				"width",
-				"widthPerFigure	Float"
-			],
-			[
-				"create",
-				"createBody(  )	Void"
-			],
-			[
-				"m",
-				"maxHeight	var"
-			],
-			[
-				"maxWi",
-				"maxWidth	Float"
-			],
-			[
-				"maxWidt",
-				"maxWidthPerPolygon	Float"
+				"_stage",
+				"_stageHeight	Int"
 			],
 			[
 				"Even",
 				"EventDispatcher	flash.events"
-			],
-			[
-				"worldS",
-				"worldScale"
 			],
 			[
 				"remove",
@@ -186,10 +214,6 @@
 			[
 				"b2S",
 				"B2Shape	box2D.collision.shapes"
-			],
-			[
-				"B2Body",
-				"B2BodyDef	box2D.dynamics"
 			],
 			[
 				"Dis",
@@ -220,6 +244,10 @@
 				"addEventListener(...)	Void"
 			],
 			[
+				"add",
+				"addEventListener"
+			],
+			[
 				"Player",
 				"PlayerEvent"
 			],
@@ -230,10 +258,6 @@
 			[
 				"in",
 				"instance(...)	instance.S"
-			],
-			[
-				"update",
-				"updateMyLook(  )	Void"
 			],
 			[
 				"B2Contact",
@@ -248,24 +272,16 @@
 				"setContactListener(...)	Void"
 			],
 			[
-				"stage",
-				"stageHeight	Int"
-			],
-			[
 				"B2Contac",
 				"B2ContactListener	box2D.dynamics"
-			],
-			[
-				"right",
-				"rightWall"
 			],
 			[
 				"lef",
 				"leftWall"
 			],
 			[
-				"wor",
-				"world_scale	var"
+				"line",
+				"lineTo( x : Float , y : Float )	Void"
 			],
 			[
 				"B2Fixt",
@@ -300,6 +316,10 @@
 				"graphics	openfl.display.Graphics"
 			],
 			[
+				"w",
+				"world_sprite	flash.display.Sprite"
+			],
+			[
 				"Pla",
 				"PlayerActor	class"
 			],
@@ -312,8 +332,8 @@
 				"setLinearVelocity(...)	Void"
 			],
 			[
-				"Display",
-				"DisplayObjectContainer	flash.display"
+				"a",
+				"addChild(...)	openfl.display.DisplayObject"
 			],
 			[
 				"wo",
@@ -342,6 +362,10 @@
 			[
 				"Eve",
 				"EventDispatcher	class"
+			],
+			[
+				"body",
+				"bodyDefinition	box2D.dynamics.B2BodyDef"
 			],
 			[
 				"wall",
@@ -380,10 +404,6 @@
 				"my_circle	var"
 			],
 			[
-				"Get",
-				"getBodyList(  )	box2D.dynamics.B2Body"
-			],
-			[
 				"stae",
 				"stageHeight	Int"
 			],
@@ -396,24 +416,12 @@
 				"circleShape	box2D.collision.shapes.B2CircleShape"
 			],
 			[
-				"set",
-				"setFlags( flags : Int )	Void"
-			],
-			[
 				"f",
 				"m_friction	Float"
 			],
 			[
 				"de",
 				"m_density	Float"
-			],
-			[
-				"B2B",
-				"B2Body	box2D.dynamics"
-			],
-			[
-				"Timer",
-				"TimerEvent	flash.events"
 			],
 			[
 				"_whee",
@@ -430,10 +438,6 @@
 			[
 				"ev",
 				"Event"
-			],
-			[
-				"_",
-				"_physicsDebug"
 			],
 			[
 				"ge",
@@ -510,36 +514,59 @@
 			[
 				"shoots",
 				"Shoots"
-			],
-			[
-				"n",
-				"nickname"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "source/Main.hx",
-			"settings":
-			{
-				"buffer_size": 893,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "source/Game.hx",
-			"settings":
-			{
-				"buffer_size": 1068,
-				"line_ending": "Windows"
-			}
-		},
-		{
+			"contents": "package;\n\nimport flash.display.Sprite;\nimport flash.events.Event;\nimport flash.display.Stage;\nimport flash.Lib;\nimport flash.events.EventDispatcher;\nimport flash.geom.Point;\nimport flash.geom.Rectangle;\n\nimport box2D.dynamics.B2World;\nimport box2D.common.math.B2Vec2;\nimport box2D.dynamics.B2DebugDraw;\n\nclass Scene extends Sprite\n{\n	public var myGame:Game;\n	public var world:B2World;\n	public var worldScale:Int = 30; // pixel to metr;\n\n	private var worldGravity:B2Vec2;\n	private var worldStep:Float = 1/30;\n	private var velocityIterations:Int = 10;\n	private var positionIterations:Int = 10;\n	private var sceneContactListener:ContactListener;\n	private var _timeMaster:TimeMaster;\n	private var _allPlayersOnScene:Array<Dynamic> = new Array();\n	private var _playersToRemove:Array<Dynamic> = new Array();\n	private var myGameTurnControl:GameTurnControl;\n	private var _userInterface:UserInterface;\n	private var _curPlayer:ScenePlayerActor;\n\n	public var maxSceneWidth:Int = 2048;\n	public var maxSceneHeight:Int = 1280;\n\n	private var _allActors:Array<Dynamic> = new Array();\n\n	public function new(game)\n	{\n		super();\n		myGame = game;\n		initilize();\n	}\n\n	private function initilize()\n	{\n		createTimeMaster();\n		createWorld();\n		createContactListener();\n		createUserInterface();\n\n		addDebuger();\n\n		createLevel();\n		createActors();\n		createGameTurnControl();\n		doPlayerTurnQue();\n	}\n\n	private function createGameTurnControl()\n	{\n		myGameTurnControl = new GameTurnControl(this, 10);\n	}\n\n	private function createUserInterface()\n	{\n		_userInterface = new UserInterface(this);\n		addChild(_userInterface);\n	}\n\n	private function createTimeMaster()\n	{\n		_timeMaster = new TimeMaster(this, worldStep);\n	}\n\n	private function createWorld()\n	{\n		worldGravity = new B2Vec2(0, 9.8); //x=0, y=G == 9.8;\n		var isSleep:Bool = true;\n		world = new B2World(worldGravity, isSleep);\n	}\n\n	private function createContactListener()\n	{\n		sceneContactListener = new ContactListener(this);\n		world.setContactListener(sceneContactListener);\n	}\n\n	private function update(event:Event)\n	{\n		var step = _timeMaster.getTimeStep();\n		world.step(step, velocityIterations, positionIterations);\n		world.clearForces();\n		world.drawDebugData();\n\n		for(i in 0..._allActors.length)\n		{\n			_allActors[i].update();\n		}\n\n		cameraControl();\n\n		myGameTurnControl.update();\n		_userInterface.update();\n\n		removePlayersFromScene();\n		\n	}\n\n	private function addDebuger()\n	{\n		var debugDraw = new B2DebugDraw();\n		var debugSprite = new Sprite();\n		addChild(debugSprite);\n		\n		debugDraw.setSprite(debugSprite);\n		debugDraw.setDrawScale(worldScale);\n		debugDraw.setFlags(B2DebugDraw.e_shapeBit);\n		\n		world.setDebugDraw(debugDraw);\n	}\n\n	private function createActors()\n	{\n		\n		var playerPos = new B2Vec2(100, 650);\n		createPlayerActor(playerPos, 3, 1);\n\n		var enemyPos = new B2Vec2(300, 650);\n		createBotActor(enemyPos, 3, 1);\n	}\n\n	private function createGround(width:Int, height:Int, pos:B2Vec2, figures:Int)\n	{\n		var width = width/2;\n		var height = height/2;\n		var loc = new B2Vec2(pos.x/2/worldScale, pos.y/worldScale);\n\n		var newGroundActor = new SceneGroundActor(this, width, height, loc, figures, true);\n\n		_allActors.push(newGroundActor);\n	}\n\n	private function createPlayerActor(pos:B2Vec2, velocityX:Int, velocityY:Int)\n	{\n		var loc = new B2Vec2(pos.x/worldScale, pos.y/worldScale);\n		var eType = \"Player\";\n		var name = \"I'm a player\";\n		var player = new ScenePlayerActor(this, loc, velocityX, velocityY, eType, name);\n		_allActors.push(player);\n	}\n\n	private function createBotActor(pos:B2Vec2, velocityX:Int, velocityY:Int)\n	{\n		var loc = new B2Vec2(pos.x/worldScale, pos.y/worldScale);\n		var eType = \"Bot\";\n		var newEnemy = new ScenePlayerActor(this, loc, velocityX, velocityY, eType);\n		_allActors.push(newEnemy);\n	}\n\n	private function sceneFollowPlayer()\n	{\n 		root.scaleX = 2;\n 		root.scaleY = 2;\n 		this.x = -_curPlayer.getSprite().x + stage.stageWidth/4;\n 		this.y = -_curPlayer.getSprite().y + stage.stageHeight/4;\n	}\n\n	private function createLevel()\n	{	\n		var groundPos = new B2Vec2(1920, 700);\n		createGround(1920, 20, groundPos, 10);\n\n	//	createWalls();\n	}\n\n	private function cameraControl()\n	{\n		if (_curPlayer != null)\n		{\n			sceneFollowPlayer();\n		}\n	}\n\n	private function doPlayerTurnQue()\n	{\n		for (i in 0..._allActors.length)\n		{\n			var player = _allActors[i];\n			if (player.getEntityType() == \"Player\" || player.getEntityType() == \"Bot\")\n				_allPlayersOnScene.push(player);\n		}\n\n		_allPlayersOnScene.sort(function(x,y){ return Math.round(Math.random()); });\n		_curPlayer = _allPlayersOnScene[0];\n		//round start\n\n	}\n\n	private function teamPlayerTurnQue()\n	{\n		//TODO: turn players in team mode, 1 member per team, then next member per team, for the last member - round end;\n	}\n\n	public function takeTurnToNextPlayer()\n	{\n		var lastPlayerTurn = _curPlayer;\n		_curPlayer = null;\n		\n		var index = _allPlayersOnScene.indexOf(lastPlayerTurn);\n		if ( index > -1 )\n		{\n			if ( index+1 < _allPlayersOnScene.length)\n				_curPlayer = _allPlayersOnScene[index+1];\n			else \n				_curPlayer = _allPlayersOnScene[0];\n				//round ended\n		}\n\n		turnStart();\n		\n	}\n\n	public function endTurn()\n	{\n		//TODO: clear all turn moving, stop all collisions,\n\n		if (_curPlayer.getEntityType() == \"Player\")\n		{\n			_curPlayer.removeInputListener();\n			_curPlayer.forciblyKeyUp();	\n		}\n		\n		_curPlayer.removeWeapon();\n		takeTurnToNextPlayer();\n	}\n\n	public function turnStart()\n	{\n		if (_curPlayer.getEntityType() == \"Player\")\n			_curPlayer.addInputListener();\n			\n		_curPlayer.equipLastWeapon();\n		startTimer();\n	}\n\n	private function startTimer()\n	{\n		myGameTurnControl.startTimer();\n	}\n\n	public function markToRemovePlayer(playerActor:ScenePlayerActor)\n	{\n		if( _playersToRemove.indexOf(playerActor) < 0 )\n			_playersToRemove.push(playerActor);\n	}\n\n	public function removePlayersFromScene()\n	{\n		for (i in 0..._playersToRemove.length){\n			_playersToRemove[i].destroy();\n			var index =_playersToRemove.indexOf(_playersToRemove[i]);\n			if (index > -1){\n				_playersToRemove.splice(index, 1);\n			}\n		}\n		_playersToRemove = new Array();\n	}\n\n	public function getUI()\n	{\n		return _userInterface;\n	}\n\n	public function start()\n	{\n		addEventListener(Event.ENTER_FRAME, update);\n		turnStart();\n	}\n\n	public function stop():Void\n	{\n		removeEventListener(Event.ENTER_FRAME, update);\n	}\n\n}",
 			"file": "source/Scene.hx",
+			"file_size": 6592,
+			"file_write_time": 131100301804504006,
 			"settings":
 			{
-				"buffer_size": 2616,
+				"buffer_size": 6309,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "source/UserInterface.hx",
+			"settings":
+			{
+				"buffer_size": 335,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "source/Weapon.hx",
+			"settings":
+			{
+				"buffer_size": 1835,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "source/GameTurnControl.hx",
+			"settings":
+			{
+				"buffer_size": 2561,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "source/ScenePlayerActor.hx",
+			"settings":
+			{
+				"buffer_size": 9690,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "source/TimeMaster.hx",
+			"settings":
+			{
+				"buffer_size": 451,
 				"line_ending": "Windows"
 			}
 		},
@@ -547,31 +574,15 @@
 			"file": "source/SceneActor.hx",
 			"settings":
 			{
-				"buffer_size": 1133,
+				"buffer_size": 1323,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/Users/Oneway/Documents/GitHub/roaches-box2d-haxe/source/ScenePlayerActor.hx",
+			"file": "source/SceneGroundActor.hx",
 			"settings":
 			{
-				"buffer_size": 6014,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/Oneway/Documents/GitHub/roaches-box2d-haxe/source/SceneGroundActor.hx",
-			"settings":
-			{
-				"buffer_size": 6316,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "source/ContactListener.hx",
-			"settings":
-			{
-				"buffer_size": 1199,
+				"buffer_size": 6357,
 				"line_ending": "Windows"
 			}
 		}
@@ -608,27 +619,43 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/Oneway/Documents/GitHub/roaches-box2d-haxe",
-		"/C/Users/Oneway/Documents/GitHub/roaches-box2d-haxe/source"
+		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe",
+		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/source",
+		"/c/haxetoolkit/haxe/lib/box2d/1,2,3",
+		"/c/haxetoolkit/haxe/lib/box2d/1,2,3/samples",
+		"/c/haxetoolkit/haxe/lib/box2d/1,2,3/samples/TestBed",
+		"/c/haxetoolkit/haxe/lib/box2d/1,2,3/samples/TestBed/Source"
 	],
 	"file_history":
 	[
-		"/C/Users/OneWay/Documents/GitHub/roaches-box2d-haxe/Project.xml",
-		"/C/Users/OneWay/Desktop/HelloWorld.as",
-		"/C/Users/OneWay/Documents/GitHub/TooManyShoots-haxe-box2d/source/Main.hx",
-		"/C/Users/OneWay/Documents/GitHub/TooManyShoots-haxe-box2d/source/BonusChuteActor.hx",
-		"/C/Users/OneWay/Documents/GitHub/TooManyShoots-haxe-box2d/source/ArbiStaticActor.hx",
+		"/C/Users/Admin/AppData/Local/Temp/7zO8E55456E/HelloWorld.as",
+		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/source/Input.hx",
+		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/source/BotEvent.hx",
+		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/source/SceneBotActor.hx",
+		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/source/Main.hx",
 		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/source/Game.hx",
+		"/C/Users/Admin/Desktop/teaching/TooManyShoots/source/Camera.hx",
+		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/source/GameTimer.hx",
 		"/C/Users/Admin/Desktop/teaching/TooManyShoots/source/Main.hx",
+		"/C/Users/Admin/Desktop/teaching/TooManyShoots/source/PegActor.hx",
+		"/C/Users/Admin/Desktop/teaching/TooManyShoots/source/PegEvent.hx",
+		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/source/EnemyEvent.hx",
+		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/source/PlayerEvent.hx",
+		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/source/ScenePlayerActor.hx",
 		"/C/Users/Admin/Desktop/teaching/TooManyShoots/source/Actor.hx",
-		"/C/Users/Admin/Desktop/teaching/TooManyShoots/source/BonusChuteActor.hx",
 		"/C/Users/Admin/Desktop/teaching/TooManyShoots/source/PlayerActor.hx",
 		"/C/Users/Admin/Desktop/teaching/TooManyShoots/source/BallEvent.hx",
+		"/C/Users/Admin/Desktop/teaching/TooManyShoots/source/BonusChuteActor.hx",
+		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/source/Camera.hx",
+		"/C/Users/Admin/Desktop/teaching/TooManyShoots/source/ArbiStaticActor.hx",
+		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/Project.xml",
+		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/source/ContactListener.hx",
+		"/C/Users/Admin/Desktop/teaching/TooManyShoots/source/Director.hx",
+		"/C/Users/Admin/Desktop/teaching/TooManyShoots/source/Global.hx",
+		"/C/Users/Admin/Desktop/teaching/TooManyShoots/source/TimeMaster.hx",
 		"/C/Users/Admin/Desktop/teaching/TooManyShoots/source/ContactListener.hx",
 		"/C/Users/Admin/Desktop/teaching/TooManyShoots/Project.xml",
 		"/C/HaxeToolkit/haxe/lib/box2d/1,2,3/samples/TestBed/Source/Main.hx",
-		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/Project.xml",
-		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/source/Main.hx",
 		"/C/Users/Admin/Documents/GitHub/roaches-box2d-haxe/.gitignore",
 		"/c/Users/Admin/Desktop/teaching/TooManyShoots/source/Global.hx",
 		"/c/Users/Admin/Desktop/teaching/TooManyShoots/source/Actor.hx",
@@ -691,11 +718,11 @@
 	],
 	"find":
 	{
-		"height": 26.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
-		"height": 93.0,
+		"height": 0.0,
 		"where_history":
 		[
 		]
@@ -705,7 +732,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"worldScale",
+			");\n",
+			"reset",
+			"actorToRemove",
+			"));\n",
+			"m_type",
+			"getType",
+			";\n",
 			");\n",
 			"setV",
 			"Global.world_sprite",
@@ -754,84 +787,24 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 4,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "source/Main.hx",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 893,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								719,
-								719
-							]
-						],
-						"settings":
-						{
-							"haxe-build-id": 0,
-							"syntax": "Packages/Haxe/Haxe.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 456.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "source/Game.hx",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1068,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								400,
-								400
-							]
-						],
-						"settings":
-						{
-							"haxe-build-id": 0,
-							"syntax": "Packages/Haxe/Haxe.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
 					"file": "source/Scene.hx",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2616,
+						"buffer_size": 6309,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2476,
-								2476
+								5380,
+								5380
 							]
 						],
 						"settings":
@@ -841,117 +814,114 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1938.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "source/SceneActor.hx",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1133,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								704,
-								704
-							]
-						],
-						"settings":
-						{
-							"haxe-build-id": 0,
-							"syntax": "Packages/Haxe/Haxe.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 171.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "/C/Users/Oneway/Documents/GitHub/roaches-box2d-haxe/source/ScenePlayerActor.hx",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6014,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3284,
-								3296
-							]
-						],
-						"settings":
-						{
-							"haxe-build-id": 0,
-							"syntax": "Packages/Haxe/Haxe.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1254.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "/C/Users/Oneway/Documents/GitHub/roaches-box2d-haxe/source/SceneGroundActor.hx",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6316,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								407,
-								407
-							]
-						],
-						"settings":
-						{
-							"haxe-build-id": 0,
-							"syntax": "Packages/Haxe/Haxe.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 3888.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "source/ContactListener.hx",
+					"buffer": 1,
+					"file": "source/UserInterface.hx",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1199,
+						"buffer_size": 335,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								865,
-								865
+								328,
+								328
+							]
+						],
+						"settings":
+						{
+							"haxe-build-id": 0,
+							"syntax": "Packages/Haxe/Haxe.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "source/Weapon.hx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1835,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1810,
+								1810
+							]
+						],
+						"settings":
+						{
+							"haxe-build-id": 0,
+							"syntax": "Packages/Haxe/Haxe.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1242.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "source/GameTurnControl.hx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2561,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2179,
+								2179
+							]
+						],
+						"settings":
+						{
+							"haxe-build-id": 0,
+							"syntax": "Packages/Haxe/Haxe.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1756.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "source/ScenePlayerActor.hx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9690,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8756,
+								8756
 							]
 						],
 						"settings":
@@ -961,10 +931,98 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
+						"translation.y": 5059.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "source/TimeMaster.hx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 451,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								174,
+								174
+							]
+						],
+						"settings":
+						{
+							"haxe-build-id": 0,
+							"syntax": "Packages/Haxe/Haxe.tmLanguage"
+						},
+						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "source/SceneActor.hx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1323,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								978,
+								978
+							]
+						],
+						"settings":
+						{
+							"haxe-build-id": 0,
+							"syntax": "Packages/Haxe/Haxe.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 756.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "source/SceneGroundActor.hx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6357,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4341,
+								4341
+							]
+						],
+						"settings":
+						{
+							"haxe-build-id": 0,
+							"syntax": "Packages/Haxe/Haxe.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1530.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
 					"type": "text"
 				}
 			]

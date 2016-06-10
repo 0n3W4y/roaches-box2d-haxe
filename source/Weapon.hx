@@ -91,7 +91,6 @@ class Weapon
 
 		sprite.graphics.endFill();
 		_myScene.addChild(sprite);
-
 		return sprite;
 
 

@@ -38,6 +38,7 @@ class ScenePlayerActor extends SceneActor
 
 	private var _haveWeapon:Bool = false;
 	private var _weapon:Weapon;
+	private var _lastWeapon:Weapon = null;
 
 	private var _eType:String;
 	private var _name:String;
@@ -193,21 +194,20 @@ class ScenePlayerActor extends SceneActor
 	{	
 		playerMoving();
 		playerOutOffScreen();
-		updateWeaponPosition();
+
+		if (_haveWeapon)
+			updateWeaponPosition();
 	}
 
 	private function updateWeaponPosition()
 	{
-		if (_haveWeapon)
-		{
-			_weapon.getBody().getPosition().x = _body.getPosition().x;
-			_weapon.getBody().getPosition().y = _body.getPosition().y;
+		_weapon.getBody().getPosition().x = _body.getPosition().x;
+		_weapon.getBody().getPosition().y = _body.getPosition().y;
 
-			_weapon.getSprite().x = _weapon.getBody().getPosition().x * _myScene.worldScale;
-			_weapon.getSprite().y = _weapon.getBody().getPosition().y * _myScene.worldScale;
+		_weapon.getSprite().x = _weapon.getBody().getPosition().x * _myScene.worldScale;
+		_weapon.getSprite().y = _weapon.getBody().getPosition().y * _myScene.worldScale;
 
-			_weapon.getSprite().rotation = _weapon.getBody().getAngle() * 180/Math.PI;
-		}
+		_weapon.getSprite().rotation = _weapon.getBody().getAngle() * 180/Math.PI;
 	}
 
 	private function updateWeaponRotation(e:MouseEvent)
@@ -302,7 +302,7 @@ class ScenePlayerActor extends SceneActor
 	{
 		Lib.current.stage.removeEventListener(KeyboardEvent.KEY_DOWN, keyDownListener);
 		Lib.current.stage.removeEventListener(KeyboardEvent.KEY_UP, keyUpListener);
-		Lib.current.stage.addEventListener(MouseEvent.MOUSE_MOVE, updateWeaponRotation);
+		Lib.current.stage.removeEventListener(MouseEvent.MOUSE_MOVE, updateWeaponRotation);
 	}
 
 	public function runAI()
@@ -334,23 +334,40 @@ class ScenePlayerActor extends SceneActor
 	public function setWeapon(weapon)
 	{
 		if (_haveWeapon)
-		{
 			removeWeapon();
-			_weapon = weapon;
-		}
-		else
-		{
-			_weapon = weapon;
-			_haveWeapon = true;
-		}
+
+		_weapon = weapon;
+		var weaponSprite = _weapon.getSprite();
+		_myScene.addChild(weaponSprite);
+		_haveWeapon = true;
 	}
 
 	public function removeWeapon()
 	{
 		if (_haveWeapon)
 		{
+			_lastWeapon = _weapon;
 			_haveWeapon = false;
 			_weapon = null;
+			var weaponSprite = _lastWeapon.getSprite();
+			_myScene.removeChild(weaponSprite);
 		}
+	}
+	public function equipLastWeapon()
+	{
+		if(_lastWeapon != null)
+		{
+			_weapon = _lastWeapon;
+			_lastWeapon = null;
+			var weaponSprite = _weapon.getSprite();
+			_myScene.addChild(weaponSprite);
+		}
+		else 
+		{
+			var weapon = new Weapon(_myScene);
+			_weapon = weapon;
+		}
+
+		_haveWeapon = true;
 	}
 }
