@@ -29,6 +29,9 @@ class Scene extends Sprite
 	private var myGameTurnControl:GameTurnControl;
 	private var _userInterface:UserInterface;
 	private var _curPlayer:ScenePlayerActor;
+	private var _collisionCategories = new Array();
+	private var _weaponBullet:WeaponBullet;
+	private var _destroyBullet:Bool = false;
 
 	public var maxSceneWidth:Int = 2048;
 	public var maxSceneHeight:Int = 1280;
@@ -48,6 +51,7 @@ class Scene extends Sprite
 		createWorld();
 		createContactListener();
 		createUserInterface();
+		createCollisionCategories();
 
 		addDebuger();
 
@@ -60,6 +64,14 @@ class Scene extends Sprite
 	private function createGameTurnControl()
 	{
 		myGameTurnControl = new GameTurnControl(this, 10);
+	}
+
+	private function createCollisionCategories()
+	{
+		_collisionCategories.push(0x0001);
+		_collisionCategories.push(0x0002);
+		_collisionCategories.push(0x0004);
+		_collisionCategories.push(0x0008);
 	}
 
 	private function createUserInterface()
@@ -102,6 +114,8 @@ class Scene extends Sprite
 
 		myGameTurnControl.update();
 		_userInterface.update();
+		if (_weaponBullet != null)
+			_weaponBullet.update();
 
 		removePlayersFromScene();
 		
@@ -136,7 +150,10 @@ class Scene extends Sprite
 		var height = height/2;
 		var loc = new B2Vec2(pos.x/2/worldScale, pos.y/worldScale);
 
-		var newGroundActor = new SceneGroundActor(this, width, height, loc, figures, true);
+		var categoryBits = getCollisionCategory("ground");
+		var maskBits = -1;
+
+		var newGroundActor = new SceneGroundActor(this, width, height, loc, figures, true, categoryBits, maskBits);
 
 		_allActors.push(newGroundActor);
 	}
@@ -146,7 +163,11 @@ class Scene extends Sprite
 		var loc = new B2Vec2(pos.x/worldScale, pos.y/worldScale);
 		var eType = "Player";
 		var name = "I'm a player";
-		var player = new ScenePlayerActor(this, loc, velocityX, velocityY, eType, name);
+		var categoryBits = getCollisionCategory("player");
+		var mask2 = getCollisionCategory("ground");
+		var mask1 = getCollisionCategory("bullet");
+		var maskBits = mask1 | mask2;
+		var player = new ScenePlayerActor(this, loc, velocityX, velocityY, eType, name, categoryBits, maskBits);
 		_allActors.push(player);
 	}
 
@@ -154,7 +175,12 @@ class Scene extends Sprite
 	{
 		var loc = new B2Vec2(pos.x/worldScale, pos.y/worldScale);
 		var eType = "Bot";
-		var newEnemy = new ScenePlayerActor(this, loc, velocityX, velocityY, eType);
+		var name = "Random";
+		var categoryBits = getCollisionCategory("player");
+		var mask2 = getCollisionCategory("ground");
+		var mask1 = getCollisionCategory("bullet");
+		var maskBits = mask1 | mask2;
+		var newEnemy = new ScenePlayerActor(this, loc, velocityX, velocityY, eType, name, categoryBits, maskBits);
 		_allActors.push(newEnemy);
 	}
 
@@ -265,6 +291,13 @@ class Scene extends Sprite
 			}
 		}
 		_playersToRemove = new Array();
+
+		if (_destroyBullet)
+		{
+			_weaponBullet.totallyDestroy();
+			_destroyBullet = false;
+			_weaponBullet = null;
+		}
 	}
 
 	public function getUI()
@@ -281,6 +314,46 @@ class Scene extends Sprite
 	public function stop():Void
 	{
 		removeEventListener(Event.ENTER_FRAME, update);
+	}
+
+	private function getCollisionCategory(category)
+	{
+		
+		if (category == "player")
+			return _collisionCategories[0];
+
+		else if (category == "bullet")
+			return _collisionCategories[1];
+
+		else if (category == "weapon")
+			return _collisionCategories[2];
+
+		else if (category == "ground")
+			return _collisionCategories[3];
+
+		else
+			return -1;
+		
+	}
+
+	public function getCurrentPlayer()
+	{
+		return _curPlayer;
+	}
+
+	public function createWeaponBullet(player)
+	{
+		var categoryBits = getCollisionCategory("bullet");
+		var mask1 = getCollisionCategory("ground");
+		var mask2 = getCollisionCategory("player");
+		var maskBits = mask1 | mask2;
+		_weaponBullet = new WeaponBullet(this, categoryBits, maskBits);
+		return _weaponBullet;
+	}
+
+	public function markToDestroyBullet()
+	{
+		_destroyBullet = true;
 	}
 
 }

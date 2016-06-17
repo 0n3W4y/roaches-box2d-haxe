@@ -19,10 +19,10 @@ class SceneGroundActor  extends SceneActor
 
 	private var coordsArray:Array<Dynamic> = new Array();
 
-	public function new(scene:Scene, width:Float, height:Float, pos:B2Vec2, figures:Int, holes:Bool = false)
+	public function new(scene:Scene, width:Float, height:Float, pos:B2Vec2, figures:Int, holes:Bool = false, categoryBits, maskBits)
 	{	
 		_parent = scene;
-		var body = createBody(width, height, pos, figures, holes);
+		var body = createBody(width, height, pos, figures, holes, categoryBits, maskBits);
 		var sprite = createSprite(pos);
 		var entityType = "Ground";
 
@@ -54,7 +54,7 @@ class SceneGroundActor  extends SceneActor
 		return sprite;
 	}
 
-	private function createBody(width:Float, height:Float, pos:B2Vec2, figures:Int, holes:Bool)
+	private function createBody(width:Float, height:Float, pos:B2Vec2, figures:Int, holes:Bool, categoryBits, maskBits)
 	{
 		var polygonArray = new Array();
 		var fixturesArray = new Array();
@@ -123,6 +123,9 @@ class SceneGroundActor  extends SceneActor
 			newFixture.density = 1;
 			newFixture.friction = 1;
 			newFixture.restitution = 0.2;
+			newFixture.filter.categoryBits = categoryBits;
+			newFixture.filter.maskBits = maskBits;
+			newFixture.userData = "Ground";
 			fixturesArray.push(newFixture);
 			
 		}

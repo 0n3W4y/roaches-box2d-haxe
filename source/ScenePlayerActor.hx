@@ -27,12 +27,12 @@ class ScenePlayerActor extends SceneActor
 	private var speed:Int = 0;
 
 	private var body:B2Body;
-	private var headCoord = new Array();
 	private var bodyCoord = new Array();
 	private var goLeft:Bool = false;
 	private var goRight:Bool = false;
 	private var goJump:Bool = false;
 	private var goShoot:Bool = false;
+	private var canShoot:Bool = true;
 	private var speedX:Int;
 	private var speedY:Int;
 
@@ -49,14 +49,14 @@ class ScenePlayerActor extends SceneActor
 	public var canJump:Bool = false;
 
 
-	public function new(scene:Scene, pos:B2Vec2, velocityX:Int, velocityY:Int, eType:String, name:String = "Random")
+	public function new(scene:Scene, pos:B2Vec2, velocityX:Int, velocityY:Int, eType:String, name:String = "Random", categoryBits, maskBits)
 	{
 		_parent = scene;
 		speedX = velocityX;
 		speedY = velocityY;
 		_eType = eType;
 		_name = name;
-		body = createBody(pos);
+		body = createBody(pos, categoryBits, maskBits);
 		var sprite:Sprite = createSprite();
 		
 		
@@ -72,28 +72,22 @@ class ScenePlayerActor extends SceneActor
 
 	}
 
-	private function createBody(pos):B2Body
+	private function createBody(pos, categoryBits, maskBits):B2Body
 	{
-		var polygonHead = new B2PolygonShape();
 		var polygonBody = new B2PolygonShape();
 		var polygonFootsSensor = new B2PolygonShape();
 		var bodyDef = new B2BodyDef();
 		var fixtureBody = new B2FixtureDef ();
-		var fixtureHead = new B2FixtureDef ();
 		var fixtureFootsSensor = new B2FixtureDef ();
 		fixtureBody.density = 1;
 		fixtureBody.friction = 1;
 		fixtureBody.restitution = 0;
-		fixtureHead.density = 1;
-		fixtureHead.friction = 1;
-		fixtureHead.restitution = 0;
+		fixtureBody.filter.categoryBits = categoryBits;
+		fixtureBody.filter.maskBits = maskBits;
 		var body;
 
 		bodyDef.position.set (pos.x, pos.y);
 		bodyDef.type = B2Body.b2_dynamicBody;
-		
-		headCoord = [new B2Vec2(-2/_parent.worldScale, -12/_parent.worldScale), new B2Vec2(2/_parent.worldScale, -12/_parent.worldScale),
-					new B2Vec2(2/_parent.worldScale, -8/_parent.worldScale), new B2Vec2(-2/_parent.worldScale, -8/_parent.worldScale)];
 		
 		bodyCoord = [new B2Vec2(-5/_parent.worldScale, -8/_parent.worldScale), new B2Vec2(5/_parent.worldScale, -8/_parent.worldScale),
 					new B2Vec2(5/_parent.worldScale, 8/_parent.worldScale), new B2Vec2(-5/_parent.worldScale, 8/_parent.worldScale)];
@@ -103,20 +97,16 @@ class ScenePlayerActor extends SceneActor
 					new B2Vec2(5/_parent.worldScale, 12/_parent.worldScale), new B2Vec2(-5/_parent.worldScale, 12/_parent.worldScale)];
 
 
-		polygonHead.setAsArray(headCoord, headCoord.length);
 		polygonBody.setAsArray(bodyCoord, bodyCoord.length);
 		polygonFootsSensor.setAsArray(footSensorCoord, footSensorCoord.length);
 
 		body = _parent.world.createBody (bodyDef);
 		fixtureBody.shape = polygonBody;
 		fixtureBody.userData = "Body";
-		fixtureHead.shape = polygonHead;
-		fixtureHead.userData = "Head";
 		fixtureFootsSensor.shape = polygonFootsSensor;
 		fixtureFootsSensor.isSensor = true;
 		fixtureFootsSensor.userData = "footSensor";
 		body.createFixture(fixtureBody);
-		body.createFixture(fixtureHead);
 		body.createFixture(fixtureFootsSensor);
 		body.setFixedRotation(true);
 
@@ -134,13 +124,6 @@ class ScenePlayerActor extends SceneActor
 
 		sprite.graphics.beginFill(color, 1);
 		sprite.graphics.lineStyle(2, 0x000000, 1);
-		
-	
-		sprite.graphics.moveTo(headCoord[0].x*_parent.worldScale, headCoord[0].y*_parent.worldScale);
-		sprite.graphics.lineTo(headCoord[1].x*_parent.worldScale, headCoord[1].y*_parent.worldScale);
-		sprite.graphics.lineTo(headCoord[2].x*_parent.worldScale, headCoord[2].y*_parent.worldScale);
-		sprite.graphics.lineTo(headCoord[3].x*_parent.worldScale, headCoord[3].y*_parent.worldScale);
-		sprite.graphics.lineTo(headCoord[0].x*_parent.worldScale, headCoord[0].y*_parent.worldScale);
 
 		sprite.graphics.moveTo(bodyCoord[0].x*_parent.worldScale, bodyCoord[0].y*_parent.worldScale);
 		sprite.graphics.lineTo(bodyCoord[1].x*_parent.worldScale, bodyCoord[1].y*_parent.worldScale);
@@ -158,36 +141,41 @@ class ScenePlayerActor extends SceneActor
 		if (e.keyCode == 37)
 		{
 			goLeft = true;
+			canShoot = false;
+			
 		}
 		else if(e.keyCode == 39)
 		{
 			goRight = true;
+			canShoot = false;
 		}
 		else if(e.keyCode == 38 && canJump)
 		{
 			goJump = true;
+			canShoot = false;
 		}
-/*		else if(e.keyCode == )
-		{
-			goShoot = true;
-		}	
-*/	
 	}
 
 	private function keyUpListener(e:KeyboardEvent)
 	{
 		if (e.keyCode == 37)
+		{
 			goLeft = false;
+			canShoot = true;
+		}
 
 		if (e.keyCode  == 39)
+		{
 			goRight = false;
+			canShoot = true;
+		}
 
 		if (e.keyCode == 38)
+		{
 			goJump = false;
+			canShoot = true;
+		}
 
-/*		if ( e.keyCode == )
-			goShoot = false;
-*/
 	}
 
 	override public function childSpecificUpdate()
@@ -196,24 +184,13 @@ class ScenePlayerActor extends SceneActor
 		playerOutOffScreen();
 
 		if (_haveWeapon)
-			updateWeaponPosition();
-	}
-
-	private function updateWeaponPosition()
-	{
-		_weapon.getBody().getPosition().x = _body.getPosition().x;
-		_weapon.getBody().getPosition().y = _body.getPosition().y;
-
-		_weapon.getSprite().x = _weapon.getBody().getPosition().x * _myScene.worldScale;
-		_weapon.getSprite().y = _weapon.getBody().getPosition().y * _myScene.worldScale;
-
-		_weapon.getSprite().rotation = _weapon.getBody().getAngle() * 180/Math.PI;
+			_weapon.update(body);
 	}
 
 	private function updateWeaponRotation(e:MouseEvent)
 	{
-		var dist_x = _weapon.getBody().getPosition().x - _myScene.getUI().mouseX;
-		var dist_y = _weapon.getBody().getPosition().y - _myScene.getUI().mouseY;
+		var dist_x = _weapon.getBody().getPosition().x - _parent.getUI().mouseX;
+		var dist_y = _weapon.getBody().getPosition().y - _parent.getUI().mouseY;
 		_weapon.getBody().setAngle(Math.atan2(- dist_y,- dist_x));
 	}
 
@@ -275,8 +252,8 @@ class ScenePlayerActor extends SceneActor
 	private function createHp()
 	{
 		_hpTextField = new TextField();
-        _hpTextField.x = -12;
-        _hpTextField.y = -50;
+        _hpTextField.x = -10;
+        _hpTextField.y = -35;
         _hpTextField.width = 25;
         _hpTextField.height = 25;
         var hp = Std.string(_hp);
@@ -287,7 +264,7 @@ class ScenePlayerActor extends SceneActor
 	{
 		var names:Array<String> = new Array();
 		names = ["Bob Greender", "Dylan Backstreet", "Rolf Cannigan", "Carl Wolf", "Duck Haskee", "Gorsen Freemon", "Hubort Konter", "lol :D"];
-		var index = Math.round(Math.random() * names.length );
+		var index = Math.round(0.5 + Math.random() * (names.length - 0.5) );
 		return names[index];
 	}
 
@@ -295,7 +272,8 @@ class ScenePlayerActor extends SceneActor
 	{
 		Lib.current.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownListener);
 		Lib.current.stage.addEventListener(KeyboardEvent.KEY_UP, keyUpListener);
-		Lib.current.stage.addEventListener(MouseEvent.MOUSE_MOVE, updateWeaponRotation);		
+		Lib.current.stage.addEventListener(MouseEvent.MOUSE_MOVE, updateWeaponRotation);
+		Lib.current.stage.addEventListener(MouseEvent.CLICK, shoot);
 	}
 
 	public function removeInputListener()
@@ -303,6 +281,7 @@ class ScenePlayerActor extends SceneActor
 		Lib.current.stage.removeEventListener(KeyboardEvent.KEY_DOWN, keyDownListener);
 		Lib.current.stage.removeEventListener(KeyboardEvent.KEY_UP, keyUpListener);
 		Lib.current.stage.removeEventListener(MouseEvent.MOUSE_MOVE, updateWeaponRotation);
+		Lib.current.stage.removeEventListener(MouseEvent.CLICK, shoot);
 	}
 
 	public function runAI()
@@ -318,12 +297,16 @@ class ScenePlayerActor extends SceneActor
 
 	}
 
-	private function shoot()
+	private function shoot(e:Event)
 	{
-		if (goShoot)
+		if (canShoot)
 		{
-
+			var weaponBullet = _parent.createWeaponBullet(this);
+			var coord = new B2Vec2(Math.cos(_weapon.getBody().getAngle())*10, Math.sin(_weapon.getBody().getAngle())*10);
+			var bulletBody = weaponBullet.getBody();
+			bulletBody.applyImpulse(coord, _weapon.getBody().getWorldCenter());
 		}
+		
 	}
 
 	public function getWeapon()
@@ -338,7 +321,7 @@ class ScenePlayerActor extends SceneActor
 
 		_weapon = weapon;
 		var weaponSprite = _weapon.getSprite();
-		_myScene.addChild(weaponSprite);
+		_parent.addChild(weaponSprite);
 		_haveWeapon = true;
 	}
 
@@ -350,7 +333,7 @@ class ScenePlayerActor extends SceneActor
 			_haveWeapon = false;
 			_weapon = null;
 			var weaponSprite = _lastWeapon.getSprite();
-			_myScene.removeChild(weaponSprite);
+			_parent.removeChild(weaponSprite);
 		}
 	}
 	public function equipLastWeapon()
@@ -360,14 +343,29 @@ class ScenePlayerActor extends SceneActor
 			_weapon = _lastWeapon;
 			_lastWeapon = null;
 			var weaponSprite = _weapon.getSprite();
-			_myScene.addChild(weaponSprite);
+			_parent.addChild(weaponSprite);
 		}
 		else 
 		{
-			var weapon = new Weapon(_myScene);
+			var weapon = new Weapon(_parent);
 			_weapon = weapon;
 		}
 
 		_haveWeapon = true;
+	}
+
+	public function destroyWeapon()
+	{
+		if (_haveWeapon == true)
+		{
+			var weaponSprite = _weapon.getSprite();
+			var weaponBody = _weapon.getBody();
+
+			_parent.removeChild(weaponSprite);
+			_parent.world.destroyBody(weaponBody);
+
+			_weapon = null;
+			_haveWeapon = false;
+		}
 	}
 }

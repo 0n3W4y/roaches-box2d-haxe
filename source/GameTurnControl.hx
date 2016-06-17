@@ -106,7 +106,7 @@ class GameTurnControl
 
 	public function endTurn()
 	{
-		_timerTextField.text = "0";
+		_timerTextField.text = "";
 		_timerIsStopped = true;
 		_myScene.endTurn();
 	}

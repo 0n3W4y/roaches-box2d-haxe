@@ -26,9 +26,22 @@ class ContactListener extends B2ContactListener{
 		{
 			bodyUserDataA.canJump = true;
 		}
+
 		if (Std.is(bodyUserDataB, ScenePlayerActor) && Std.is(bodyUserDataA, SceneGroundActor) && fixtureB.getUserData() == "footSensor")
 		{
 			bodyUserDataB.canJump = true;
+		}
+
+		if (bodyUserDataA != null)
+		{
+			//bodyUserDataA.destroy();
+			trace("contact from A reflected:" + fixtureA.getUserData());
+		}
+
+		if (bodyUserDataB != null)
+		{
+			//bodyUserDataB.destroy();
+			trace("contact from B reflected:" + fixtureB.getUserData());
 		}
 
 	}

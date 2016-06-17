@@ -13,10 +13,12 @@ import flash.display.Sprite;
 class Weapon 
 {
 	public var damage:Int;
+
 	private var _sizeX:Int;
 	private var _sizeY:Int;
 	private var _name:String = "Bazooka";
-	private var _type:String = "rocket";
+	private var _type:String = "rocket laucher";
+	private var _bulletType:String = "rockets";
 	private var _body:B2Body;
 	private var _sprite:Sprite;
 	private var _myScene:Scene;
@@ -88,11 +90,37 @@ class Weapon
 		sprite.graphics.lineTo( _sizeX, _sizeY);
 		sprite.graphics.lineTo( _sizeX, -_sizeY);
 		sprite.graphics.lineTo( -_sizeX, -_sizeY);
+		sprite.graphics.lineTo( -_sizeX, _sizeY);
 
 		sprite.graphics.endFill();
 		_myScene.addChild(sprite);
 		return sprite;
 
+
+	}
+
+	public function update(playerbody)
+	{
+		_body.getPosition().x = playerbody.getPosition().x;
+		_body.getPosition().y = playerbody.getPosition().y;
+
+		_sprite.x = _body.getPosition().x*_myScene.worldScale;
+		_sprite.y = _body.getPosition().y*_myScene.worldScale;
+		_sprite.rotation = _body.getAngle() * 180/Math.PI;
+	}
+
+	public function getSize(coord)
+	{
+		if (coord == "X")
+			return _sizeX;
+		else if (coord == "Y")
+			return _sizeY;
+		else
+			return 0;
+	}
+
+	public function createBullet()
+	{
 
 	}
 }
