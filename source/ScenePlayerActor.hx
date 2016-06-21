@@ -35,6 +35,9 @@ class ScenePlayerActor extends SceneActor
 	private var canShoot:Bool = true;
 	private var speedX:Int;
 	private var speedY:Int;
+	private var isMooving:Bool = false;
+	private var showWeapon:Bool = true;
+	private var weaponIsShowed:Bool = true;
 
 	private var _haveWeapon:Bool = false;
 	private var _weapon:Weapon;
@@ -79,7 +82,7 @@ class ScenePlayerActor extends SceneActor
 		var bodyDef = new B2BodyDef();
 		var fixtureBody = new B2FixtureDef ();
 		var fixtureFootsSensor = new B2FixtureDef ();
-		fixtureBody.density = 1;
+		fixtureBody.density = 100;
 		fixtureBody.friction = 1;
 		fixtureBody.restitution = 0;
 		fixtureBody.filter.categoryBits = categoryBits;
@@ -140,19 +143,15 @@ class ScenePlayerActor extends SceneActor
 	{	
 		if (e.keyCode == 37)
 		{
-			goLeft = true;
-			canShoot = false;
-			
+			goLeft = true;			
 		}
 		else if(e.keyCode == 39)
 		{
 			goRight = true;
-			canShoot = false;
 		}
 		else if(e.keyCode == 38 && canJump)
 		{
 			goJump = true;
-			canShoot = false;
 		}
 	}
 
@@ -161,19 +160,16 @@ class ScenePlayerActor extends SceneActor
 		if (e.keyCode == 37)
 		{
 			goLeft = false;
-			canShoot = true;
 		}
 
 		if (e.keyCode  == 39)
 		{
 			goRight = false;
-			canShoot = true;
 		}
 
 		if (e.keyCode == 38)
 		{
 			goJump = false;
-			canShoot = true;
 		}
 
 	}
@@ -183,15 +179,56 @@ class ScenePlayerActor extends SceneActor
 		playerMoving();
 		playerOutOffScreen();
 
+		if (_myScene.getCurrentPlayer() == this)
+		{
+			if (goLeft || goRight || goJump)
+				isMooving = true;
+			else 
+				isMooving = false;
+		}
+		else
+			removeWeapon();
+		
 		if (_haveWeapon)
 			_weapon.update(body);
+
+		if (_myScene.bulletOnScene() || isMooving)
+			canShoot = false;
+		else
+			canShoot = true;
+
+		if (isMooving)
+			showWeapon = false;
+		else
+			showWeapon = true;
+
+		if (showWeapon)
+		{
+			if (!weaponIsShowed)
+			{
+				equipLastWeapon();
+				weaponIsShowed = true;
+			}
+		}
+		else
+		{
+			if (weaponIsShowed)
+			{
+				removeWeapon();
+				weaponIsShowed = false;
+			}
+		}
+
 	}
 
 	private function updateWeaponRotation(e:MouseEvent)
 	{
-		var dist_x = _weapon.getBody().getPosition().x - _parent.getUI().mouseX;
-		var dist_y = _weapon.getBody().getPosition().y - _parent.getUI().mouseY;
-		_weapon.getBody().setAngle(Math.atan2(- dist_y,- dist_x));
+		if (_haveWeapon)
+		{
+			var dist_x = _weapon.getBody().getPosition().x - _parent.getUI().mouseX;
+			var dist_y = _weapon.getBody().getPosition().y - _parent.getUI().mouseY;
+			_weapon.getBody().setAngle(Math.atan2(- dist_y,- dist_x));
+		}
 	}
 
 
@@ -242,7 +279,7 @@ class ScenePlayerActor extends SceneActor
 
 		_nameTextField = new TextField();
         _nameTextField.x = -50;
-        _nameTextField.y = -80;
+        _nameTextField.y = -60;
         _nameTextField.width = 100;
         _nameTextField.height = 25;
         _nameTextField.text = textName;
@@ -260,11 +297,17 @@ class ScenePlayerActor extends SceneActor
         _hpTextField.text = hp;
 	}
 
+	private function updateHp()
+	{
+		var hp = Std.string(_hp);
+		_hpTextField.text = hp;
+	}
+
 	private function createRandomName()
 	{
 		var names:Array<String> = new Array();
 		names = ["Bob Greender", "Dylan Backstreet", "Rolf Cannigan", "Carl Wolf", "Duck Haskee", "Gorsen Freemon", "Hubort Konter", "lol :D"];
-		var index = Math.round(0.5 + Math.random() * (names.length - 0.5) );
+		var index = Math.floor(Math.random() * names.length);
 		return names[index];
 	}
 
@@ -301,10 +344,11 @@ class ScenePlayerActor extends SceneActor
 	{
 		if (canShoot)
 		{
-			var weaponBullet = _parent.createWeaponBullet(this);
-			var coord = new B2Vec2(Math.cos(_weapon.getBody().getAngle())*10, Math.sin(_weapon.getBody().getAngle())*10);
+			var weaponBullet = _myScene.createWeaponBullet();
+			var coord = new B2Vec2(Math.cos(_weapon.getBody().getAngle())*20, Math.sin(_weapon.getBody().getAngle())*20);
 			var bulletBody = weaponBullet.getBody();
 			bulletBody.applyImpulse(coord, _weapon.getBody().getWorldCenter());
+			trace(isMooving + " = isMooving? " + canShoot + " = canShoot?");
 		}
 		
 	}
@@ -367,5 +411,17 @@ class ScenePlayerActor extends SceneActor
 			_weapon = null;
 			_haveWeapon = false;
 		}
+	}
+
+	public function hitByBullet()
+	{
+		var weaponDamage = _myScene.getCurrentPlayer().getWeapon().damage;
+		_hp -= weaponDamage;
+		if (_hp <= 0)
+		{
+			//death
+		}
+		else
+			updateHp();
 	}
 }

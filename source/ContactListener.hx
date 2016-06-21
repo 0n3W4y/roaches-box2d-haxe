@@ -32,17 +32,20 @@ class ContactListener extends B2ContactListener{
 			bodyUserDataB.canJump = true;
 		}
 
-		if (bodyUserDataA != null)
+		if (Std.is(bodyUserDataA, WeaponBullet))
 		{
-			//bodyUserDataA.destroy();
-			trace("contact from A reflected:" + fixtureA.getUserData());
+			bodyUserDataA.destroy();
+			if (Std.is(bodyUserDataB, ScenePlayerActor))
+				bodyUserDataB.hitByBullet();
 		}
 
-		if (bodyUserDataB != null)
+		if (Std.is(bodyUserDataB, WeaponBullet))
 		{
-			//bodyUserDataB.destroy();
-			trace("contact from B reflected:" + fixtureB.getUserData());
+			bodyUserDataB.destroy();
+			if (Std.is(bodyUserDataA, ScenePlayerActor))
+				bodyUserDataA.hitByBullet();
 		}
+
 
 	}
 

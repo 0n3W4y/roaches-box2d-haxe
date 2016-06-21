@@ -119,8 +119,4 @@ class Weapon
 			return 0;
 	}
 
-	public function createBullet()
-	{
-
-	}
 }

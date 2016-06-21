@@ -138,10 +138,10 @@ class Scene extends Sprite
 	{
 		
 		var playerPos = new B2Vec2(100, 650);
-		createPlayerActor(playerPos, 3, 1);
+		createPlayerActor(playerPos, 3, 9);
 
 		var enemyPos = new B2Vec2(300, 650);
-		createBotActor(enemyPos, 3, 1);
+		createBotActor(enemyPos, 3, 9);
 	}
 
 	private function createGround(width:Int, height:Int, pos:B2Vec2, figures:Int)
@@ -341,7 +341,7 @@ class Scene extends Sprite
 		return _curPlayer;
 	}
 
-	public function createWeaponBullet(player)
+	public function createWeaponBullet()
 	{
 		var categoryBits = getCollisionCategory("bullet");
 		var mask1 = getCollisionCategory("ground");
@@ -354,6 +354,14 @@ class Scene extends Sprite
 	public function markToDestroyBullet()
 	{
 		_destroyBullet = true;
+	}
+
+	public function bulletOnScene()
+	{
+		if (_weaponBullet != null)
+			return true;
+		else
+			return false;
 	}
 
 }
