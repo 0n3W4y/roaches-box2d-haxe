@@ -15,9 +15,11 @@ class WeaponBullet extends EventDispatcher
 	private var _myScene:Scene;
 	private var _body:B2Body;
 	private var _sprite:Sprite;
+	private var _damage:Int;
 
-	public function new(scene, categoryBits, maskBits)
+	public function new(scene, categoryBits, maskBits, dmg)
 	{
+		_damage = dmg;
 		_myScene = scene;
 		_body = createBody(categoryBits, maskBits);
 		_sprite = createSprite();
@@ -47,10 +49,8 @@ class WeaponBullet extends EventDispatcher
 		var posX = ( weapon.getBody().getPosition().x + (10/_myScene.worldScale)*Math.cos(weapon.getBody().getAngle()) );
 		var posY = ( weapon.getBody().getPosition().y + (10/_myScene.worldScale)*Math.sin(weapon.getBody().getAngle()) );
 
-
 		bodyDef.position.set(posX, posY);
 
-		//bodyDef.position.set(weapon.getBody().getPosition().x, weapon.getBody().getPosition().y);
 		bodyDef.type = B2Body.b2_dynamicBody;
 		bodyDef.bullet = true;
 	
@@ -106,6 +106,7 @@ class WeaponBullet extends EventDispatcher
 	public function destroy()
 	{
 		_myScene.markToDestroyBullet();
+		//need 2-3 seconds, to play blow animation, then need to go to the next turn.
 	}
 
 	public function totallyDestroy()
@@ -127,6 +128,11 @@ class WeaponBullet extends EventDispatcher
 		var actorToRemove:WeaponBullet = e.currentTarget;
 		_myScene.markToDestroyBullet();
 		actorToRemove.removeEventListener(PlayerEvent.PLAYER_OFF_SCREEN, handleBulletOffScreen);
+	}
+
+	public function getDamage()
+	{
+		return _damage;
 	}
 
 }

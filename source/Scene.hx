@@ -55,15 +55,11 @@ class Scene extends Sprite
 
 		addDebuger();
 
-		createLevel();
-		createActors();
-		createGameTurnControl();
-		doPlayerTurnQue();
 	}
 
-	private function createGameTurnControl()
+	private function createGameTurnControl(timePerEachPlayerTurn)
 	{
-		myGameTurnControl = new GameTurnControl(this, 10);
+		myGameTurnControl = new GameTurnControl(this, timePerEachPlayerTurn);
 	}
 
 	private function createCollisionCategories()
@@ -138,10 +134,16 @@ class Scene extends Sprite
 	{
 		
 		var playerPos = new B2Vec2(100, 650);
-		createPlayerActor(playerPos, 3, 9);
+		createPlayerActor(playerPos, 3, 100);
 
 		var enemyPos = new B2Vec2(300, 650);
-		createBotActor(enemyPos, 3, 9);
+		createBotActor(enemyPos, 3, 100);
+
+		var enemypos2 = new B2Vec2(500, 650);
+		createBotActor(enemypos2, 3, 100);
+
+		var enemyPos3 = new B2Vec2(700, 650);
+		createBotActor(enemyPos3, 3, 100);
 	}
 
 	private function createGround(width:Int, height:Int, pos:B2Vec2, figures:Int)
@@ -192,6 +194,14 @@ class Scene extends Sprite
  		this.y = -_curPlayer.getSprite().y + stage.stageHeight/4;
 	}
 
+	private function scneeFollowBullet()
+	{
+		root.scaleX = 2;
+ 		root.scaleY = 2;
+ 		this.x = -_weaponBullet.getSprite().x + stage.stageWidth/4;
+ 		this.y = -_weaponBullet.getSprite().y + stage.stageHeight/4;
+	}
+
 	private function createLevel()
 	{	
 		var groundPos = new B2Vec2(1920, 700);
@@ -202,10 +212,10 @@ class Scene extends Sprite
 
 	private function cameraControl()
 	{
-		if (_curPlayer != null)
-		{
+		if (_weaponBullet == null)
 			sceneFollowPlayer();
-		}
+		else
+			scneeFollowBullet();
 	}
 
 	private function doPlayerTurnQue()
@@ -228,48 +238,7 @@ class Scene extends Sprite
 		//TODO: turn players in team mode, 1 member per team, then next member per team, for the last member - round end;
 	}
 
-	public function takeTurnToNextPlayer()
-	{
-		var lastPlayerTurn = _curPlayer;
-		_curPlayer = null;
-		
-		var index = _allPlayersOnScene.indexOf(lastPlayerTurn);
-		if ( index > -1 )
-		{
-			if ( index+1 < _allPlayersOnScene.length)
-				_curPlayer = _allPlayersOnScene[index+1];
-			else 
-				_curPlayer = _allPlayersOnScene[0];
-				//round ended
-		}
-
-		turnStart();
-		
-	}
-
-	public function endTurn()
-	{
-		//TODO: clear all turn moving, stop all collisions,
-
-		if (_curPlayer.getEntityType() == "Player")
-		{
-			_curPlayer.removeInputListener();
-			_curPlayer.forciblyKeyUp();	
-		}
-
-		_curPlayer.removeWeapon();
-		takeTurnToNextPlayer();
-	}
-
-	public function turnStart()
-	{
-		if (_curPlayer.getEntityType() == "Player")
-			_curPlayer.addInputListener();
-			
-		_curPlayer.equipLastWeapon();
-		startTimer();
-	}
-
+	
 	private function startTimer()
 	{
 		myGameTurnControl.startTimer();
@@ -308,7 +277,10 @@ class Scene extends Sprite
 	public function start()
 	{
 		addEventListener(Event.ENTER_FRAME, update);
-		turnStart();
+		//TODO: helloScreen -> menuScreen -> customWormScreen -> warScreen ( matchScreen )
+
+		//now, just start MatchScreen while other not ready;
+		startMatch();
 	}
 
 	public function stop():Void
@@ -347,7 +319,8 @@ class Scene extends Sprite
 		var mask1 = getCollisionCategory("ground");
 		var mask2 = getCollisionCategory("player");
 		var maskBits = mask1 | mask2;
-		_weaponBullet = new WeaponBullet(this, categoryBits, maskBits);
+		var damage = getCurrentPlayer().getWeapon().damage;
+		_weaponBullet = new WeaponBullet(this, categoryBits, maskBits, damage);
 		return _weaponBullet;
 	}
 
@@ -363,5 +336,47 @@ class Scene extends Sprite
 		else
 			return false;
 	}
+
+	public function startMatch()
+	{
+		//create maplevel;
+		createLevel();
+
+		//create Players ( roaches ) with bots;
+		createActors(); // feature: ( players, bots )
+
+		// create Turn Master, who can control players with them turn;
+		var timePerEachPlayerTurn = 10;
+		createGameTurnControl(timePerEachPlayerTurn);
+
+		// sort player in que, who started match first ( now without teams, just deathmatch)
+		doPlayerTurnQue();
+
+		//TODO: so much work... :(
+
+		//when all done, start round;
+		myGameTurnControl.turnStart();
+	}
+
+	private function roundEnd()
+	{
+		//TODO: say to all player, that round ended, do some cleaning;
+	}
+
+	public function setCurrentPlayer(player)
+	{
+		_curPlayer = player;
+	}
+
+	public function getListOfPlayers()
+	{
+		return _allPlayersOnScene;
+	}
+
+	public function getGameTurnControl()
+	{
+		return myGameTurnControl;
+	}
+
 
 }

@@ -32,16 +32,20 @@ class ScenePlayerActor extends SceneActor
 	private var goRight:Bool = false;
 	private var goJump:Bool = false;
 	private var goShoot:Bool = false;
-	private var canShoot:Bool = true;
+	private var canShoot:Bool = false;
 	private var speedX:Int;
 	private var speedY:Int;
 	private var isMooving:Bool = false;
-	private var showWeapon:Bool = true;
-	private var weaponIsShowed:Bool = true;
+	private var endShooting:Bool = false;
+	private var _moveAfterShooting:Bool = false;
+
+	private var _enemy:ScenePlayerActor = null;
+	private var _aimDirection = null;
+	private var _isEndAiming:Bool = false;
 
 	private var _haveWeapon:Bool = false;
 	private var _weapon:Weapon;
-	private var _lastWeapon:Weapon = null;
+	private var _isWeaponShowed:Bool = false;
 
 	private var _eType:String;
 	private var _name:String;
@@ -176,49 +180,65 @@ class ScenePlayerActor extends SceneActor
 
 	override public function childSpecificUpdate()
 	{	
-		playerMoving();
 		playerOutOffScreen();
 
 		if (_myScene.getCurrentPlayer() == this)
 		{
-			if (goLeft || goRight || goJump)
-				isMooving = true;
-			else 
-				isMooving = false;
-		}
-		else
-			removeWeapon();
-		
-		if (_haveWeapon)
-			_weapon.update(body);
-
-		if (_myScene.bulletOnScene() || isMooving)
-			canShoot = false;
-		else
-			canShoot = true;
-
-		if (isMooving)
-			showWeapon = false;
-		else
-			showWeapon = true;
-
-		if (showWeapon)
-		{
-			if (!weaponIsShowed)
+			if (!endShooting)
 			{
-				equipLastWeapon();
-				weaponIsShowed = true;
+				if (goLeft || goRight || goJump || !canJump)
+					isMooving = true;
+				else 
+					isMooving = false;
+
+				if (isMooving)
+					displayWeapon("hide");
+				else
+					displayWeapon("show");
+
+				if (_haveWeapon)
+					_weapon.update(body);
+
+				if (_myScene.bulletOnScene() || isMooving || !canJump || _weapon == null)
+					canShoot = false;
+				else
+					canShoot = true;
 			}
-		}
-		else
-		{
-			if (weaponIsShowed)
+			else
 			{
-				removeWeapon();
-				weaponIsShowed = false;
+				canShoot = false;
 			}
+
+			updateAI();
+			playerMoving();
+
 		}
 
+	}
+
+	private function updateAI()
+	{
+		if (_myScene.getCurrentPlayer() == this && _entityType != "Player")
+		{
+			var timerCount = _myScene.getGameTurnControl().getTimerCount();
+			//var turnTime = _myScene.getGameTurnControl().getTurnTime();
+
+			if (timerCount >= 2 && _enemy == null)
+			{
+				getClosestPlayer();
+			}
+
+			if (timerCount >= 5 && !_isEndAiming)
+			{
+				getDirection();
+				aimToEnemy();
+				_isEndAiming = true;
+
+			}
+			if ( timerCount >= 7 && canShoot)
+				shootAI();
+
+		}
 	}
 
 	private function updateWeaponRotation(e:MouseEvent)
@@ -278,11 +298,12 @@ class ScenePlayerActor extends SceneActor
 			textName = _name;
 
 		_nameTextField = new TextField();
-        _nameTextField.x = -50;
-        _nameTextField.y = -60;
+        _nameTextField.x = -30;
+        _nameTextField.y = -45;
         _nameTextField.width = 100;
         _nameTextField.height = 25;
         _nameTextField.text = textName;
+        _name = textName;
 
 	}
 
@@ -311,7 +332,7 @@ class ScenePlayerActor extends SceneActor
 		return names[index];
 	}
 
-	public function addInputListener()
+	private function addInputListener()
 	{
 		Lib.current.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownListener);
 		Lib.current.stage.addEventListener(KeyboardEvent.KEY_UP, keyUpListener);
@@ -319,7 +340,7 @@ class ScenePlayerActor extends SceneActor
 		Lib.current.stage.addEventListener(MouseEvent.CLICK, shoot);
 	}
 
-	public function removeInputListener()
+	private function removeInputListener()
 	{
 		Lib.current.stage.removeEventListener(KeyboardEvent.KEY_DOWN, keyDownListener);
 		Lib.current.stage.removeEventListener(KeyboardEvent.KEY_UP, keyUpListener);
@@ -327,16 +348,135 @@ class ScenePlayerActor extends SceneActor
 		Lib.current.stage.removeEventListener(MouseEvent.CLICK, shoot);
 	}
 
-	public function runAI()
+
+	private function getClosestPlayer()
 	{
+		var playerList = _parent.getListOfPlayers();
+
+		var myPos = body.getPosition();
+		var positionArray = new Array();
+		var selfIndex = 0;
+		for (i in 0...playerList.length)
+		{
+			if (playerList[i] != this)
+			{
+				var position = playerList[i].getBody().getPosition();
+				positionArray.push(position);
+			}
+			else
+				selfIndex = i;
+			
+		}
+
+		var distArray = new Array();
+
+		for (j in 0...positionArray.length)
+		{
+			var distanceX = Math.abs(positionArray[j].x - myPos.x);
+			var distanceY = Math.abs(positionArray[j].y - myPos.y);
+			var distance = Math.sqrt(distanceX*distanceX + distanceY*distanceY);
+			distance = Math.round(distance);
+			distArray.push(distance);
+		}
+
+		var unsortedDistArray = distArray.concat(new Array());
+
+		distArray.sort(function(a, b)
+			{
+				if (a < b)
+					return -1;
+				else if (a > b)
+					return 1;
+				else 
+					return 0;
+			});
+		var closest = distArray[0];
+
+		var index = unsortedDistArray.indexOf(closest);
+
+		if (index >= selfIndex)
+			index += 1;
+
+		_enemy = playerList[index];
+		trace(this._name + ", have enemy =" + _enemy.getName() );
+
 
 	}
 
-	public function forciblyKeyUp()
+	private function getDirection()
+	{
+		var enemyPos = _enemy.getBody().getPosition();
+		var selfPos = body.getPosition();
+
+		var difX = selfPos.x - enemyPos.x;
+		var difY = selfPos.y - enemyPos.y;
+
+		var directionX = "center";
+		var directionY = "center";
+
+		if (difX > 0)
+			directionX = "left";
+		else if(difX < 0)
+			directionX = "right";
+		else
+			directionX = "center";
+
+		if (difY < 0)
+			directionY = "down";
+		else if(difX > 0)
+			directionY = "up";
+		else
+			directionY = "center";
+
+		_aimDirection = [directionX, directionY];
+
+		trace(this._name + " direction to enemy on X =" + directionX);
+	}
+
+	private function aimToEnemy()
+	{
+
+		var selfPos = body.getPosition();
+		var enemyPos = _enemy.getBody().getPosition();
+
+		var difX = Math.abs(selfPos.x - enemyPos.x);
+		var difY = Math.abs(selfPos.y - enemyPos.y);
+		var dif = Math.sqrt(difX*difX + difY*difY);
+
+		var sinAlpha = difY/dif;
+		var arcSinAlpha = Math.asin(sinAlpha);
+		var alpha = arcSinAlpha*(180/Math.PI);
+
+		var weaponBody = _weapon.getBody();
+
+		var angle:Float = getAimAngle();
+		weaponBody.setAngle(angle);
+	}
+
+	private function getAimAngle():Float
+	{
+		var directionX = _aimDirection[0];
+		var directionY = _aimDirection[1];
+
+		if (directionX == "left")
+		{
+			var result = 180*(Math.PI/180);
+			return result;
+		}
+		else 
+		{
+			var result2 = 0*(Math.PI/180);
+			return result2;
+		}
+
+	}
+
+	private function forciblyKeyUp()
 	{
 		goLeft = false;
 		goRight = false;
 		goJump = false;
+		canShoot = false;
 
 	}
 
@@ -348,9 +488,36 @@ class ScenePlayerActor extends SceneActor
 			var coord = new B2Vec2(Math.cos(_weapon.getBody().getAngle())*20, Math.sin(_weapon.getBody().getAngle())*20);
 			var bulletBody = weaponBullet.getBody();
 			bulletBody.applyImpulse(coord, _weapon.getBody().getWorldCenter());
-			trace(isMooving + " = isMooving? " + canShoot + " = canShoot?");
+			var weaponAmmo = _weapon.ammo;
+			weaponAmmo--;
+			if (weaponAmmo <= 0)
+			{
+				endShooting = true;
+				displayWeapon("hide");
+				canShoot = false;
+			}
 		}
 		
+	}
+
+	private function shootAI()
+	{
+		if (canShoot)
+		{
+			var weaponBullet = _myScene.createWeaponBullet();
+			var coord = new B2Vec2(Math.cos(_weapon.getBody().getAngle())*20, Math.sin(_weapon.getBody().getAngle())*20);
+			var bulletBody = weaponBullet.getBody();
+			bulletBody.applyImpulse(coord, _weapon.getBody().getWorldCenter());
+			var weaponAmmo = _weapon.ammo;
+			weaponAmmo--;
+			if (weaponAmmo <= 0)
+			{
+				endShooting = true;
+				displayWeapon("hide");
+				canShoot = false;
+			}
+
+		}
 	}
 
 	public function getWeapon()
@@ -361,7 +528,7 @@ class ScenePlayerActor extends SceneActor
 	public function setWeapon(weapon)
 	{
 		if (_haveWeapon)
-			removeWeapon();
+			destroyWeapon();
 
 		_weapon = weapon;
 		var weaponSprite = _weapon.getSprite();
@@ -369,33 +536,26 @@ class ScenePlayerActor extends SceneActor
 		_haveWeapon = true;
 	}
 
-	public function removeWeapon()
+	private function displayWeapon(x)
 	{
-		if (_haveWeapon)
+		if (x == "show")
 		{
-			_lastWeapon = _weapon;
-			_haveWeapon = false;
-			_weapon = null;
-			var weaponSprite = _lastWeapon.getSprite();
-			_parent.removeChild(weaponSprite);
+			if (!_isWeaponShowed)
+			{
+				var sprite = _weapon.getSprite();
+				_parent.addChild(sprite);
+				_isWeaponShowed = true;
+			}
 		}
-	}
-	public function equipLastWeapon()
-	{
-		if(_lastWeapon != null)
+		else if (x == "hide")
 		{
-			_weapon = _lastWeapon;
-			_lastWeapon = null;
-			var weaponSprite = _weapon.getSprite();
-			_parent.addChild(weaponSprite);
+			if(_isWeaponShowed)
+			{
+				var sprite = _weapon.getSprite();
+				_parent.removeChild(sprite);
+				_isWeaponShowed = false;
+			}
 		}
-		else 
-		{
-			var weapon = new Weapon(_parent);
-			_weapon = weapon;
-		}
-
-		_haveWeapon = true;
 	}
 
 	public function destroyWeapon()
@@ -413,15 +573,60 @@ class ScenePlayerActor extends SceneActor
 		}
 	}
 
-	public function hitByBullet()
+	public function hitByBullet(dmg)
 	{
-		var weaponDamage = _myScene.getCurrentPlayer().getWeapon().damage;
-		_hp -= weaponDamage;
+		var damage = dmg;
+		_hp -= damage;
 		if (_hp <= 0)
 		{
 			//death
 		}
 		else
 			updateHp();
+	}
+
+	private function giveControlToPlayer()
+	{
+		addInputListener();
+		endShooting = false;
+	}
+
+	private function withdrawControlFromPlayer()
+	{
+		forciblyKeyUp();
+		removeInputListener();
+	}
+
+	public function startTurn()
+	{
+		_isEndAiming = false;
+		canShoot = true;
+		endShooting = false;
+		_enemy = null;
+		if (_weapon == null)
+			createWeapon("default");
+		else
+			displayWeapon("show");
+
+		if (_parent.getCurrentPlayer().getEntityType() == "Player")
+			giveControlToPlayer();
+	}
+
+	public function endTurn()
+	{
+		displayWeapon("hide");
+		withdrawControlFromPlayer();
+
+	}
+
+	private function createWeapon(weaponType)
+	{
+		var weapon = new Weapon(_parent, weaponType);
+		setWeapon(weapon);
+	}
+
+	public function getName():String
+	{
+		return _name;
 	}
 }

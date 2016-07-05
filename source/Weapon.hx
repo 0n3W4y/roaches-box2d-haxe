@@ -23,8 +23,10 @@ class Weapon
 	private var _sprite:Sprite;
 	private var _myScene:Scene;
 
+	public var ammo:Int = 1;
 
-	public function new(scene)
+
+	public function new(scene, weaponType)
 	{
 		damage = 10;
 		_sizeX = 7;

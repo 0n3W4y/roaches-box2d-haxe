@@ -34,16 +34,24 @@ class ContactListener extends B2ContactListener{
 
 		if (Std.is(bodyUserDataA, WeaponBullet))
 		{
-			bodyUserDataA.destroy();
 			if (Std.is(bodyUserDataB, ScenePlayerActor))
-				bodyUserDataB.hitByBullet();
+			{
+				var damage = bodyUserDataA.getDamage();
+				bodyUserDataB.hitByBullet(damage);
+			}
+
+			bodyUserDataA.destroy();
 		}
 
 		if (Std.is(bodyUserDataB, WeaponBullet))
 		{
-			bodyUserDataB.destroy();
 			if (Std.is(bodyUserDataA, ScenePlayerActor))
-				bodyUserDataA.hitByBullet();
+			{
+				var damage = bodyUserDataB.getDamage();
+				bodyUserDataA.hitByBullet(damage);
+			}
+
+			bodyUserDataB.destroy();
 		}
 
 
