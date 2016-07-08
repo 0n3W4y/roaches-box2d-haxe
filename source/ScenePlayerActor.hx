@@ -293,9 +293,9 @@ class ScenePlayerActor extends SceneActor
 	{
 		var textName:String;
 		if (_name == "Random")
-			textName = createRandomName();
-		else
-			textName = _name;
+			createRandomName();
+
+		textName = _name;
 
 		_nameTextField = new TextField();
         _nameTextField.x = -30;
@@ -303,7 +303,6 @@ class ScenePlayerActor extends SceneActor
         _nameTextField.width = 100;
         _nameTextField.height = 25;
         _nameTextField.text = textName;
-        _name = textName;
 
 	}
 
@@ -329,7 +328,7 @@ class ScenePlayerActor extends SceneActor
 		var names:Array<String> = new Array();
 		names = ["Bob Greender", "Dylan Backstreet", "Rolf Cannigan", "Carl Wolf", "Duck Haskee", "Gorsen Freemon", "Hubort Konter", "lol :D"];
 		var index = Math.floor(Math.random() * names.length);
-		return names[index];
+		_name = names[index];
 	}
 
 	private function addInputListener()
@@ -398,7 +397,6 @@ class ScenePlayerActor extends SceneActor
 			index += 1;
 
 		_enemy = playerList[index];
-		trace(this._name + ", have enemy =" + _enemy.getName() );
 
 
 	}
@@ -430,7 +428,6 @@ class ScenePlayerActor extends SceneActor
 
 		_aimDirection = [directionX, directionY];
 
-		trace(this._name + " direction to enemy on X =" + directionX);
 	}
 
 	private function aimToEnemy()
@@ -443,29 +440,52 @@ class ScenePlayerActor extends SceneActor
 		var difY = Math.abs(selfPos.y - enemyPos.y);
 		var dif = Math.sqrt(difX*difX + difY*difY);
 
-		var sinAlpha = difY/dif;
-		var arcSinAlpha = Math.asin(sinAlpha);
-		var alpha = arcSinAlpha*(180/Math.PI);
+		trace( difX + " = DifX; " + difY + " = DifY; " + dif + " = DIF;");
+		var impuls = Math.sqrt(Math.pow(14, 2) + Math.pow(14, 2));  // Impuls = 20, const right now, will be changed;
+		trace( impuls + " = Impuls == Speed");
+		var gForce = 9.8; // 9.8 gravity inmy world;
+		var coordX = difX;
 
+		if (difY >= 1)
+		{
+			gForce = 9.8*(difX/dif);
+			trace("GForceSkew = " + gForce);
+			coordX = dif;
+		}
+
+		var angleSin = (gForce*coordX)/(impuls*impuls);
+		trace ("AngleSin = " + angleSin);
+		var angle = (Math.asin(angleSin)*(180/Math.PI))/2;
+		trace("Angle = " + angle);
+		
+		if (angle >= 0 || angle < 0)
+		{
+			
+		}
+		else
+		{
+			trace("my angle is not defined, cause have error when calculated");
+			angle = 0.0;
+		}
 		var weaponBody = _weapon.getBody();
 
-		var angle:Float = getAimAngle();
-		weaponBody.setAngle(angle);
+		var angleToResult = getAimAngle(angle);
+		weaponBody.setAngle(angleToResult);
 	}
 
-	private function getAimAngle():Float
+	private function getAimAngle(angle:Float)
 	{
 		var directionX = _aimDirection[0];
 		var directionY = _aimDirection[1];
 
 		if (directionX == "left")
 		{
-			var result = 180*(Math.PI/180);
+			var result = (angle+180)*(Math.PI/180);
 			return result;
 		}
 		else 
 		{
-			var result2 = 0*(Math.PI/180);
+			var result2 = (360-angle)*(Math.PI/180);
 			return result2;
 		}
 
@@ -516,7 +536,6 @@ class ScenePlayerActor extends SceneActor
 				displayWeapon("hide");
 				canShoot = false;
 			}
-
 		}
 	}
 
@@ -579,6 +598,7 @@ class ScenePlayerActor extends SceneActor
 		_hp -= damage;
 		if (_hp <= 0)
 		{
+			dispatchEvent(new PlayerEvent(PlayerEvent.PLAYER_OFF_SCREEN));
 			//death
 		}
 		else

@@ -136,11 +136,11 @@ class Scene extends Sprite
 		var playerPos = new B2Vec2(100, 650);
 		createPlayerActor(playerPos, 3, 100);
 
-		var enemyPos = new B2Vec2(300, 650);
-		createBotActor(enemyPos, 3, 100);
+	//	var enemyPos = new B2Vec2(300, 650);
+	//	createBotActor(enemyPos, 3, 100);
 
-		var enemypos2 = new B2Vec2(500, 650);
-		createBotActor(enemypos2, 3, 100);
+	//	var enemypos2 = new B2Vec2(500, 650);
+	//	createBotActor(enemypos2, 3, 100);
 
 		var enemyPos3 = new B2Vec2(700, 650);
 		createBotActor(enemyPos3, 3, 100);
